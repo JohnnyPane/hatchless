@@ -1,0 +1,9 @@
+.idea
+
+/hatchless-api/log/*
+/hatchless-api/tmp/*
+/hatchless-api/db/*.sqlite3
+/hatchless-api/db/*.sqlite3-journal
+
+/hatchless-frontend/node_modules
+/hatchless-frontend/dist
