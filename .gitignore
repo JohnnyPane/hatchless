@@ -1,4 +1,5 @@
 .idea
+.env
 
 /hatchless-api/log/*
 /hatchless-api/tmp/*
@@ -7,3 +8,4 @@
 
 /hatchless-frontend/node_modules
 /hatchless-frontend/dist
+/hatchless-frontend/package-lock.json

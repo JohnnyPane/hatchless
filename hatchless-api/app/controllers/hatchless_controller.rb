@@ -1,0 +1,91 @@
+class HatchlessController < ApplicationController
+  include Renderable
+
+  def index
+    paginated_resources = resource_class
+                            .page(page)
+                            .per(per_page)
+                            .apply_ordering(ordering)
+                            .apply_scopes(scopes)
+                            .apply_filters(filters)
+                            .apply_search(search)
+
+    paginated_resources = paginated_resources.includes(*included_index_resources) if included_index_resources.present?
+
+    render_resource_collection(paginated_resources, resource_serializer, { image_type: image_size })
+  end
+
+  def show
+    render_resource(resource, resource_serializer, { image_type: :main_image })
+  end
+
+  private
+
+  def resource
+    @resource ||= resource_class.find(params[:id])
+  end
+
+  def resource_class
+    controller_name.classify.constantize
+  end
+
+  def resource_params
+    if respond_to?("#{resource_class.name.underscore}_params", true)
+      send("#{resource_class.name.underscore}_params")
+    end
+
+  rescue ActionController::ParameterMissing => e
+    render json: { error: e.message }, status: :unprocessable_entity
+  end
+
+  def resource_serializer
+    "#{resource_class}Serializer".constantize
+  end
+
+  def page
+    (params[:page] || 1).to_i
+  end
+
+  def per_page
+    (params[:per_page] || 25).to_i
+  end
+
+  def filters
+    params[:filters] || {}
+  end
+
+  def scopes
+    params[:scopes] || []
+  end
+
+  def sort_column
+    params[:sort_column] || 'id'
+  end
+
+  def sort_direction
+    direction = params[:sort_direction] || 'asc'
+    raise "Invalid sort direction: #{direction}" unless %w[asc desc].include?(direction)
+
+    direction
+  end
+
+  def ordering
+    { field: sort_column, direction: sort_direction }
+  end
+
+  def search
+    params[:search] || {}
+  end
+
+  def image_size
+    params[:image_size] || :default
+  end
+
+  def included_index_resources
+    []
+  end
+
+  def included_show_resources
+    []
+  end
+end
