@@ -1,0 +1,52 @@
+.flex {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.to-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.to-right {
+  justify-content: flex-end;
+}
+
+.align-right {
+  align-items: flex-end;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.margin {
+  margin: 1rem;
+}
+
+.margin-top {
+  margin-top: 1rem;
+}
+
+.margin-bottom {
+  margin-bottom: 1rem;
+}

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import useResource from "../../hooks/useResource.js";
 import ActiveHatches from "./ActiveHatches.jsx";
 import HatchChart from "./HatchChart.jsx";
+import HatchChartPage from "./HatchChartPage.jsx";
 
 const River = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const River = () => {
       <h1>{river.name}</h1>
       <p>Description: {river.description}</p>
       <ActiveHatches />
-      <HatchChart riverId={id} />
+      <HatchChartPage />
     </div>
   );
 }

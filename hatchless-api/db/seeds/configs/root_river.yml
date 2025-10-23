@@ -1,0 +1,737 @@
+river:
+  name: "Root River"
+  description: "Flowing 80 miles through Minnesota’s Driftless Area, the Root River is a scenic tributary of the Mississippi, perfect for fishing and canoeing. Formed by multiple branches, its cool waters support trout, bass, and many other fish. Wildlife is abundant, from eagles and herons to deer and foxes. Named Hokah in Dakota, the river winds through rugged, beautiful terrain."
+  water_type: "freestone"
+  designation: "Class I trout stream"
+  designation_system: "MN DNR"
+  latitude: 43.6842
+  longitude: -92.0430
+
+
+insects:
+  - common_name: Tiny Winter Black Stonefly
+    scientific_name: "Allocapnia | Paracapnia sp."
+    min_size: 12
+    max_size: 14
+    colors: ["black", "dark gray wing"]
+  - common_name: Medium Evening Sedge
+    scientific_name: Dolophilodes distinctus
+    min_size: 12
+    max_size: 16
+    colors: ["brown", "dark gray wing"]
+  - common_name: Blue-winged Olive
+    scientific_name: Baetis sp.
+    min_size: 16
+    max_size: 22
+    colors: ["grayish olive to dark olive", "subimago - dark gray wing"]
+  - common_name: Dark Hendrickson
+    scientific_name: Ephemerella subvaria
+    min_size: 12
+    max_size: 14
+    colors: ["reddish brown to tan", "subimago - dark gray wing"]
+  - common_name: Summer Flier Sedge
+    scientific_name: Limnephilus submonifer
+    min_size: 8
+    max_size: 10
+    colors: ["ginger", "ginger wing"]
+  - common_name: Summer Flier Sedge
+    scientific_name: Limnephilus rhombicus
+    min_size: 8
+    max_size: 10
+    colors: ["ginger", "ginger wing"]
+  - common_name: Early Brown Stonefly
+    scientific_name: Taeniopteryx sp.
+    min_size: 10
+    max_size: 12
+    colors: ["brown", "brown wing"]
+  - common_name: Giant Black Stonefly
+    scientific_name: Pteronarcys sp.
+    min_size: 2
+    max_size: 6
+    colors: ["dark gray", "black wing"]
+  - common_name: Little Sister Sedge
+    scientific_name: Cheumatopsyche pasella
+    min_size: 14
+    max_size: 16
+    colors: ["green", "mottled brown wing"]
+  - common_name: Little Tan Short Horn Sedge
+    scientific_name: "Glossosoma intermedium | G. nigrior"
+    min_size: 14
+    max_size: 18
+    colors: ["greenish brown", "tan to medium brown wing"]
+  - common_name: Little Black Sedge
+    scientific_name: Chimarra aterrima
+    min_size: 16
+    max_size: 18
+    colors: ["black", "black or dark brown wing"]
+  - common_name: American Grannom
+    scientific_name: Brachycentrus americanus
+    min_size: 12
+    max_size: 14
+    colors: ["green", "tan wing"]
+  - common_name: Speckled Peter
+    scientific_name: Helicopsyche borealis
+    min_size: 16
+    max_size: 20
+    colors: ["pale yellow", "tan wing"]
+  - common_name: Light Hendrickson
+    scientific_name: Ephemerella invaria
+    min_size: 14
+    max_size: 16
+    colors: ["tan with olive and yellow cast", "subimago - medium gray wing"]
+  - common_name: Medium Brown Stonefly
+    scientific_name: Isoperla sp.
+    min_size: 8
+    max_size: 10
+    colors: ["brown", "dark brown wing"]
+  - common_name: Spotted Sedge
+    scientific_name: Hydropsyche slossonae
+    min_size: 12
+    max_size: 14
+    colors: ["brownish yellow", "mottled brown wing"]
+  - common_name: Iron Blue Quill
+    scientific_name: Paraleptophlebia sp.
+    min_size: 18
+    max_size: 20
+    colors: ["dark gray with maroon cast", "subimago - dark gray wing"]
+  - common_name: Sulfur
+    scientific_name: Ephemerella dorothea
+    min_size: 16
+    max_size: 18
+    colors: ["orange to cream", "subimago - light gray wing"]
+  - common_name: March Brown
+    scientific_name: Macaffertium vicarium
+    min_size: 10
+    max_size: 12
+    colors: ["mottled tan and brown", "subimago - mottled brown wing"]
+  - common_name: Light Cahill
+    scientific_name: Macaffertium ithaca
+    min_size: 12
+    max_size: 16
+    colors: ["cream to tan", "subimago - tan|cream wing"]
+  - common_name: Little Black Quill
+    scientific_name: Teloganopsis deficiens
+    min_size: 20
+    max_size: 22
+    colors: ["rust to dark gray", "subimago - black to dark gray"]
+  - common_name: Brown Drake
+    scientific_name: Ephemera simulans
+    min_size: 8
+    max_size: 10
+    colors: ["tan with brown markings", "subimago - mottled brown"]
+  - common_name: Craneflies
+    scientific_name: Tipulidae
+    min_size: 10
+    max_size: 14
+    colors: ["assorted, usually tan to olive"]
+  - common_name: Gray Checkered Sedge
+    scientific_name: "Molanna flavicornis | M. uniophila"
+    min_size: 6
+    max_size: 10
+    colors: ["brown", "mottled gray wing"]
+  - common_name: Big Golden Stonefly
+    scientific_name: Acroneuria sp.
+    min_size: 4
+    max_size: 8
+    colors: ["gold and brown", "medium gray wing"]
+  - common_name: Little Red Twilight Sedge
+    scientific_name: "Neureclipsis bimaculata | N. crepuscularis"
+    min_size: 16
+    max_size: 20
+    colors: ["yellow", "reddish brown wing"]
+  - common_name: Yellow Sally Stonefly
+    scientific_name: Alloperla sp.
+    min_size: 12
+    max_size: 14
+    colors: ["dirty yellow/pale green", "light gray wing"]
+  - common_name: Little Sister Sedge
+    scientific_name: "Cheumatopsyche oxa | C. wabasha"
+    min_size: 14
+    max_size: 16
+    colors: ["green", "mottled brown wing"]
+  - common_name: Long-horn Sedge
+    scientific_name: Oecetis avara
+    min_size: 12
+    max_size: 16
+    colors: ["yellow to brown", "yellow to brown wing"]
+  - common_name: Dinky Purple-Breasted Sedge
+    scientific_name: Psychomyia flavida
+    min_size: 18
+    max_size: 22
+    colors: ["yellow w/purplish tinge", "lt. to dk. brown wing"]
+  - common_name: Giant Rusty Sedge
+    scientific_name: Ptilostomis ocellifera
+    min_size: 4
+    max_size: 8
+    colors: ["yellowish brown", "lt. reddish brown wing"]
+  - common_name: Little Plain Brown Sedge
+    scientific_name: Lepidostoma togatum
+    min_size: 14
+    max_size: 18
+    colors: ["brown", "brown wing"]
+  - common_name: White Miller
+    scientific_name: Nectopsyche albida
+    min_size: 10
+    max_size: 12
+    colors: ["white to pale green", "white to pale gray wing"]
+  - common_name: Little Blue-winged Olive
+    scientific_name: Plauditus punctiventris
+    min_size: 20
+    max_size: 22
+    colors: ["pale yellow olive", "subimago - dark gray wing"]
+  - common_name: White-winged Blacks
+    scientific_name: Tricorythodes sp.
+    min_size: 20
+    max_size: 24
+    colors: ["charcoal", "cream/white wing"]
+  - common_name: Brown Checkered Summer Sedge
+    scientific_name: "Polycentropus cinereus | P. interruptus"
+    min_size: 16
+    max_size: 20
+    colors: ["yellowish brown", "checkered brown wing"]
+  - common_name: Yellow Drake
+    scientific_name: Anthopotamus distinctus
+    min_size: 10
+    max_size: 12
+    colors: ["creamy yellow", "subimago - cream wing"]
+  - common_name: Ants
+    scientific_name: Hymenoptera
+    min_size: 8
+    max_size: 24
+    colors: ["black and brown"]
+  - common_name: Beetles
+    scientific_name: Coleoptera
+    min_size: 8
+    max_size: 24
+    colors: [ "black and brown" ]
+  - common_name: Grasshoppers
+    scientific_name: Orthoptera
+    min_size: 6
+    max_size: 16
+    colors: ["yellow and green bodied"]
+  - common_name: Crickets
+    scientific_name: Orthoptera
+    min_size: 10
+    max_size: 16
+    colors: ["black"]
+  - common_name: Autumn Mottled Sedge
+    scientific_name: Neophlax concinnus
+    min_size: 12
+    max_size: 14
+    colors: ["brownish yellow", "mottled brown wing"]
+  - common_name: Midges
+    scientific_name: Diptera - Chironomidae
+    min_size: 16
+    max_size: 28
+    colors: ["black, olive, and cream bodied"]
+
+fly_patterns:
+  "Allocapnia | Paracapnia sp.|Tiny Winter Black Stonefly":
+    - name: "Winter Stonefly Nymph"
+      category: "Nymph"
+    - name: "Black Stonefly Dry"
+      category: "Dry"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Dolophilodes distinctus|Medium Evening Sedge":
+    - name: "Tiny Black Caddis"
+      category: "Dry"
+    - name: "Caddis Pupa"
+      category: "Emerger"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Baetis sp.|Blue-winged Olive":
+    - name: "Parachute BWO"
+      category: "Dry"
+    - name: "RS2"
+      category: "Emerger"
+    - name: "Pheasant Tail Nymph"
+      category: "Nymph"
+    - name: "Prince Nymph"
+      category: "Nymph"
+    - name: "Parachute Adams"
+      category: "Dry"
+
+  "Ephemerella subvaria|Dark Hendrickson":
+    - name: "Hendrickson"
+      category: "Dry"
+    - name: "Red Quill"
+      category: "Dry"
+    - name: "Hendrickson Emerger"
+      category: "Emerger"
+    - name: "Prince Nymph"
+      category: "Nymph"
+    - name: "Parachute Adams"
+      category: "Dry"
+
+  "Limnephilus submonifer|Summer Flier Sedge":
+    - name: "Brown Caddis"
+      category: "Dry"
+    - name: "Soft Hackle Caddis"
+      category: "Emerger"
+    - name: "Caddis Larva"
+      category: "Nymph"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Taeniopteryx sp.|Early Brown Stonefly":
+    - name: "Early Brown Stonefly"
+      category: "Dry"
+    - name: "Stonefly Nymph"
+      category: "Nymph"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Pteronarcys sp.|Giant Black Stonefly":
+    - name: "Salmonfly Nymph"
+      category: "Nymph"
+    - name: "Orange Stimulator"
+      category: "Dry"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Cheumatopsyche pasella|Little Sister Sedge":
+    - name: "Spotted Sedge"
+      category: "Dry"
+    - name: "Caddis Pupa"
+      category: "Emerger"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Glossosoma intermedium | G. nigrior|Little Tan Short Horn Sedge":
+    - name: "Black Caddis"
+      category: "Dry"
+    - name: "Caddis Larva"
+      category: "Nymph"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Chimarra aterrima|Little Black Sedge":
+    - name: "Little Black Caddis"
+      category: "Dry"
+    - name: "Caddis Emerger"
+      category: "Emerger"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Brachycentrus americanus|American Grannom":
+    - name: "Grannom Caddis"
+      category: "Dry"
+    - name: "LaFontaine Sparkle Pupa"
+      category: "Emerger"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Helicopsyche borealis|Speckled Peter":
+    - name: "Helicopsyche Caddis Pupa"
+      category: "Emerger"
+    - name: "Caddis Larva"
+      category: "Nymph"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Ephemerella invaria|Light Hendrickson":
+    - name: "Pale Morning Dun"
+      category: "Dry"
+    - name: "PMD Emerger"
+      category: "Emerger"
+    - name: "PMD Nymph"
+      category: "Nymph"
+    - name: "Prince Nymph"
+      category: "Nymph"
+    - name: "Parachute Adams"
+      category: "Dry"
+
+  "Isoperla sp.|Medium Brown Stonefly":
+    - name: "Yellow Sally"
+      category: "Dry"
+    - name: "Stonefly Nymph"
+      category: "Nymph"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Hydropsyche slossonae|Spotted Sedge":
+    - name: "Caddis Pupa"
+      category: "Emerger"
+    - name: "Elk Hair Caddis"
+      category: "Dry"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Paraleptophlebia sp.|Iron Blue Quill":
+    - name: "Blue Quill"
+      category: "Dry"
+    - name: "Soft Hackle"
+      category: "Emerger"
+    - name: "Prince Nymph"
+      category: "Nymph"
+    - name: "Parachute Adams"
+      category: "Dry"
+
+  "Ephemerella dorothea|Sulfur":
+    - name: "Sulphur Dun"
+      category: "Dry"
+    - name: "Sulphur Spinner"
+      category: "Dry"
+    - name: "Sulphur Emerger"
+      category: "Emerger"
+    - name: "Prince Nymph"
+      category: "Nymph"
+    - name: "Parachute Adams"
+      category: "Dry"
+
+  "Macaffertium vicarium|March Brown":
+    - name: "March Brown"
+      category: "Dry"
+    - name: "March Brown Nymph"
+      category: "Nymph"
+    - name: "Prince Nymph"
+      category: "Nymph"
+    - name: "Parachute Adams"
+      category: "Dry"
+
+  "Macaffertium ithaca|Light Cahill":
+    - name: "Light Cahill"
+      category: "Dry"
+    - name: "Light Cahill Nymph"
+      category: "Nymph"
+    - name: "Prince Nymph"
+      category: "Nymph"
+    - name: "Parachute Adams"
+      category: "Dry"
+
+  "Teloganopsis deficiens|Little Black Quill":
+    - name: "Slate Drake"
+      category: "Dry"
+    - name: "Isonychia Nymph"
+      category: "Nymph"
+    - name: "Prince Nymph"
+      category: "Nymph"
+    - name: "Parachute Adams"
+      category: "Dry"
+
+  "Ephemera simulans|Brown Drake":
+    - name: "Brown Drake"
+      category: "Dry"
+    - name: "Brown Drake Spinner"
+      category: "Dry"
+    - name: "Drake Nymph"
+      category: "Nymph"
+    - name: "Prince Nymph"
+      category: "Nymph"
+    - name: "Parachute Adams"
+      category: "Dry"
+
+  "Tipulidae|Craneflies":
+    - name: "Crane Fly Adult"
+      category: "Dry"
+    - name: "Crane Fly Larva"
+      category: "Nymph"
+
+  "Molanna flavicornis | M. uniophila|Gray Checkered Sedge":
+    - name: "Longhorn Sedge"
+      category: "Dry"
+    - name: "Caddis Larva"
+      category: "Nymph"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Acroneuria sp.|Big Golden Stonefly":
+    - name: "Golden Stone"
+      category: "Dry"
+    - name: "Stonefly Nymph"
+      category: "Nymph"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Limnephilus rhombicus|Summer Flier Sedge":
+    - name: "Cinnamon Caddis"
+      category: "Dry"
+    - name: "Caddis Larva"
+      category: "Nymph"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Neureclipsis bimaculata | N. crepuscularis|Little Red Twilight Sedge":
+    - name: "Spotted Sedge"
+      category: "Dry"
+    - name: "Caddis Pupa"
+      category: "Emerger"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Alloperla sp.|Yellow Sally Stonefly":
+    - name: "Yellow Sally"
+      category: "Dry"
+    - name: "Stonefly Nymph"
+      category: "Nymph"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Cheumatopsyche oxa | C. wabasha|Little Sister Sedge":
+    - name: "Tan Caddis"
+      category: "Dry"
+    - name: "Caddis Emerger"
+      category: "Emerger"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Oecetis avara|Long-horn Sedge":
+    - name: "Cream Caddis"
+      category: "Dry"
+    - name: "Caddis Pupa"
+      category: "Emerger"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Psychomyia flavida|Dinky Purple-Breasted Sedge":
+    - name: "Tiny Yellow Caddis"
+      category: "Dry"
+    - name: "Soft Hackle Caddis"
+      category: "Emerger"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Ptilostomis ocellifera|Giant Rusty Sedge":
+    - name: "Giant Cinnamon Sedge"
+      category: "Dry"
+    - name: "Caddis Larva"
+      category: "Nymph"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Lepidostoma togatum|Little Plain Brown Sedge":
+    - name: "Little Brown Sedge"
+      category: "Dry"
+    - name: "Caddis Pupa"
+      category: "Emerger"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Nectopsyche albida|White Miller":
+    - name: "White Miller"
+      category: "Dry"
+    - name: "Caddis Pupa"
+      category: "Emerger"
+    - name: "Stimulator"
+      category: "Dry"
+
+  "Plauditus punctiventris|Little Blue-winged Olive":
+    - name: "Tiny Yellow Mayfly"
+      category: "Dry"
+    - name: "Baetis Nymph"
+      category: "Nymph"
+    - name: "Prince Nymph"
+      category: "Nymph"
+    - name: "Parachute Adams"
+      category: "Dry"
+
+  "Tricorythodes sp.|White-winged Blacks":
+    - name: "Trico Spinner"
+      category: "Dry"
+    - name: "Trico Dun"
+      category: "Dry"
+    - name: "Prince Nymph"
+      category: "Nymph"
+    - name: "Parachute Adams"
+      category: "Dry"
+
+    "Polycentropus cinereus | P. interruptus|Brown Checkered Summer Sedge":
+      - name: "Black Caddis"
+        category: "Dry"
+      - name: "Caddis Pupa"
+        category: "Emerger"
+      - name: "Stimulator"
+        category: "Dry"
+
+    "Anthopotamus distinctus|Yellow Drake":
+      - name: "Golden Drake"
+        category: "Dry"
+      - name: "Mayfly Nymph"
+        category: "Nymph"
+      - name: "Prince Nymph"
+        category: "Nymph"
+      - name: "Parachute Adams"
+        category: "Dry"
+
+    "Hymenoptera|Ants":
+      - name: "Ant Pattern"
+        category: "Terrestrial"
+      - name: "Cinnamon Ant"
+        category: "Terrestrial"
+
+    "Coleoptera|Beetles":
+      - name: "Foam Beetle"
+        category: "Terrestrial"
+      - name: "Black Beetle"
+        category: "Terrestrial"
+
+    "Orthoptera|Grasshoppers":
+      - name: "Dave’s Hopper"
+        category: "Terrestrial"
+      - name: "Fat Albert"
+        category: "Terrestrial"
+
+    "Orthoptera|Crickets":
+      - name: "Cricket Pattern"
+        category: "Terrestrial"
+      - name: "Chernobyl Ant"
+        category: "Terrestrial"
+
+    "Neophlax concinnus|Autumn Mottled Sedge":
+      - name: "Caddis Pupa"
+        category: "Emerger"
+      - name: "Brown Caddis"
+        category: "Dry"
+      - name: "Stimulator"
+        category: "Dry"
+
+    "Diptera - Chironomidae|Midges":
+      - name: "Zebra Midge"
+        category: "Nymph"
+      - name: "Griffith’s Gnat"
+        category: "Dry"
+      - name: "WD-40"
+        category: "Emerger"
+
+hatch_windows:
+  - insect: "Allocapnia | Paracapnia sp.|Tiny Winter Black Stonefly"
+    start_day_of_year: 0
+    end_day_of_year: 127
+  - insect: "Dolophilodes distinctus|Medium Evening Sedge"
+    start_day_of_year: 32
+    end_day_of_year: 66
+  - insect: "Dolophilodes distinctus|Medium Evening Sedge"
+    start_day_of_year: 182
+    end_day_of_year: 243
+  - insect: "Baetis sp.|Blue-winged Olive"
+    start_day_of_year: 66
+    end_day_of_year: 144
+  - insect: "Ephemerella subvaria|Dark Hendrickson"
+    start_day_of_year: 83
+    end_day_of_year: 127
+  - insect: "Limnephilus submonifer|Summer Flier Sedge"
+    start_day_of_year: 121
+    end_day_of_year: 158
+  - insect: "Limnephilus submonifer|Summer Flier Sedge"
+    start_day_of_year: 259
+    end_day_of_year: 280
+  - insect: "Taeniopteryx sp.|Early Brown Stonefly"
+    start_day_of_year: 97
+    end_day_of_year: 144
+  - insect: "Pteronarcys sp.|Giant Black Stonefly"
+    start_day_of_year: 121
+    end_day_of_year: 151
+  - insect: "Cheumatopsyche pasella|Little Sister Sedge"
+    start_day_of_year: 105
+    end_day_of_year: 212
+  - insect: "Glossosoma intermedium | G. nigrior|Little Tan Short Horn Sedge"
+    start_day_of_year: 113
+    end_day_of_year: 181
+  - insect: "Chimarra aterrima|Little Black Sedge"
+    start_day_of_year: 121
+    end_day_of_year: 174
+  - insect: "Brachycentrus americanus|American Grannom"
+    start_day_of_year: 127
+    end_day_of_year: 181
+  - insect: "Helicopsyche borealis|Speckled Peter"
+    start_day_of_year: 158
+    end_day_of_year: 212
+  - insect: "Ephemerella invaria|Light Hendrickson"
+    start_day_of_year: 144
+    end_day_of_year: 181
+  - insect: "Isoperla sp.|Medium Brown Stonefly"
+    start_day_of_year: 144
+    end_day_of_year: 188
+  - insect: "Hydropsyche slossonae|Spotted Sedge"
+    start_day_of_year: 136
+    end_day_of_year: 212
+  - insect: "Paraleptophlebia sp.|Iron Blue Quill"
+    start_day_of_year: 144
+    end_day_of_year: 181
+  - insect: "Ephemerella dorothea|Sulfur"
+    start_day_of_year: 144
+    end_day_of_year: 188
+  - insect: "Macaffertium vicarium|March Brown"
+    start_day_of_year: 152
+    end_day_of_year: 196
+  - insect: "Macaffertium ithaca|Light Cahill"
+    start_day_of_year: 152
+    end_day_of_year: 196
+  - insect: "Teloganopsis deficiens|Little Black Quill"
+    start_day_of_year: 158
+    end_day_of_year: 188
+  - insect: "Ephemera simulans|Brown Drake"
+    start_day_of_year: 158
+    end_day_of_year: 188
+  - insect: "Tipulidae|Craneflies"
+    start_day_of_year: 152
+    end_day_of_year: 212
+  - insect: "Molanna flavicornis | M. uniophila|Gray Checkered Sedge"
+    start_day_of_year: 152
+    end_day_of_year: 212
+  - insect: "Acroneuria sp.|Big Golden Stonefly"
+    start_day_of_year: 152
+    end_day_of_year: 219
+  - insect: "Limnephilus rhombicus|Summer Flier Sedge"
+    start_day_of_year: 152
+    end_day_of_year: 181
+  - insect: "Neureclipsis bimaculata | N. crepuscularis|Little Red Twilight Sedge"
+    start_day_of_year: 166
+    end_day_of_year: 228
+  - insect: "Alloperla sp.|Yellow Sally Stonefly"
+    start_day_of_year: 158
+    end_day_of_year: 205
+  - insect: "Cheumatopsyche oxa | C. wabasha|Little Sister Sedge"
+    start_day_of_year: 166
+    end_day_of_year: 196
+  - insect: "Oecetis avara|Long-horn Sedge"
+    start_day_of_year: 166
+    end_day_of_year: 212
+  - insect: "Psychomyia flavida|Dinky Purple-Breasted Sedge"
+    start_day_of_year: 158
+    end_day_of_year: 188
+  - insect: "Ptilostomis ocellifera|Giant Rusty Sedge"
+    start_day_of_year: 182
+    end_day_of_year: 213
+  - insect: "Lepidostoma togatum|Little Plain Brown Sedge"
+    start_day_of_year: 174
+    end_day_of_year: 219
+  - insect: "Nectopsyche albida|White Miller"
+    start_day_of_year: 174
+    end_day_of_year: 250
+  - insect: "Plauditus punctiventris|Little Blue-winged Olive"
+    start_day_of_year: 166
+    end_day_of_year: 273
+  - insect: "Tricorythodes sp.|White-winged Blacks"
+    start_day_of_year: 182
+    end_day_of_year: 273
+  - insect: "Polycentropus cinereus | P. interruptus|Brown Checkered Summer Sedge"
+    start_day_of_year: 182
+    end_day_of_year: 212
+  - insect: "Anthopotamus distinctus|Yellow Drake"
+    start_day_of_year: 196
+    end_day_of_year: 212
+  - insect: "Hymenoptera|Ants"
+    start_day_of_year: 105
+    end_day_of_year: 273
+  - insect: "Coleoptera|Beetles"
+    start_day_of_year: 105
+    end_day_of_year: 273
+  - insect: "Orthoptera|Grasshoppers"
+    start_day_of_year: 196
+    end_day_of_year: 273
+  - insect: "Orthoptera|Crickets"
+    start_day_of_year: 196
+    end_day_of_year: 273
+  - insect: "Baetis sp.|Blue-winged Olive"
+    start_day_of_year: 244
+    end_day_of_year: 297
+  - insect: "Neophlax concinnus|Autumn Mottled Sedge"
+    start_day_of_year: 274
+    end_day_of_year: 297
+  - insect: "Diptera - Chironomidae|Midges"
+    start_day_of_year: 7
+    end_day_of_year: 297

@@ -1,8 +1,21 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 import { createApi } from "../services/createApi.js";
 
-const useResources = ({ page = 1, perPage = 10, sortColumn = 'id', sortDirection = 'desc', filters = {}, scopes = [], search = '', searchColumn = null, imageSize = 'default', resourceName, extraParams = {} }) => {
+const useResources = (
+  {
+    resourceName,
+    page = 1,
+    perPage = 10,
+    sortColumn = "id",
+    sortDirection = "desc",
+    filters = {},
+    scopes = [],
+    search = "",
+    searchColumn = null,
+    extraParams = {}
+  }) => {
   const resourceApi = createApi(resourceName);
+
   const queryParams = {
     page,
     per_page: perPage,
@@ -10,21 +23,16 @@ const useResources = ({ page = 1, perPage = 10, sortColumn = 'id', sortDirection
     sort_direction: sortDirection,
     filters,
     scopes,
-    image_size: imageSize,
+    image_size: "default",
     search: { text: search, column: searchColumn },
-    ...extraParams
-  }
+    ...extraParams,
+  };
 
-  const queryKey = [
-    resourceName,
-    queryParams
-  ];
+  const queryKey = [resourceName, queryParams];
 
   const { data, error, isLoading, isError } = useQuery({
     queryKey,
-    queryFn: async () => {
-      return await resourceApi.query(queryParams);
-    },
+    queryFn: async () => resourceApi.query(queryParams),
     keepPreviousData: true,
     staleTime: 60 * 1000,
   });
@@ -40,7 +48,7 @@ const useResources = ({ page = 1, perPage = 10, sortColumn = 'id', sortDirection
     isLoading,
     isError,
     error,
-  }
-}
+  };
+};
 
 export default useResources;

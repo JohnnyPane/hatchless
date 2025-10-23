@@ -3,6 +3,14 @@ class HatchWindow < HatchlessRecord
   belongs_to :river
 
   scope :by_river, ->(river_id) { where(river_id: river_id) }
+  scope :currently_hatching, -> {
+    today = Date.today.yday
+    normal_hatches = where("start_day_of_year <= end_day_of_year")
+                       .where("start_day_of_year <= ? AND end_day_of_year >= ?", today, today)
+    wraparound_hatches = where("start_day_of_year > end_day_of_year")
+                           .where("start_day_of_year <= ? OR end_day_of_year >= ?", today, today)
+    normal_hatches.or(wraparound_hatches)
+  }
 
   def hatching?(date = Date.today)
     day_of_year = date.yday

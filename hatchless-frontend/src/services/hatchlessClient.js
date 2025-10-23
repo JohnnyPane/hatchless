@@ -16,6 +16,18 @@ const hatchlessClient = axios.create({
   paramsSerializer: serializeParams,
 });
 
+hatchlessClient.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('authToken');
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  }
+);
+
 export {
   serializeParams
 }

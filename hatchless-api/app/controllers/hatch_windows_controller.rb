@@ -2,7 +2,7 @@ class HatchWindowsController < HatchlessController
   protected
 
   def included_index_resources
-    [ :insect ]
+    [ insect: :fly_patterns ]
   end
 
   private

@@ -66,6 +66,59 @@ midge = Insect.find_or_create_by!(
   description: "Small, prolific insects; hatch continuously, important in cold water."
 )
 
+# Create FlyPatterns
+adams = FlyPattern.create!(
+  name: "Adams",
+  category: "Dry",
+  image_url: "https://example.com/adams.png",
+  notes: "Classic dry fly, effective on many mayflies",
+)
+
+parachute_bwo = FlyPattern.create!(
+  name: "Parachute BWO",
+  category: "Dry",
+  image_url: "https://example.com/parachute_bwo.png",
+  notes: "Blue-Winged Olive imitation, floats well",
+)
+
+pheasant_tail_nymph = FlyPattern.create!(
+  name: "Pheasant Tail Nymph",
+  category: "Nymph",
+  image_url: "https://example.com/pheasant_tail.png",
+  notes: "Effective for mayfly nymphs",
+)
+
+hendrickson_dry = FlyPattern.create!(
+  name: "Hendrickson",
+  category: "Dry",
+  image_url: "https://example.com/hendrickson.png",
+  notes: "Hatches in early season, popular pattern",
+)
+
+midge_pattern = FlyPattern.create!(
+  name: "Zebra Midge",
+  category: "Nymph",
+  image_url: "https://example.com/zebra_midge.png",
+  notes: "Tiny, prolific; works for midges",
+)
+
+stimulator = FlyPattern.create!(
+  name: "Stimulator",
+  category: "Dry",
+  image_url: "https://example.com/stimulator.png",
+  notes: "Effective for caddisfly and stonefly patterns",
+)
+
+# Create join table records
+InsectFlyPattern.create!(fly_pattern: adams, insect: bwo)
+InsectFlyPattern.create!(fly_pattern: adams, insect: pmd)
+InsectFlyPattern.create!(fly_pattern: parachute_bwo, insect: bwo)
+InsectFlyPattern.create!(fly_pattern: pheasant_tail_nymph, insect: bwo)
+InsectFlyPattern.create!(fly_pattern: hendrickson_dry, insect: bwo)
+InsectFlyPattern.create!(fly_pattern: midge_pattern, insect: midge)
+InsectFlyPattern.create!(fly_pattern: stimulator, insect: stonefly)
+InsectFlyPattern.create!(fly_pattern: stimulator, insect: caddis)
+
 # --- HatchWindows ---
 
 puts "Seeding hatch windows..."
@@ -95,3 +148,8 @@ HatchWindow.find_or_create_by!(river: kinni, insect: stonefly, start_day_of_year
 HatchWindow.find_or_create_by!(river: kinni, insect: midge, start_day_of_year: doy(3, 1), end_day_of_year: doy(11, 30))
 
 puts "✅ Done seeding full chart!"
+
+Dir[Rails.root.join('db', 'seeds', 'configs', '*.yml')].each do |file|
+  config = YAML.load_file(file)
+  SeedRiverChart.new(config).call
+end
