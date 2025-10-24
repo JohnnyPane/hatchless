@@ -4,7 +4,7 @@ module Searchable
   DISALLOWED_TSQUERY_CHARACTERS_REGEX = /['?\\:''ʻʼ]/
 
   included do
-    scope :search, -> (query, column) {
+    scope :search, ->(query, column) {
       column_with_table_name = column.to_s.include?(".") ? column : "#{table_name}.#{column}"
       join_table_name = join_table(column)
 
@@ -13,7 +13,7 @@ module Searchable
       scope.where("to_tsvector('simple', #{column_with_table_name}) @@ to_tsquery('simple', ?)", sanitize_tsquery(query))
     }
 
-    scope :search_local, -> (query, column) {
+    scope :search_local, ->(query, column) {
       where("to_tsvector('simple', #{table_name}.#{column}) @@ to_tsquery('simple', ?)", sanitize_tsquery(query))
     }
   end

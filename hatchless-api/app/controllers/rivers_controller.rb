@@ -1,4 +1,14 @@
 class RiversController < HatchlessController
+  protected
+
+  def included_index_resources
+    [ :fly_shops, insects: :fly_patterns ]
+  end
+
+  def included_show_resources
+    [ :fly_shops, insects: :fly_patterns ]
+  end
+
   private
 
   def river_params

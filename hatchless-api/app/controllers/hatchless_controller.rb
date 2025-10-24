@@ -19,6 +19,32 @@ class HatchlessController < ApplicationController
     render_resource(resource, resource_serializer, { image_type: :main_image })
   end
 
+  def create
+    new_resource = resource_class.new(resource_params)
+
+    if new_resource.save
+      render_resource(new_resource, resource_serializer, { image_type: :main_image })
+    else
+      render_errors(new_resource.errors, status: :unprocessable_entity)
+    end
+  end
+
+  def update
+    if resource.update(resource_params)
+      render_resource(resource, resource_serializer, { image_type: :main_image })
+    else
+      render_errors(resource.errors, status: :unprocessable_entity)
+    end
+  end
+
+  def destroy
+    if resource.destroy
+      head :no_content
+    else
+      render_errors(resource.errors, status: :unprocessable_entity)
+    end
+  end
+
   private
 
   def resource
@@ -87,5 +113,11 @@ class HatchlessController < ApplicationController
 
   def included_show_resources
     []
+  end
+
+  def render_errors(errors, status: :unprocessable_content)
+    render json: { errors: errors.full_messages }, status: status
+  rescue NoMethodError
+    render json: { errors: errors }, status: status
   end
 end

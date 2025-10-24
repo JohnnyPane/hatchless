@@ -2,7 +2,7 @@ class FlyPatternsController < HatchlessController
   protected
 
   def included_index_resources
-    [ :insect, :river ]
+    [ :insects ]
   end
 
   private

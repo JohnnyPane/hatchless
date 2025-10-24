@@ -1,3 +1,9 @@
+.page {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
 .flex {
   display: flex;
 }
@@ -33,6 +39,10 @@
 
 .space-between {
   justify-content: space-between;
+}
+
+.space-around {
+  justify-content: space-around;
 }
 
 .full-width {

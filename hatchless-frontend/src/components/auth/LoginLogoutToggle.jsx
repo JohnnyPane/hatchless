@@ -8,8 +8,6 @@ const LoginLogoutToggle = ({ className = "" }) => {
   const { data: user } = useMe();
   const { logout } = useAuth();
 
-  console.log('user in LoginLogoutToggle:', user);
-
   const navigate = useNavigate();
 
   const handleLogout = async () => {
