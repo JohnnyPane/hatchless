@@ -1,4 +1,6 @@
 import { useParams } from "react-router-dom";
+import { Title } from "@mantine/core";
+
 import { ResourceProvider, useResourceContext } from "../../contexts/ResourceContext.jsx";
 import HatchlessScopes from "../ui/HatchlessScopes.jsx";
 import HatchChart from "./HatchChart.jsx";
@@ -6,7 +8,7 @@ import HatchChart from "./HatchChart.jsx";
 const hatchWindowScopes = [{
   type: 'buttons',
   options: [
-    { label: 'Active Hatches', value: 'currently_hatching', activeLabel: 'All Hatches' },
+    { label: 'Show Active Hatches', value: 'currently_hatching', activeLabel: 'Show All Hatches' },
   ]
 }];
 
@@ -29,7 +31,8 @@ const ChartPage = () => {
 
   return (
     <div className="flex column">
-      <div className="flex to-right">
+      <div className="flex row align-center margin-4-b">
+        <Title order={4} className="margin-right">Hatch Chart</Title>
         <HatchlessScopes scopeConfigs={hatchWindowScopes} />
       </div>
 
@@ -42,7 +45,7 @@ const ChartPage = () => {
   );
 };
 
-const HatchChartPage = () => {
+const HatchChartPage = ({ initialScope }) => {
   const { id: riverId } = useParams();
 
   const chunkArray = (array, chunkSize) => {
@@ -53,12 +56,15 @@ const HatchChartPage = () => {
     return chunks;
   };
 
+  const riverScope = { name: "by_river", args: [riverId] };
+  const initialScopes = initialScope ? [riverScope, initialScope ] : [riverScope];
+
   return (
     <ResourceProvider
       resourceName="hatch_windows"
       initialParams={{
-        perPage: 1000,
-        scopes: [{ name: "by_river", args: [riverId] }],
+        perPage: 100,
+        scopes: initialScopes,
         sortColumn: "start_day_of_year",
         sortDirection: "asc",
       }}

@@ -2,11 +2,11 @@ class RiversController < HatchlessController
   protected
 
   def included_index_resources
-    [ :fly_shops, insects: :fly_patterns ]
+    [ :fly_shops, hatch_windows: [ insects: :fly_patterns ], hatch_reports: [ :user, :fly_shop, { insects: :fly_patterns } ] ]
   end
 
   def included_show_resources
-    [ :fly_shops, insects: :fly_patterns ]
+    [ :fly_shops, hatch_windows:  { insects: :fly_patterns }, hatch_reports: [ :user, :fly_shop, { insects: :fly_patterns } ] ]
   end
 
   private

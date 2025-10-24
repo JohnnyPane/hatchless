@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ButtonGroup, Button } from "@mantine/core";
 import { useResourceContext } from "../../contexts/ResourceContext.jsx";
 
@@ -27,7 +28,7 @@ const ScopeButtonGroup = ({ scopeConfig, setScopes, scopes }) => {
           key={option.value}
           variant="outline"
           color={scopes.some(scope => scope.name === option.value) ? 'indigo' : 'gray'}
-          size="xs"
+          size="compact-xs"
           onClick={() => toggleScope(option.value)}
           className="scope-button"
         >

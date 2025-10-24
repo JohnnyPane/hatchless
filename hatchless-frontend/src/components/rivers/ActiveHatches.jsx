@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { Title } from "@mantine/core";
 import useResource from "../../hooks/useResource.js";
 import InsectList from "../insects/InsectList.jsx";
 
@@ -15,7 +16,7 @@ const ActiveHatches = ({ riverId }) => {
 
   return (
     <div>
-      <h2>Active Hatches</h2>
+      <Title order={3} mb={15}>Active Hatches</Title>
       <InsectList insects={river.currently_hatching_insects} />
     </div>
   );

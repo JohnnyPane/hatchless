@@ -5,7 +5,7 @@ class HatchWindowSerializer < HatchlessSerializer
     hatch_window.hatching?
   end
 
-  attribute :insect do |hatch_window, params|
+  attribute :insect do |hatch_window|
     InsectSerializer.shallow_serialize(hatch_window.insect)
   end
 end

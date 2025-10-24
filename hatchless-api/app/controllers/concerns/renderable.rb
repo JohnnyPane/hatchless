@@ -9,8 +9,13 @@ module Renderable
   end
 
   def render_resource_collection(collection, serializer, options = {})
-    if collection.empty?
-      return render json: { data: [], meta: { page: 1, per_page: 10, total_pages: 0, total_count: 0 } }
+    total_count = collection.total_count
+
+    if total_count.zero?
+      return render json: {
+        data: [],
+        meta: { page: 1, per_page: collection.limit_value || 10, total_pages: 0, total_count: 0 }
+      }
     end
 
     render json: serializer.new(
@@ -21,7 +26,7 @@ module Renderable
           page: collection.current_page,
           per_page: collection.limit_value,
           total_pages: collection.total_pages,
-          total_count: collection.total_count
+          total_count: total_count
         }
       }
     )

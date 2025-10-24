@@ -10,6 +10,14 @@ class HatchReport < HatchlessRecord
   before_create :set_observed_on
 
   scope :by_fly_shop, ->(fly_shop_id) { where(fly_shop_id: fly_shop_id) }
+  scope :for_river, ->(river_id) {
+    joins("LEFT JOIN fly_shops ON fly_shops.id = hatch_reports.fly_shop_id")
+      .joins("LEFT JOIN shop_rivers ON shop_rivers.fly_shop_id = fly_shops.id")
+      .where(
+        "hatch_reports.river_id = :river_id OR (hatch_reports.river_id IS NULL AND shop_rivers.river_id = :river_id)",
+        river_id: river_id
+      )
+  }
 
   private
 

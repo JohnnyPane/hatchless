@@ -3,7 +3,7 @@ class RiverSerializer < HatchlessSerializer
 
 
   attribute :currently_hatching_insects do |river|
-    InsectSerializer.shallow_serialize_collection(river.currently_hatching_insects)
+    InsectSerializer.shallow_serialize_collection(Insect.currently_hatching_for_river(river.id))
   end
 
   attribute :fly_shops do |river|

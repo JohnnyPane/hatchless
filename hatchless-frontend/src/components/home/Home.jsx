@@ -14,10 +14,6 @@ const Home = () => {
     setSelectedRiverId(value);
   }
 
-  if (river) {
-    console.log("Selected River:", river);
-  }
-
   return (
     <div>
       <h1>Welcome to Hatchless</h1>

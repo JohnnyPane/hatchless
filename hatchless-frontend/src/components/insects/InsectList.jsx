@@ -7,7 +7,6 @@ const InsectList = ({ insects }) => {
 
   return (
     <div>
-      <h2>Insect List</h2>
       {insects.map(insect => (
         <InsectListItem key={insect.id} insect={insect} />
       ))}
