@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Button } from '@mantine/core';
+import { Button, Text } from '@mantine/core';
 
 import { useMe } from '../../hooks/useMe';
 import { useAuth } from "../../contexts/AuthContext.jsx";
@@ -16,12 +16,12 @@ const LoginLogoutToggle = ({ className = "" }) => {
   };
 
   return user ? (
-    <Button variant="subtle" onClick={handleLogout} color="gray" className={className}>
-      Logout
+    <Button variant="transparent" onClick={handleLogout} color="indigo" size="compact-md" className="animated-link">
+      <Text color="black" size="xs">Logout</Text>
     </Button>
   ) : (
-    <Button variant="subtle" color="gray" component={Link} to="/login" className={className}>
-      Login
+    <Button variant="transparent" color="indigo" component={Link} to="/login"  size="compact-md" className="animated-link">
+      <Text color="black" size="xs">Login</Text>
     </Button>
   );
 }

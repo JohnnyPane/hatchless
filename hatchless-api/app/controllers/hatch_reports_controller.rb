@@ -49,7 +49,7 @@ class HatchReportsController < HatchlessController
   protected
 
   def included_index_resources
-    [ :river, { hatch_report_insects: { insect: :fly_patterns } }, :user, :fly_shop ]
+    [ :river, :user, :fly_shop, { hatch_report_insects: { insect: :fly_patterns } } ]
   end
 
   private

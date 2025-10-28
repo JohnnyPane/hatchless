@@ -1,70 +1,67 @@
-import { Text, Button } from "@mantine/core";
+import { Title, Text, Button } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { ResourceProvider, useResourceContext } from "../../contexts/ResourceContext.jsx";
 import useResources from "../../hooks/useResources.js";
-import { useResourceContext } from "../../contexts/ResourceContext.jsx";
-import { useCreateResource, useDeleteResource } from "../../hooks/useResourceMutations.js";
-import HatchlessSearch from "../ui/HatchlessSearch.jsx";
+import { useDeleteResource } from "../../hooks/useResourceMutations.js";
+import HatchlessTablePage from "../ui/HatchlessTablePage.jsx";
+import AddShopRiverDrawer from "./AddShopRiverDrawer.jsx";
+
+const riversTableData = [
+  { label: 'River', accessor: 'river.name', type: 'text' },
+  { label: 'Water Type', accessor: 'river.water_type', type: 'text' },
+  { label: 'Classification', accessor: 'river.designation', type: 'text' },
+  { label: 'Classification System', accessor: 'river.designation_system', type: 'text' },
+];
 
 
 const MyShopRivers = ({ flyShopId }) => {
-  const { data: shopRivers, isLoading, refetch } = useResources({ resourceName: 'shop_rivers', scopes: [{ name: 'by_fly_shop', args: [flyShopId]}] });
-  const { data: allRivers } = useResourceContext();
-  const createShopRiverMutation = useCreateResource('shop_rivers');
+  const [drawerOpened, { open: openDrawer, close: closeDrawer }] = useDisclosure(false);
+  const { data: shopRivers } = useResourceContext();
   const deleteShopRiverMutation = useDeleteResource('shop_rivers');
-
-  const handleAddRiver = async (riverId) => {
-    await createShopRiverMutation.mutateAsync({ fly_shop_id: flyShopId, river_id: riverId });
-  }
 
   const handleRemoveRiver = async (shopRiverId) => {
     await deleteShopRiverMutation.mutateAsync(shopRiverId);
   }
 
+  const RemoveShopRiverButton = ({ actionItem }) => {
+    const shopRiverId = actionItem.id;
+
+    return (
+      <Button
+        size="compact-xs"
+        color="pink"
+        variant="subtle"
+        onClick={() => handleRemoveRiver(shopRiverId)}
+      >
+        Remover River
+      </Button>
+    );
+  }
+
   return (
-    <div>
-      <h2>Rivers Associated with Your Fly Shop</h2>
-      {shopRivers && shopRivers.length > 0 ? (
-        <div>
-          {shopRivers.map((shopRiver) => (
-            <div>
-              <Text key={shopRiver.id}>{shopRiver.attributes.river.name}</Text>
-              <Button
-                size="xs"
-                onClick={() => handleRemoveRiver(shopRiver.id)}
-              >
-                Remove from Fly Shop
-              </Button>
-            </div>
-          ))}
+    <div className="page">
+      <div className="margin-bottom">
+        <div className="flex row margin-4-b">
+          <Title order={2}>Your Shop's Rivers</Title>
+          <Button className="margin-left" size="sm" color="indigo" variant="light" onClick={openDrawer}>Add River to Fly Shop</Button>
         </div>
-      ) : (
-        <p>No rivers associated with this fly shop yet.</p>
-      )}
+        <Text color="dimmed" size="sm">
+          Choose the rivers your shop serves to help local anglers find you and stay connected to the waters you know best.
 
-      <HatchlessSearch
-        resourceName="rivers"
-        onChange={handleAddRiver}
-        placeholder="Search and add rivers to your fly shop..."
-      />
+          When your shop is linked to a river, anglers browsing that river’s page will see your shop listed as a trusted resource for gear, advice, and hatch updates.
 
-      {allRivers && allRivers.length > 0 ? (
-        <div className="margin-top-small">
-          <h3>All Available Rivers</h3>
-            {allRivers.map((river) => (
-              <div>
-                <Text key={river.id}>{river.attributes.name}</Text>
-                <Button
-                  size="xs"
-                  onClick={() => handleAddRiver(river.id)}
-                  disabled={shopRivers.some((shopRiver) => shopRiver.attributes.river.id === river.id)}
-                >
-                  {shopRivers.some((shopRiver) => shopRiver.attributes.river.id === river.id) ? 'Added' : 'Add to Fly Shop'}
-                </Button>
-              </div>
-            ))}
-        </div>
-      ) : (
-        <p>No rivers match your search parameters.</p>
-      )}
+          Associating rivers also lets you publish hatch reports directly to those waters—helping anglers choose the right flies and making your shop part of their next great day on the water.
+        </Text>
+      </div>
+
+      <div>
+        <Title order={4} className="margin-4-b">Rivers Associated with Your Fly Shop</Title>
+        <HatchlessTablePage columns={riversTableData} actionComponent={RemoveShopRiverButton} resourceName="shop_rivers" />
+      </div>
+
+      <ResourceProvider resourceName="rivers" initialParams={{ searchColumn: "name", scopes: [{ name: 'not_by_fly_shop', args: [flyShopId]}] }}>
+        <AddShopRiverDrawer shopRivers={shopRivers} opened={drawerOpened} onClose={closeDrawer} flyShopId={flyShopId} />
+      </ResourceProvider>
     </div>
   );
 }

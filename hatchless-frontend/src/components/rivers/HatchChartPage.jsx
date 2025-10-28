@@ -14,7 +14,7 @@ const hatchWindowScopes = [{
 
 
 const ChartPage = () => {
-  const { data: hatchWindows, isLoading } = useResourceContext();
+  const { data: hatchWindows, isLoading, scopes } = useResourceContext();
 
   // if (isLoading) return <div>Loading hatch data...</div>;
   // if (!hatchWindows || hatchWindows.length === 0) return <div>No hatch data available.</div>;
@@ -28,6 +28,7 @@ const ChartPage = () => {
   };
 
   const hatchWindowChunks = chunkArray(hatchWindows, 10);
+  const currentlyHatchingScope = scopes.find(scope => scope.name === 'currently_hatching');
 
   return (
     <div className="flex column">
@@ -35,6 +36,19 @@ const ChartPage = () => {
         <Title order={4} className="margin-right">Hatch Chart</Title>
         <HatchlessScopes scopeConfigs={hatchWindowScopes} />
       </div>
+
+      {hatchWindowChunks.length === 0 && currentlyHatchingScope && (
+        <div className="flex row to-center margin-80-t margin-80-b">
+          No currently active hatches - click "Show All Hatches" to get a full view of the hatch chart.
+        </div>
+      )}
+
+      {hatchWindowChunks.length === 0 && !currentlyHatchingScope && (
+        <div className="flex row to-center margin-80-t margin-80-b">
+          No hatch chart for this stretch (yet).
+          [Shoot us a message] and we’ll work on adding it!
+        </div>
+      )}
 
       {hatchWindowChunks.map((chunk, idx) => (
         <div key={idx} className="flex justify-center">

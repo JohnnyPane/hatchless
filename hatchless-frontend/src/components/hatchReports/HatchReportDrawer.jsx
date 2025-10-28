@@ -48,13 +48,31 @@ const HatchReportDrawer = ({ opened, onClose, hatchReport }) => {
             <HatchlessSearch onChange={onInsectSelect} nameKey='common_name' searchType='multiSelect' />
           </div>
 
-          <div className="margin-top">
+          <div className="margin-top margin-bottom">
             <Title order={5}>Observed On</Title>
-            <DatePicker onChange={onDateChange} value={form.values.observed_on} color="indigo" />
+            <div className="flex row to-center margin-top">
+              <DatePicker
+                styles={(theme) => ({
+                  day: {
+                    '&[dataSelected]': {
+                      backgroundColor: 'black',
+                      color: theme.white,
+
+                      '&:hover': {
+                        backgroundColor: 'var(--mantine-indigo-dark)'
+                      },
+                    },
+                  },
+                })}
+                onChange={onDateChange}
+                value={form.values.observed_on}
+                color="indigo"
+              />
+            </div>
           </div>
         </div>
 
-        <Button type="submit" color="indigo" className="full-width double-margin-top">Save Changes</Button>
+        <Button type="submit" color="indigo" className="full-width margin-top">Save Changes</Button>
       </form>
     </Drawer>
   );

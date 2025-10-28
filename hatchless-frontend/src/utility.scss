@@ -8,6 +8,10 @@
   display: flex;
 }
 
+.wrap {
+  flex-wrap: wrap;
+}
+
 .row {
   flex-direction: row;
 }
@@ -25,19 +29,20 @@
   justify-content: center;
 }
 
-.align-center {
-  align-items: center;
-}
 
 .to-right {
   justify-content: flex-end;
 }
 
-.align-right {
-  align-items: flex-end;
+.align-center {
+  align-items: center;
 }
 
-.align-bottom {
+.align-start {
+  align-items: flex-start;
+}
+
+.align-end {
   align-items: flex-end;
 }
 
@@ -87,6 +92,18 @@
 
 .margin-4-r {
   margin-right: 4px;
+}
+
+.margin-80-t {
+  margin-top: 80px;
+}
+
+.margin-80-b {
+  margin-bottom: 80px;
+}
+
+.center-text {
+  text-align: center;
 }
 
 .italic {

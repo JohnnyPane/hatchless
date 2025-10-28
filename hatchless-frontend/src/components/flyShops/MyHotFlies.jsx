@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Textarea, Button, Card, Drawer } from '@mantine/core';
+import { Text, Title, Textarea, Button, Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from "@mantine/form";
 
-import { useCreateResource, useUpdateResource } from "../../hooks/useResourceMutations.js";
+import { useCreateResource } from "../../hooks/useResourceMutations.js";
 import useResources from "../../hooks/useResources.js";
 import useResource from "../../hooks/useResource.js";
 import HatchlessSearch from "../ui/HatchlessSearch.jsx";
+import HotFlyCard from "../flyPatterns/HotFlyCard.jsx";
 
 const MyHotFlies = () => {
   const [selectedFlyId, setSelectedFlyId] = useState(null);
@@ -17,7 +18,6 @@ const MyHotFlies = () => {
   const { data: hotFlies } = useResources({ resourceName: 'hot_flies', scopes: [{ name: 'by_fly_shop', args: [flyShopId] }, { name: 'active' }] });
   const { data: selectedFly } = useResource("fly_patterns", selectedFlyId);
   const createHotFly = useCreateResource('hot_flies');
-  const updateHotFly = useUpdateResource('hot_flies');
 
   const form = useForm({
     initialValues: {
@@ -48,33 +48,29 @@ const MyHotFlies = () => {
     }
   }
 
-  const deactivateHotFly = async (hotFlyId) => {
-    try {
-      await updateHotFly.mutateAsync({ id: hotFlyId, active: false });
-    } catch (error) {
-      console.error("Failed to deactivate hot fly:", error);
-    }
-  }
-
   return (
-    <div>
-      <h2>My Hot Flies</h2>
-      <Button onClick={open} color="teal" className="margin-bottom">Add Hot Fly</Button>
+    <div className="page">
+      <div className="flex row space-between align-start">
+        <div>
+          <Title order={2}>My Hot Flies</Title>
+          <Text color="dimmed">Share what’s working! Add the flies you’d recommend to anglers this week based on what’s been producing on your local waters.</Text>
+        </div>
 
-      {hotFlies && hotFlies.length > 0 ? (
-        <>
-          {hotFlies.map((hotFly) => (
-            <Card key={hotFly.id} shadow="sm" padding="lg" radius="md" withBorder className="margin-bottom">
-              <strong>{hotFly.attributes.fly_pattern.name}</strong> {hotFly.attributes.notes}
-              <Button variant="subtle" color="gray" onClick={() => deactivateHotFly(hotFly.id)} size="xs">
-                Remove
-              </Button>
-            </Card>
-          ))}
-        </>
-      ) : (
-        <p>No hot flies added yet.</p>
-      )}
+        <Button onClick={open} color="indigo" variant="light" className="margin-bottom">Add Hot Fly</Button>
+      </div>
+
+      <div className="flex row wrap to-center">
+        {hotFlies && hotFlies.length > 0 ? (
+          <>
+            {hotFlies.map((hotFly) => (
+              <HotFlyCard hotFly={hotFly} editable={true} key={hotFly.id} />
+            ))}
+          </>
+        ) : (
+          <p>No hot flies added yet.</p>
+        )}
+
+      </div>
 
      <Drawer opened={opened} onClose={close} position="bottom" title="Select Fly Pattern" padding="md" size="md">
         <div>

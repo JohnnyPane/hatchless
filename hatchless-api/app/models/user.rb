@@ -10,4 +10,7 @@ class User < HatchlessRecord
 
   enum :role, { user: 0, shop_owner: 1, admin: 2 }
 
+  def name
+    first_name + " " + last_name
+  end
 end

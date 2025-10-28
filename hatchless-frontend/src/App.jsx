@@ -12,6 +12,7 @@ import Home from "./components/home/Home.jsx";
 import FlyShopForm from "./components/flyShops/FlyShopForm.jsx";
 import FlyShop from "./components/flyShops/FlyShop.jsx";
 import MyFlyShop from "./components/flyShops/MyFlyShop.jsx";
+import HatchlessNavbar from "./components/ui/HatchlessNavbar.jsx";
 
 function App() {
 
@@ -19,6 +20,8 @@ function App() {
     <>
       <Router>
         <AuthProvider>
+          <HatchlessNavbar />
+
           <Routes>
             <Route path="/" element={<Home />} />
 

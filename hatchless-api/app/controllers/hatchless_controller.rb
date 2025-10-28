@@ -16,7 +16,7 @@ class HatchlessController < ApplicationController
   end
 
   def show
-    render_resource(resource, resource_serializer, { image_type: :main_image })
+    render_resource(resource, resource_serializer, { image_type: :main_image, show_page: true })
   end
 
   def create

@@ -6,12 +6,14 @@ import { useCreateResource } from "../../hooks/useResourceMutations.js";
 import { useResourceContext } from "../../contexts/ResourceContext.jsx";
 import { ResourceProvider } from "../../contexts/ResourceContext.jsx";
 import HatchReportDrawer from "../hatchReports/HatchReportDrawer.jsx";
+import HatchReportCard from "../hatchReports/HatchReportCard.jsx";
+import HatchlessPagination from "../ui/HatchlessPagination.jsx";
 
 const MyHatchReports = () => {
   const [newHatchReport, setNewHatchReport] = useState(null);
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { data: hatchReports } = useResourceContext();
+  const { data: hatchReports, total } = useResourceContext();
   const createHatchReport = useCreateResource('hatch_reports');
 
   const form = useForm({
@@ -45,27 +47,35 @@ const MyHatchReports = () => {
   }
 
   return (
-    <div>
-      <Title order={2}>My Hatch Reports</Title>
-      <div style={{ marginBottom: '20px' }}>
-        <Textarea
-          label="Notes"
-          placeholder="Enter hatch report notes"
-          minRows={4}
-          {...form.getInputProps('notes')}
-        />
-        <Button mt="sm" onClick={addHatchReport}>Add Hatch Report</Button>
-      </div>
-      {hatchReports && hatchReports.length > 0 ? (
-        hatchReports.map((report) => (
-          <div key={report.id} style={{ marginBottom: '15px', padding: '10px', border: '1px solid #ccc' }}>
-            <Text><strong>Observed On:</strong> {report.attributes.observed_on}</Text>
-            <Text><strong>Notes:</strong> {report.attributes.notes}</Text>
+    <div className="page">
+      <Title order={2} className="margin-bottom">Hatch Reports</Title>
+      <div className="flex column align-center margin-bottom">
+        <div className="hatch-report-card">
+          <Textarea
+            label="Add New Hatch Report"
+            placeholder="Enter hatch report notes"
+            minRows={4}
+            {...form.getInputProps('notes')}
+          />
+
+          <div className="flex to-right margin-4-t">
+            <Button color="indigo" variant="light" disabled={form.values.notes.length === 0} onClick={addHatchReport}>Add Hatch Report</Button>
           </div>
-        ))
-      ) : (
-        <Text>No hatch reports available.</Text>
-      )}
+        </div>
+      </div>
+
+
+      <div className="flex column align-center">
+        <Text size="xs" color="dimmed" className="italic margin-4-b">Total Hatch Reports: {total}</Text>
+
+        {hatchReports.map((report) => (
+          <HatchReportCard key={report.id} report={report.attributes} />
+        ))}
+      </div>
+
+      <div className="flex to-center margin-top margin-bottom">
+        <HatchlessPagination resourceName="hatch_reports" />
+      </div>
 
       {newHatchReport && (
         <ResourceProvider resourceName="insects" initialParams={{ searchColumn: "common_name" }}>

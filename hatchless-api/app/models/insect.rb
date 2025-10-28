@@ -10,7 +10,7 @@ class Insect < HatchlessRecord
     joins(:hatch_windows)
       .where(hatch_windows: { river_id: river_id })
       .where('hatch_windows.start_day_of_year <= ? AND hatch_windows.end_day_of_year >= ?', current_day_of_year, current_day_of_year)
-      .select(:id)
+      .select(:id, :common_name, :scientific_name, :description, :min_size, :max_size)
       .distinct
       .includes(:fly_patterns)
   }

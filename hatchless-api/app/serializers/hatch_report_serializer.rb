@@ -14,7 +14,7 @@ class HatchReportSerializer < HatchlessSerializer
   end
 
   attribute :insects do |hatch_report|
-    InsectSerializer.shallow_serialize_collection(hatch_report.hatch_report_insects.includes(:insect).map(&:insect))
+    InsectSerializer.shallow_serialize_collection(hatch_report.hatch_report_insects.map(&:insect))
   end
 
   attribute :author do |hatch_report|

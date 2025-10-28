@@ -17,7 +17,6 @@ const Home = () => {
   return (
     <div>
       <h1>Welcome to Hatchless</h1>
-      <LoginLogoutToggle className="mt-4" />
 
       <ResourceProvider resourceName="rivers" initialParams={{ searchColumn: "name" }}>
         <HatchlessSearch onChange={handleRiverSelect} searchType='select' />

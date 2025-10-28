@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Title, Tabs } from "@mantine/core";
+import { Text, Title, Tabs } from "@mantine/core";
 
 import { useMe } from "../../hooks/useMe.js";
 import { ResourceProvider } from "../../contexts/ResourceContext.jsx";
@@ -24,22 +24,23 @@ const MyFlyShop = () => {
   }
 
   return (
-    <div>
-      <Title order={2}>{flyShop.name}</Title>
+    <div className="page">
 
-      <Tabs defaultValue="overview">
+      <Title order={2} className="center-text margin">{flyShop.name}</Title>
+
+      <Tabs defaultValue="overview" color="indigo" keepMounted={false}>
         <Tabs.List>
           <Tabs.Tab value="overview">
-            Overview
+            <Text>Overview</Text>
           </Tabs.Tab>
           <Tabs.Tab value="hot_flies">
-            Hot Flies
+            <Text>Hot Flies</Text>
           </Tabs.Tab>
           <Tabs.Tab value="hatch_reports">
-            Hatch Reports
+            <Text>Hatch Reports</Text>
           </Tabs.Tab>
           <Tabs.Tab value="rivers">
-            Rivers
+            <Text>Rivers</Text>
           </Tabs.Tab>
         </Tabs.List>
 
@@ -63,7 +64,7 @@ const MyFlyShop = () => {
         </Tabs.Panel>
 
         <Tabs.Panel value="rivers" pt="xs">
-          <ResourceProvider resourceName="rivers" initialParams={{ searchColumn: "name", scopes: [{ name: 'not_by_fly_shop', args: [flyShop.id]}] }}>
+          <ResourceProvider resourceName="shop_rivers" initialParams={{ scopes: [{ name: 'for_fly_shop', args: [flyShop.id]}] }}>
             <MyShopRivers flyShopId={id} />
           </ResourceProvider>
         </Tabs.Panel>

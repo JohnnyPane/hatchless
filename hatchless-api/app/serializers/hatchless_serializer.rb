@@ -38,4 +38,8 @@ class HatchlessSerializer
   def self.shallow_attributes_list
     raise NotImplementedError, "Subclasses must define `shallow_attributes_list`"
   end
+
+  def self.show_only?(params)
+    params.dig(:show_page) == true
+  end
 end
