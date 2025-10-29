@@ -16,9 +16,6 @@ const hatchWindowScopes = [{
 const ChartPage = () => {
   const { data: hatchWindows, isLoading, scopes } = useResourceContext();
 
-  // if (isLoading) return <div>Loading hatch data...</div>;
-  // if (!hatchWindows || hatchWindows.length === 0) return <div>No hatch data available.</div>;
-
   const chunkArray = (array, chunkSize) => {
     const chunks = [];
     for (let i = 0; i < array.length; i += chunkSize) {
@@ -61,14 +58,6 @@ const ChartPage = () => {
 
 const HatchChartPage = ({ initialScope }) => {
   const { id: riverId } = useParams();
-
-  const chunkArray = (array, chunkSize) => {
-    const chunks = [];
-    for (let i = 0; i < array.length; i += chunkSize) {
-      chunks.push(array.slice(i, i + chunkSize));
-    }
-    return chunks;
-  };
 
   const riverScope = { name: "by_river", args: [riverId] };
   const initialScopes = initialScope ? [riverScope, initialScope ] : [riverScope];

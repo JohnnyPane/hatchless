@@ -2,13 +2,17 @@ import { Card, Text, Title } from "@mantine/core";
 import { formatDate } from "../../utils/dateUtils.js";
 
 
-const HatchReportCard = ({ report }) => {
+const HatchReportCard = ({ report, className }) => {
   const { id, author, observed_on, notes, insects } = report;
 
   return (
-    <Card key={id} shadow="sm" padding="md" radius="md" mb={8} withBorder className="hatch-report-card">
+    <Card key={id} shadow="sm" padding="md" radius="md" mb={8} withBorder className={className}>
       <div className="flex row align-end space-between margin-4-b">
-        <Title order={5}>{author}</Title>
+        <div className="flex row align-center">
+          <Title order={5} className="margin-4-r">{author.name}</Title>
+          <Text size="sm" color="dimmed">{author.type}</Text>
+        </div>
+
         <Text size="sm" color="dimmed" className="italic margin-left">
           {formatDate(observed_on)}
         </Text>

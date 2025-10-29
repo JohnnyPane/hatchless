@@ -1,35 +1,77 @@
 import { useParams } from "react-router-dom";
-import { Grid, Title, Text } from "@mantine/core";
+import { Title, Text, Tabs } from "@mantine/core";
 
 import useResource from "../../hooks/useResource.js";
 import { ResourceProvider } from "../../contexts/ResourceContext.jsx";
-import ActiveHatches from "./ActiveHatches.jsx";
+import { useMe } from "../../hooks/useMe.js";
+
+import RiverOverview from "./RiverOverview.jsx";
+import RiverHotFliesTable from "./RiverHotFliesTable.jsx";
 import HatchChartPage from "./HatchChartPage.jsx";
 import HatchReports from "../hatchReports/HatchReports.jsx";
+import AddRiverHatchReportToggle from "../hatchReports/AddRiverHatchReportToggle.jsx";
+import './River.scss';
+
 
 const River = () => {
   const { id } = useParams();
   const { data: river, isLoading } = useResource('rivers', id);
+  const { data: user } = useMe();
 
   if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className="page">
-      <Title order={1}>{river.name}</Title>
-      <Text>Description: {river.description}</Text>
+      <div className="flex column center">
+        <Title order={1}>{river.name}</Title>
+        <Text color="dimmed">{river.description}</Text>
+      </div>
 
-      <Grid>
-        <Grid.Col span={8} p={20}>
-          <HatchChartPage initialScope={{ name: 'currently_hatching' }} />
+      <Tabs defaultValue="overview" color="indigo" keepMounted={false}>
 
-          <ResourceProvider resourceName="hatch_reports" initialParams={{ scopes: [{ name: 'for_river', args: [id] }], perPage: 3 }}>
-            <HatchReports />
+        <Tabs.List className="margin-bottom">
+          <Tabs.Tab value="overview">
+            <Text size="lg" className="bold">Overview</Text>
+          </Tabs.Tab>
+          <Tabs.Tab value="hot_flies">
+            <Text size="lg" className="bold">Hot Fly Patterns</Text>
+          </Tabs.Tab>
+          <Tabs.Tab value="hatch_reports">
+            <Text size="lg" className="bold">Hatch Reports</Text>
+          </Tabs.Tab>
+          <Tabs.Tab value="hatch_charts">
+            <Text size="lg" className="bold">Hatch Charts</Text>
+          </Tabs.Tab>
+        </Tabs.List>
+
+        <Tabs.Panel value="overview">
+          <RiverOverview riverId={id} />
+        </Tabs.Panel>
+
+        <Tabs.Panel value="hot_flies">
+          <ResourceProvider resourceName="hot_flies" initialParams={{ scopes: [{ name: 'for_river', args: [id] }, { name: 'active' }] }}>
+            <RiverHotFliesTable />
           </ResourceProvider>
-        </Grid.Col>
-        <Grid.Col span={4} p={20}>
-          <ActiveHatches riverId={id} />
-        </Grid.Col>
-      </Grid>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="hatch_reports">
+          <ResourceProvider resourceName="hatch_reports" initialParams={{ sortColumn: 'observed_on', sort_direction: 'desc', scopes: [{ name: 'for_river', args: [id] }] }}>
+            <div className="flex to-center">
+              <div className="river-hatch-reports-page flex column">
+                {user && <AddRiverHatchReportToggle riverId={id}/>}
+                <HatchReports />
+              </div>
+            </div>
+          </ResourceProvider>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="hatch_charts">
+          <ResourceProvider resourceName="hatch_windows" initialParams={{ scopes: [{ name: 'for_river', args: [id] }] }}>
+            <HatchChartPage />
+          </ResourceProvider>
+        </Tabs.Panel>
+
+      </Tabs>
     </div>
   );
 }

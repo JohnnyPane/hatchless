@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Text, Title, Textarea, Button, Drawer } from '@mantine/core';
+import { Text, Title, Textarea, NumberInput, Button, Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from "@mantine/form";
 
@@ -17,6 +17,7 @@ const MyHotFlies = () => {
 
   const { data: hotFlies } = useResources({ resourceName: 'hot_flies', scopes: [{ name: 'by_fly_shop', args: [flyShopId] }, { name: 'active' }] });
   const { data: selectedFly } = useResource("fly_patterns", selectedFlyId);
+  const { data: flyShop } = useResource("fly_shops", flyShopId);
   const createHotFly = useCreateResource('hot_flies');
 
   const form = useForm({
@@ -24,6 +25,8 @@ const MyHotFlies = () => {
       fly_pattern_id: '',
       fly_shop_id: flyShopId,
       notes: '',
+      min_size: null,
+      max_size: null
     },
   });
 
@@ -36,6 +39,8 @@ const MyHotFlies = () => {
       fly_pattern_id: selectedFlyId,
       fly_shop_id: flyShopId,
       notes: form.values.notes,
+      min_size: form.values.min_size,
+      max_size: form.values.max_size
     }
 
     try {
@@ -52,11 +57,11 @@ const MyHotFlies = () => {
     <div className="page">
       <div className="flex row space-between align-start">
         <div>
-          <Title order={2}>My Hot Flies</Title>
+          <Title order={2}>{flyShop.name} Hot Flies</Title>
           <Text color="dimmed">Share what’s working! Add the flies you’d recommend to anglers this week based on what’s been producing on your local waters.</Text>
         </div>
 
-        <Button onClick={open} color="indigo" variant="light" className="margin-bottom">Add Hot Fly</Button>
+        <Button onClick={open} color="teal" variant="light" className="margin-bottom">Add Hot Fly</Button>
       </div>
 
       <div className="flex row wrap to-center">
@@ -67,7 +72,7 @@ const MyHotFlies = () => {
             ))}
           </>
         ) : (
-          <p>No hot flies added yet.</p>
+          <Text className="margin-80-t">No hot flies added yet.</Text>
         )}
 
       </div>
@@ -88,7 +93,24 @@ const MyHotFlies = () => {
                   {...form.getInputProps('notes')}
                   className="margin-bottom"
                 />
-                <div className="flex to-right">
+
+                <div className="flex row">
+                  <NumberInput
+                    label="From Size"
+                    placeholder="Enter minimum size"
+                    {...form.getInputProps('min_size')}
+                    className="margin-right"
+                  />
+
+                  <NumberInput
+                    label="To Size"
+                    placeholder="Enter maximum size"
+                    {...form.getInputProps('max_size')}
+                    className="margin-bottom"
+                  />
+                </div>
+
+                <div>
                   <Button type="submit" color="indigo">Add Hot Fly</Button>
                 </div>
               </form>

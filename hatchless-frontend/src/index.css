@@ -3,6 +3,6 @@
 }
 
 .mantine-DatePicker-day[data-selected]{
-    background-color: var(--mantine-color-pink-5) !important;
+    background-color: var(--mantine-color-teal-5) !important;
     color: white !important;
 }

@@ -1,12 +1,6 @@
 import { Button, Card, Image, Text } from "@mantine/core";
 import { useUpdateResource } from "../../hooks/useResourceMutations.js";
-
-const hatchlessImageBaseUrl = import.meta.env.VITE_HATCHLESS_IMAGE_BASE_URL;
-
-const getFlyDefaultImageUrl = (flyCategory) => {
-  const formattedCategory = flyCategory.toLowerCase().replace(/\s+/g, '-');
-  return `${hatchlessImageBaseUrl}/hatchless-${formattedCategory}.jpg`;
-}
+import { getFlyDefaultImageUrl } from "../../utils/imageUtils.js";
 
 const HotFlyCard = ({ hotFly, editable = false }) => {
   const { fly_pattern: flyPattern } = hotFly.attributes;

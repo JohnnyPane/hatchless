@@ -1,5 +1,5 @@
 class HotFlySerializer < HatchlessSerializer
-  attributes :id, :active, :expires_at, :notes
+  attributes :id, :active, :expires_at, :notes, :min_size, :max_size, :created_at
 
   attribute :fly_pattern do |hot_fly|
     FlyPatternSerializer.shallow_serialize(hot_fly.fly_pattern)
@@ -13,7 +13,11 @@ class HotFlySerializer < HatchlessSerializer
     end
   end
 
+  attribute :fly_shop do |hot_fly|
+    FlyShopSerializer.shallow_serialize(hot_fly.fly_shop)
+  end
+
   def self.shallow_attributes_list
-    [ :id, :active, :expires_at, :notes ]
+    [ :id, :active, :expires_at, :notes, :min_size, :max_size ]
   end
 end

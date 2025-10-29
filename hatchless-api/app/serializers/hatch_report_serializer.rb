@@ -19,9 +19,9 @@ class HatchReportSerializer < HatchlessSerializer
 
   attribute :author do |hatch_report|
     if hatch_report.fly_shop.present?
-      hatch_report.fly_shop.name
+      { name: hatch_report.fly_shop.name, type: "Fly Shop" }
     elsif hatch_report.user.present?
-      hatch_report.user.username
+      { name: hatch_report.user.name, type: "User" }
     else
       "Anonymous"
     end

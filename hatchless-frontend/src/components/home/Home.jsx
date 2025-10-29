@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Title, Text } from "@mantine/core";
+import { Link } from "react-router-dom";
+import { Title, Text, Button } from "@mantine/core";
 
 import { ResourceProvider } from "../../contexts/ResourceContext.jsx";
 import useResource from "../../hooks/useResource.js";
 import HatchlessSearch from "../ui/HatchlessSearch.jsx";
-import LoginLogoutToggle from "../auth/LoginLogoutToggle.jsx";
 
 const Home = () => {
   const [selectedRiverId, setSelectedRiverId] = useState(null);
@@ -26,6 +26,7 @@ const Home = () => {
         <div className="margin-top">
           <Title order={2}>{river.name}</Title>
           <Text>{river.description}</Text>
+          <Button component={Link} to={`/rivers/${river.id}`} color="teal" variant="light">Go to River Page</Button>
 
           {river.fly_shops.map((flyShop => (
             <div key={flyShop.id} className="margin-top-small">

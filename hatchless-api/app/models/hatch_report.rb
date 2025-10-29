@@ -11,12 +11,11 @@ class HatchReport < HatchlessRecord
 
   scope :by_fly_shop, ->(fly_shop_id) { where(fly_shop_id: fly_shop_id) }
   scope :for_river, ->(river_id) {
-    joins("LEFT JOIN fly_shops ON fly_shops.id = hatch_reports.fly_shop_id")
-      .joins("LEFT JOIN shop_rivers ON shop_rivers.fly_shop_id = fly_shops.id")
-      .where(
-        "hatch_reports.river_id = :river_id OR (hatch_reports.river_id IS NULL AND shop_rivers.river_id = :river_id)",
-        river_id: river_id
-      )
+    base = left_joins(fly_shop: :shop_rivers)
+
+    direct = base.where("hatch_reports.river_id = :river_id", river_id: river_id)
+    via_shop = base.where("hatch_reports.river_id IS NULL").where("shop_rivers.river_id = :river_id", river_id: river_id)
+    direct.or(via_shop).distinct
   }
 
   private

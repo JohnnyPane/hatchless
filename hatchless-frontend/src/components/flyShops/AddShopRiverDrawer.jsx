@@ -30,7 +30,7 @@ const AddShopRiverDrawer = ({ opened, onClose, shopRivers, flyShopId }) => {
         <div className="margin-top-small">
           <h3>All Available Rivers</h3>
             {allRivers.map((river) => (
-              <Card shadow="sm" withBorder padding="sm" className="margin-4-t-b" key={river.id}>
+              <Card shadow="sm" withBorder padding="sm" className="margin-4-t margin-4-b" key={river.id}>
                 <div className="flex row align-center space-between" key={river.id}>
                   <Text key={river.id}>{river.attributes.name}</Text>
                   <Button

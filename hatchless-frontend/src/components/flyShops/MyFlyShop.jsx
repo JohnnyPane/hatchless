@@ -31,16 +31,16 @@ const MyFlyShop = () => {
       <Tabs defaultValue="overview" color="indigo" keepMounted={false}>
         <Tabs.List>
           <Tabs.Tab value="overview">
-            <Text>Overview</Text>
+            <Text size="lg" className="bold">Overview</Text>
           </Tabs.Tab>
           <Tabs.Tab value="hot_flies">
-            <Text>Hot Flies</Text>
+            <Text size="lg" className="bold">Hot Flies</Text>
           </Tabs.Tab>
           <Tabs.Tab value="hatch_reports">
-            <Text>Hatch Reports</Text>
+            <Text size="lg" className="bold">Hatch Reports</Text>
           </Tabs.Tab>
           <Tabs.Tab value="rivers">
-            <Text>Rivers</Text>
+            <Text size="lg" className="bold">Rivers</Text>
           </Tabs.Tab>
         </Tabs.List>
 

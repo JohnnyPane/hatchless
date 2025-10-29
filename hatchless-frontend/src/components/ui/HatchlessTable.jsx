@@ -1,7 +1,25 @@
-import { Text, Table } from "@mantine/core"
+import { Table, Text, Image } from "@mantine/core"
 import { useResourceContext } from "../../contexts/ResourceContext.jsx";
+import { formatDate } from "../../utils/dateUtils.js";
+import './HatchlesTable.scss';
 
-const HatchlessTable = ({ columns, actionComponent, resourceName }) => {
+const HatchlessColumnDisplay = ({ column, row, rowData }) => {
+  const displayValue = row[column.accessor];
+
+  switch (column.type) {
+    case 'text':
+      return <Text>{displayValue}</Text>;
+    case 'date':
+      return <Text>{formatDate(displayValue)}</Text>;
+    case 'image':
+      const imageUrl = column.getImageUrl ? column.getImageUrl(rowData) : displayValue;
+      return <Image radius={8} src={imageUrl} alt="" w={50} h={50} />;
+    default:
+      return <span>{row[column.accessor]}</span>;
+  }
+}
+
+const HatchlessTable = ({ columns, actionComponent, resourceName, onRowClick }) => {
   const { data, total } = useResourceContext({ resourceName: resourceName });
 
   const tableData = data.map((row) => {
@@ -17,6 +35,13 @@ const HatchlessTable = ({ columns, actionComponent, resourceName }) => {
 
     return rowData;
   });
+
+  const handleRowClick = (rowData) => {
+    if (onRowClick) {
+      onRowClick(rowData);
+    }
+  };
+
 
   return (
     <>
@@ -34,10 +59,10 @@ const HatchlessTable = ({ columns, actionComponent, resourceName }) => {
         </Table.Thead>
         <Table.Tbody>
           {tableData.map((row, rowIndex) => (
-            <Table.Tr key={rowIndex}>
+            <Table.Tr key={rowIndex} className="clickable" onClick={() => handleRowClick(data[rowIndex])}>
               {columns.map((column) => (
-                <Table.Td key={column.accessor}>
-                  {row[column.accessor]}
+                <Table.Td key={column.accessor} className={`hatchless-table-${column.type}`}>
+                  <HatchlessColumnDisplay column={column} row={row} rowData={data[rowIndex]} />
                 </Table.Td>
               ))}
 
