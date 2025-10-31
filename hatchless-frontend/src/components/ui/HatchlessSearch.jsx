@@ -4,26 +4,28 @@ import { useDebouncedValue } from "@mantine/hooks";
 import { IconSearch } from "@tabler/icons-react";
 import { useResourceContext } from "../../contexts/ResourceContext.jsx";
 
-const HatchlessSearch = ({ onChange, nameKey = 'name', searchType = 'input' }) => {
+const HatchlessSearch = ({ onChange, nameKey = 'name', searchType = 'input', config, icon = null, debounceValue = 100, searchLabel = "resources" }) => {
   const [localSearch, setLocalSearch] = useState('');
-  const [debouncedSearch] = useDebouncedValue(localSearch, 100);
+  const [debouncedSearch] = useDebouncedValue(localSearch, debounceValue);
   const { setSearch } = useResourceContext();
 
   useEffect(() => {
     setSearch(debouncedSearch);
   }, [debouncedSearch, setSearch]);
 
+  const placeholderText = `Search ${searchLabel}...`;
+
   switch (searchType) {
     case 'multiSelect':
-      return <MultiSelectSearch search={localSearch} setSearch={setLocalSearch} onChange={onChange} nameKey={nameKey} />;
+      return <MultiSelectSearch search={localSearch} setSearch={setLocalSearch} onChange={onChange} nameKey={nameKey} placeholderText={placeholderText} />;
     case 'select':
-      return <SelectSearch search={localSearch} setSearch={setLocalSearch} onChange={onChange} nameKey={nameKey} />;
+      return <SelectSearch search={localSearch} setSearch={setLocalSearch} onChange={onChange} nameKey={nameKey} placeholderText={placeholderText} />;
     default:
-      return <InputSearch search={localSearch} setSearch={setLocalSearch} />;
+      return <InputSearch search={localSearch} setSearch={setLocalSearch} config={config} icon={icon} placeholderText={placeholderText} />;
   }
 }
 
-const MultiSelectSearch = ({ search, setSearch, onChange, nameKey }) => {
+const MultiSelectSearch = ({ search, setSearch, onChange, nameKey, placeholderText }) => {
   const [selectedValues, setSelectedValues] = useState([]);
   const { data } = useResourceContext();
 
@@ -42,7 +44,7 @@ const MultiSelectSearch = ({ search, setSearch, onChange, nameKey }) => {
 
   return (
     <MultiSelect
-      placeholder="Search resources..."
+      placeholder={placeholderText}
       searchable
       clearable
       data={multiSelectSearchData}
@@ -54,7 +56,7 @@ const MultiSelectSearch = ({ search, setSearch, onChange, nameKey }) => {
   );
 }
 
-const SelectSearch = ({ search, setSearch, onChange, nameKey }) => {
+const SelectSearch = ({ search, setSearch, onChange, nameKey, placeholderText }) => {
   const { data } = useResourceContext();
 
   const searchData = data?.map((resource) => ({
@@ -64,7 +66,7 @@ const SelectSearch = ({ search, setSearch, onChange, nameKey }) => {
 
   return (
     <Select
-      placeholder="Search resources..."
+      placeholder={placeholderText}
       searchable
       clearable
       rightSection={<IconSearch size={16} />}
@@ -76,12 +78,13 @@ const SelectSearch = ({ search, setSearch, onChange, nameKey }) => {
   );
 }
 
-const InputSearch = ({ search, setSearch }) => {
+const InputSearch = ({ search, setSearch, config, icon, placeholderText }) => {
   return (
     <Input
-      placeholder="Search resources..."
-      rightSection={<IconSearch size={16} />}
+      placeholder={placeholderText}
+      rightSection={icon ? icon : <IconSearch size={16} />}
       value={search}
+      {...config}
       onChange={(event) => {
         const value = event.currentTarget.value;
         setSearch(value);

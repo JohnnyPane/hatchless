@@ -1,8 +1,21 @@
+/*body {*/
+/*    background-image: url('/textures/paper-bg.jpg');*/
+/*    background-size: cover;*/
+/*    background-repeat: no-repeat;*/
+/*    background-attachment: fixed;*/
+/*    background-color: #f8f7f3; !* fallback soft neutral *!*/
+/*}*/
+
+body {
+  background: #F7F7F0;
+  color: #1E2522
+}
+
 .mantine-DatePicker-day[data-weekend]{
-    color: black !important;
+  color: black !important;
 }
 
 .mantine-DatePicker-day[data-selected]{
-    background-color: var(--mantine-color-teal-5) !important;
-    color: white !important;
+  background-color: var(--mantine-color-teal-5) !important;
+  color: white !important;
 }

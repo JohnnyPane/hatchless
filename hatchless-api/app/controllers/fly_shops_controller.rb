@@ -3,6 +3,10 @@ class FlyShopsController < HatchlessController
 
   protected
 
+  def included_show_resources
+    [ :address, :rivers, :hatch_reports ]
+  end
+
   def included_index_resources
     [ :user, :rivers, :hatch_reports ]
   end

@@ -6,7 +6,7 @@ class HotFly < HatchlessRecord
   validates :fly_shop, :fly_pattern, presence: true
 
   scope :active, -> { where(active: true) }
-  scope :by_fly_shop, ->(fly_shop_id) { where(fly_shop_id: fly_shop_id) }
+  scope :for_fly_shop, ->(fly_shop_id) { where(fly_shop_id: fly_shop_id) }
   scope :for_river, ->(river_id) {
     base = joins(fly_shop: :shop_rivers)
 

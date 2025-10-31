@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter as Router } from 'react-router-dom'
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '@fontsource/inter';
@@ -19,7 +20,11 @@ createRoot(document.getElementById('root')).render(
         fontFamily: 'Spectral, san-serif',
         // headings: { fontFamily: 'Spectral, san-serif' },
       }} forceColorScheme="light">
-        <App />
+
+        <Router>
+          <App />
+        </Router>
+
       </MantineProvider>
     </QueryClientProvider>
   </StrictMode>,

@@ -58,7 +58,7 @@ const MyFlyShop = () => {
         </Tabs.Panel>
 
         <Tabs.Panel value="hatch_reports" pt="xs">
-          <ResourceProvider resourceName="hatch_reports" initialParams={{ scopes: [{ name: 'by_fly_shop', args: [flyShop.id] }] }}>
+          <ResourceProvider resourceName="hatch_reports" initialParams={{ scopes: [{ name: 'for_fly_shop', args: [flyShop.id] }] }}>
             <MyHatchReports />
           </ResourceProvider>
         </Tabs.Panel>

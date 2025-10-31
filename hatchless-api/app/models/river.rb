@@ -10,10 +10,10 @@ class River < HatchlessRecord
   has_many :hatch_reports, dependent: :nullify
   has_many :hot_flies, dependent: :nullify
 
-  scope :by_fly_shop, ->(fly_shop_id) {
+  scope :for_fly_shop, ->(fly_shop_id) {
     joins(:shop_rivers).where(shop_rivers: { fly_shop_id: fly_shop_id })
   }
-  scope :not_by_fly_shop, ->(fly_shop_id) {
+  scope :not_for_fly_shop, ->(fly_shop_id) {
     where.not(id: ShopRiver.select(:river_id).where(fly_shop_id: fly_shop_id))
   }
 

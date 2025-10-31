@@ -9,7 +9,7 @@ class HatchReport < HatchlessRecord
   validates :notes, presence: true
   before_create :set_observed_on
 
-  scope :by_fly_shop, ->(fly_shop_id) { where(fly_shop_id: fly_shop_id) }
+  scope :for_fly_shop, ->(fly_shop_id) { where(fly_shop_id: fly_shop_id) }
   scope :for_river, ->(river_id) {
     base = left_joins(fly_shop: :shop_rivers)
 

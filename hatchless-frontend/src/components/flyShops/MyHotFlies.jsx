@@ -15,7 +15,7 @@ const MyHotFlies = () => {
   const { id: flyShopId } = useParams();
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { data: hotFlies } = useResources({ resourceName: 'hot_flies', scopes: [{ name: 'by_fly_shop', args: [flyShopId] }, { name: 'active' }] });
+  const { data: hotFlies } = useResources({ resourceName: 'hot_flies', scopes: [{ name: 'for_fly_shop', args: [flyShopId] }, { name: 'active' }] });
   const { data: selectedFly } = useResource("fly_patterns", selectedFlyId);
   const { data: flyShop } = useResource("fly_shops", flyShopId);
   const createHotFly = useCreateResource('hot_flies');

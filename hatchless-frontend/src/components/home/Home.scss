@@ -1,0 +1,101 @@
+.home-navbar {
+  height: 60px;
+  padding-left: var(--mantine-spacing-md);
+  padding-right: var(--mantine-spacing-md);
+  background: transparent;
+  position: absolute;
+  color: white;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.home-logo {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.hero-background {
+  background: linear-gradient(45deg, #0e4d4e, #3b7b73, #748f79);
+  //background: linear-gradient(45deg, #0e4d4e, #3b7b73, #a8b87f);
+  //background: linear-gradient(45deg, #0d4b4e 0%, #3b7b73 50%, #aab892 100%);
+  //background: linear-gradient(135deg, #2D555A 0%, #346162 50%, #467B7D 100%);
+  background-size: cover;
+  animation: riverFlow 20s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  //align-items: center;
+  justify-content: center;
+}
+
+@keyframes riverFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+
+.hero-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../../../public/waves.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.hero-search-container {
+  margin-top: 200px;
+}
+
+@keyframes sunlightDrift {
+  0% { transform: translate(0, 0); opacity: 0.6; }
+  100% { transform: translate(15px, -15px); opacity: 0.9; }
+}
+
+.hatch-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hatch-particles span {
+  position: absolute;
+  bottom: -10px;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: floatUp 12s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 0.9; }
+  100% { transform: translateY(-110vh) scale(0.3); opacity: 0; }
+}
+
+.mantine-Input-input {
+  &::placeholder {
+    color: rgba(255, 255, 255) !important;
+    opacity: 1 !important;
+  }
+}

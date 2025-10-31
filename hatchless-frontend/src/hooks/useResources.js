@@ -12,6 +12,7 @@ const useResources = (
     scopes = [],
     search = "",
     searchColumn = null,
+    enableQuery = true,
     extraParams = {}
   }) => {
   const resourceApi = createApi(resourceName);
@@ -35,6 +36,7 @@ const useResources = (
     queryFn: async () => resourceApi.query(queryParams),
     keepPreviousData: true,
     staleTime: 60 * 1000,
+    enabled: enableQuery,
   });
 
   const meta = data?.meta || {};

@@ -4,7 +4,7 @@ import { Button, Text } from '@mantine/core';
 import { useMe } from '../../hooks/useMe';
 import { useAuth } from "../../contexts/AuthContext.jsx";
 
-const LoginLogoutToggle = ({ className = "" }) => {
+const LoginLogoutToggle = ({ themeColor = "indigo", textColor = "black" }) => {
   const { data: user } = useMe();
   const { logout } = useAuth();
 
@@ -16,12 +16,12 @@ const LoginLogoutToggle = ({ className = "" }) => {
   };
 
   return user ? (
-    <Button variant="transparent" onClick={handleLogout} color="indigo" size="compact-md" className="animated-link">
-      <Text color="black" size="xs">Logout</Text>
+    <Button variant="transparent" onClick={handleLogout} color={themeColor} size="compact-md" className="animated-link">
+      <Text color={textColor} size="sm">Logout</Text>
     </Button>
   ) : (
-    <Button variant="transparent" color="indigo" component={Link} to="/login"  size="compact-md" className="animated-link">
-      <Text color="black" size="xs">Login</Text>
+    <Button variant="transparent" color={themeColor} component={Link} to="/login"  size="compact-md" className="animated-link">
+      <Text color={textColor} size="sm">Login</Text>
     </Button>
   );
 }

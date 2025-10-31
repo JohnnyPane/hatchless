@@ -59,7 +59,7 @@ const MyShopRivers = ({ flyShopId }) => {
         <HatchlessTablePage columns={riversTableData} actionComponent={RemoveShopRiverButton} resourceName="shop_rivers" />
       </div>
 
-      <ResourceProvider resourceName="rivers" initialParams={{ searchColumn: "name", scopes: [{ name: 'not_by_fly_shop', args: [flyShopId]}] }}>
+      <ResourceProvider resourceName="rivers" initialParams={{ searchColumn: "name", scopes: [{ name: 'not_for_fly_shop', args: [flyShopId]}] }}>
         <AddShopRiverDrawer shopRivers={shopRivers} opened={drawerOpened} onClose={closeDrawer} flyShopId={flyShopId} />
       </ResourceProvider>
     </div>

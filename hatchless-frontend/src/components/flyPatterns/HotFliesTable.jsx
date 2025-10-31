@@ -5,7 +5,7 @@ import { useDisclosure } from "@mantine/hooks";
 import useResource from "../../hooks/useResource.js";
 import HatchlessTablePage from "../ui/HatchlessTablePage.jsx";
 import { getFlyDefaultImageUrl } from "../../utils/imageUtils.js";
-import HotFlyDrawer from "../flyPatterns/HotFlyDrawer.jsx";
+import HotFlyDrawer from "./HotFlyDrawer.jsx";
 
 const getImageUrl = (hotFly) => {
   const { attributes } = hotFly;
@@ -20,7 +20,7 @@ const columns = [
   { accessor: 'created_at', label: 'Posted On', type: 'date' }
 ];
 
-const RiverHotFliesTable = () => {
+const HotFliesTable = ({ displayHeader = true }) => {
   const [selectedHotFlyId, setSelectedHotFlyId] = useState(null);
   const [opened, { open, close }] = useDisclosure(false);
   const { data: selectedHotFly } = useResource("hot_flies", selectedHotFlyId);
@@ -37,13 +37,14 @@ const RiverHotFliesTable = () => {
 
   return (
     <div>
-      <div className="center-text">
+      {displayHeader && <div className="center-text">
         <Text size="md" className="margin-bottom">
           These are the flies local fly shops are recommending right now for this river.
 
-          They’re handpicked by guides and shop staff who know the current hatches and conditions, giving you an edge on what patterns are producing fish today.
+          They’re handpicked by guides and shop staff who know the current hatches and conditions, giving you an edge on
+          what patterns are producing fish today.
         </Text>
-      </div>
+      </div>}
 
       <HatchlessTablePage resourceName="hot_flies" columns={columns} onRowClick={onRowClick} />
 
@@ -52,4 +53,4 @@ const RiverHotFliesTable = () => {
   )
 }
 
-export default RiverHotFliesTable;
+export default HotFliesTable;

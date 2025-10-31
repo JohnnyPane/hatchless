@@ -32,6 +32,8 @@ const HatchReportDrawer = ({ opened, onClose, hatchReport }) => {
     }
   }
 
+  const dateChosen = form.values.observed_on.length > 0;
+
   return (
     <Drawer
       opened={opened}
@@ -72,7 +74,7 @@ const HatchReportDrawer = ({ opened, onClose, hatchReport }) => {
           </div>
         </div>
 
-        <Button type="submit" color="indigo" className="full-width margin-top">Save Changes</Button>
+        <Button type="submit" color="indigo" disabled={!dateChosen} className="full-width margin-top">Save Changes</Button>
       </form>
     </Drawer>
   );

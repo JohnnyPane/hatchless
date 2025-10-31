@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useMemo, useCallback } from "react";
+import React, { createContext, useContext, useState, useMemo, useCallback, useEffect } from "react";
 import useResources from "../hooks/useResources.js";
 
 const ResourceContext = createContext(null);
@@ -12,7 +12,16 @@ export const ResourceProvider = ({ resourceName, children, initialParams = {} })
   const [scopes, setScopes] = useState(initialParams.scopes || []);
   const [search, setSearch] = useState(initialParams.search || "");
   const [searchColumn, setSearchColumn] = useState(initialParams.searchColumn || null);
+  const [hasSearched, setHasSearched] = useState(false);
   const [extraParams, setExtraParams] = useState(initialParams.extraParams || {});
+
+  useEffect(() => {
+    if (search.length > 0) {
+      setHasSearched(true);
+    }
+  }, [search]);
+
+  const shouldEnableQuery = hasSearched || !initialParams.waitForSearch;
 
   const updateExtraParams = useCallback(
     (newParams) => setExtraParams((prev) => ({ ...prev, ...newParams })),
@@ -31,7 +40,7 @@ export const ResourceProvider = ({ resourceName, children, initialParams = {} })
     extraParams,
   }), [page, perPage, sortColumn, sortDirection, filters, scopes, search, searchColumn, extraParams]);
 
-  const resources = useResources({ resourceName, ...queryParams });
+  const resources = useResources({ resourceName, ...queryParams, enableQuery: shouldEnableQuery });
 
   const contextValue = {
     ...resources,

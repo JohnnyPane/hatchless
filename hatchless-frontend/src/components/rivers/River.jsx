@@ -6,7 +6,7 @@ import { ResourceProvider } from "../../contexts/ResourceContext.jsx";
 import { useMe } from "../../hooks/useMe.js";
 
 import RiverOverview from "./RiverOverview.jsx";
-import RiverHotFliesTable from "./RiverHotFliesTable.jsx";
+import HotFliesTable from "../flyPatterns/HotFliesTable.jsx";
 import HatchChartPage from "./HatchChartPage.jsx";
 import HatchReports from "../hatchReports/HatchReports.jsx";
 import AddRiverHatchReportToggle from "../hatchReports/AddRiverHatchReportToggle.jsx";
@@ -50,7 +50,7 @@ const River = () => {
 
         <Tabs.Panel value="hot_flies">
           <ResourceProvider resourceName="hot_flies" initialParams={{ scopes: [{ name: 'for_river', args: [id] }, { name: 'active' }] }}>
-            <RiverHotFliesTable />
+            <HotFliesTable />
           </ResourceProvider>
         </Tabs.Panel>
 
