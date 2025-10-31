@@ -58,10 +58,10 @@ const MyHotFlies = () => {
       <div className="flex row space-between align-start">
         <div>
           <Title order={2}>{flyShop.name} Hot Flies</Title>
-          <Text color="dimmed">Share what’s working! Add the flies you’d recommend to anglers this week based on what’s been producing on your local waters.</Text>
+          <Text className="secondary-text">Share what’s working! Add the flies you’d recommend to anglers this week based on what’s been producing on your local waters.</Text>
         </div>
 
-        <Button onClick={open} color="teal" variant="light" className="margin-bottom">Add Hot Fly</Button>
+        <Button onClick={open} variant="light" className="margin-bottom">Add Hot Fly</Button>
       </div>
 
       <div className="flex row wrap to-center">

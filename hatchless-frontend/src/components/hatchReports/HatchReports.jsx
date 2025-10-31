@@ -2,6 +2,7 @@ import { Title, Text } from "@mantine/core";
 import { useResourceContext } from "../../contexts/ResourceContext.jsx";
 import HatchlessPagination from "../ui/HatchlessPagination.jsx";
 import HatchReportCard from "../hatchReports/HatchReportCard.jsx";
+import './HatchReport.scss'
 
 const HatchReports = () => {
   const { data: hatchReports, isLoading, isError, error, total } = useResourceContext();
@@ -14,7 +15,7 @@ const HatchReports = () => {
     <>
       <div className="flex row space-between align-end margin-4-b">
         <Title order={4}>Hatch Reports</Title>
-        <Text color="dimmed" size="xs" className="margin-4-r">Total: {total}</Text>
+        <Text size="xs" className="secondary-text margin-4-r">Total: {total}</Text>
       </div>
 
       <div>

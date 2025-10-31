@@ -26,7 +26,7 @@ const FlyShop = () => {
     <div className="page">
 
       <Title order={2} className="center-text">{flyShop.name}</Title>
-      {flyShop.address && <Text color="dimmed" className="center-text ">
+      {flyShop.address && <Text className="secondary-text center-text ">
         {flyShop.address}
       </Text>}
 

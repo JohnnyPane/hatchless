@@ -6,9 +6,100 @@
 /*    background-color: #f8f7f3; !* fallback soft neutral *!*/
 /*}*/
 
+:root {
+  /* 🌊 Base tones */
+  --color-water-deep: #0E4D4E;
+  --color-water: #3B7B73;
+  --color-water-light: #A7B18D;
+
+  /* 🪨 Neutral surfaces */
+  --color-stone: #F4F5F2;      /* main background */
+  --color-bone: #F7F7F0;       /* card/panel surfaces */
+  --color-border: #DADFD7;     /* soft divider */
+  --color-shadow: rgba(0, 0, 0, 0.04);
+
+  /* ☀️ Accents */
+  --color-sunlight: #F2C97D;   /* warm gold highlight */
+  --color-hover: #E3EBE8;      /* gentle green-gray hover */
+  --color-active: #D2E1DC;     /* slightly deeper hover */
+  --color-highlight: #A7B18D;  /* calming light green */
+
+  /* 🌿 Text */
+  --color-text: #1F2C27;       /* deep forest text */
+  --color-text-muted: #5C6A62; /* secondary text */
+  --color-text-inverse: #FFFFFF;
+
+  /* ✨ Optional gradient for hero sections */
+  --gradient-forest-river: linear-gradient(135deg, #A7B18D, #3B7B73, #0E4D4E);
+
+  /* 🪶 Shadows */
+  --shadow-soft: 0 2px 10px var(--color-shadow);
+  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+
 body {
-  background: #F7F7F0;
-  color: #1E2522
+  background: var(--color-stone);
+  color: var(--color-text);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../public/white-waves.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  /*opacity: 0.07;*/
+  pointer-events: none;
+  z-index: -1;
+}
+
+.primary-text {
+  color: var(--color-water-deep);
+}
+
+.secondary-text {
+  color: var(--color-text-muted);
+}
+
+.card {
+  background: var(--color-bone);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+}
+
+.button-primary {
+  background: var(--color-water);
+  color: var(--color-text-inverse);
+  border-radius: 6px;
+}
+
+.button-primary:hover {
+  background: var(--color-water-deep);
+  color: var(--color-bone)
+}
+
+.button-primary-light {
+  background-color: color-mix(in srgb, var(--color-water) 10%, white);
+  color: var(--color-water);
+}
+
+.button-primary-light:hover {
+  background-color: color-mix(in srgb, var(--color-water) 15%, white);
+}
+
+.hero-section {
+  background: var(--gradient-forest-river);
+  color: var(--color-text-inverse);
+}
+
+.table-row:hover {
+  background-color: var(--color-shadow);
 }
 
 .mantine-DatePicker-day[data-weekend]{
@@ -16,6 +107,14 @@ body {
 }
 
 .mantine-DatePicker-day[data-selected]{
-  background-color: var(--mantine-color-teal-5) !important;
+  background-color: var(--color-water) !important;
   color: white !important;
+}
+
+
+.mantine-Tabs-tab:hover {
+  &:active {
+    background-color: var(--color-active);
+  }
+  background-color: var(--color-shadow);
 }

@@ -21,13 +21,13 @@ const River = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="page">
-      <div className="flex column center">
+    <div className="page margin-top">
+      <div className="flex column center margin-bottom">
         <Title order={1}>{river.name}</Title>
-        <Text color="dimmed">{river.description}</Text>
+        <Text className="secondary-text">{river.description}</Text>
       </div>
 
-      <Tabs defaultValue="overview" color="indigo" keepMounted={false}>
+      <Tabs defaultValue="overview" keepMounted={false}>
 
         <Tabs.List className="margin-bottom">
           <Tabs.Tab value="overview">

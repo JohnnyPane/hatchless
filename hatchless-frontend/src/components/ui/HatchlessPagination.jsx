@@ -17,7 +17,6 @@ const HatchlessPagination = () => {
         onChange={handlePageChange}
         total={totalPages}
         size="sm"
-        color="indigo"
       />
     </div>
   );

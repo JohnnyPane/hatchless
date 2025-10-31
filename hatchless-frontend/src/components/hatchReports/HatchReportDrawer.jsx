@@ -44,7 +44,7 @@ const HatchReportDrawer = ({ opened, onClose, hatchReport }) => {
       position="right"
     >
       <form onSubmit={form.onSubmit(onSubmit)}>
-        <div className="flex column">
+        <div className="flex column margin-bottom">
           <div className="margin-bottom">
             <Title order={5}>Hatches Observed</Title>
             <HatchlessSearch onChange={onInsectSelect} nameKey='common_name' searchType='multiSelect' />
@@ -74,7 +74,7 @@ const HatchReportDrawer = ({ opened, onClose, hatchReport }) => {
           </div>
         </div>
 
-        <Button type="submit" color="indigo" disabled={!dateChosen} className="full-width margin-top">Save Changes</Button>
+        <Button type="submit" disabled={!dateChosen} className="full-width margin-top">Save Changes</Button>
       </form>
     </Drawer>
   );

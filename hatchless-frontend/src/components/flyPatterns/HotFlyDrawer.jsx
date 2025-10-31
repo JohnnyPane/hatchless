@@ -56,7 +56,7 @@ const HotFlyDrawer = ({ isOpen, onClose, hotFly }) => {
             <Text><strong>Fly Shop:</strong></Text>
 
             <Button component={Link} to={`/fly_shops/${hotFly.fly_shop.id}`} size="compact-xs" variant="transparent" className="animated-link" color="indigo">
-              <Text color="indigo">{hotFly.fly_shop.name}</Text>
+              <Text color="water">{hotFly.fly_shop.name}</Text>
             </Button>
           </div>
 
@@ -64,7 +64,7 @@ const HotFlyDrawer = ({ isOpen, onClose, hotFly }) => {
             <Text><strong>Website: </strong>   </Text>
 
             <Button component={Link} to={hotFly.fly_shop.website_url} target="_blank" size="compact-xs" variant="transparent" className="animated-link" color="indigo">
-              <Text color="indigo">{hotFly.fly_shop.website_url}</Text>
+              <Text color="water">{hotFly.fly_shop.website_url}</Text>
             </Button>
           </div>
         </div>

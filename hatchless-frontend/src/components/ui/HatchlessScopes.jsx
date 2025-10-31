@@ -26,8 +26,8 @@ const ScopeButtonGroup = ({ scopeConfig, setScopes, scopes }) => {
       {scopeConfig.options.map((option) => (
         <Button
           key={option.value}
-          variant="outline"
-          color={scopes.some(scope => scope.name === option.value) ? 'indigo' : 'gray'}
+          variant={scopes.some(scope => scope.name === option.value) ? 'outline' : 'light'}
+          // color={scopes.some(scope => scope.name === option.value) ? 'water' : 'gray'}
           size="compact-xs"
           onClick={() => toggleScope(option.value)}
           className="scope-button"

@@ -4,7 +4,7 @@ import { Button, Text } from '@mantine/core';
 import { useMe } from '../../hooks/useMe';
 import { useAuth } from "../../contexts/AuthContext.jsx";
 
-const LoginLogoutToggle = ({ themeColor = "indigo", textColor = "black" }) => {
+const LoginLogoutToggle = ({ themeColor = "var(--color-highlight)", textColor = "black" }) => {
   const { data: user } = useMe();
   const { logout } = useAuth();
 

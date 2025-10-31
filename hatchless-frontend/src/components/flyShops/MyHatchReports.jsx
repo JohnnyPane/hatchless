@@ -14,7 +14,7 @@ const MyHatchReports = () => {
       <AddHatchReport />
 
       <div className="flex column align-center">
-        <Text size="xs" color="dimmed" className="italic margin-4-b">Total Hatch Reports: {total}</Text>
+        <Text size="xs" className="secondary-text italic margin-4-b">Total Hatch Reports: {total}</Text>
 
         {hatchReports.map((report) => (
           <HatchReportCard key={report.id} report={report.attributes} className="my-hatch-report-card" />

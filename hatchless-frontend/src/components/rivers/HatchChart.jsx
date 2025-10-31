@@ -1,4 +1,4 @@
-import { Tooltip } from "@mantine/core";
+import { Tooltip, Card } from "@mantine/core";
 import { ResponsiveBar } from "@nivo/bar";
 import dayjs from "dayjs";
 import dayOfYear from "dayjs/plugin/dayOfYear";
@@ -152,13 +152,15 @@ const HatchChart = ({ hatchWindows }) => {
 
   return (
     <div className="flex center full-width">
-      <div
+      <Card
+        shadow="sm"
+        className="card"
         style={{
           height: hatchData.length * 40 + margin.top + margin.bottom,
           width: "min(90vw, 1000px)",
           margin: "0 auto",
           marginBottom: "40px",
-          background: "#f7f5f0",
+          // background: "#E8EBE3",
           borderRadius: "16px",
           padding: "20px",
         }}
@@ -207,7 +209,7 @@ const HatchChart = ({ hatchWindows }) => {
           }}
           motionConfig="gentle"
         />
-      </div>
+      </Card>
     </div>
   );
 };

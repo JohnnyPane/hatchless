@@ -28,7 +28,7 @@ const MyFlyShop = () => {
 
       <Title order={2} className="center-text margin">{flyShop.name}</Title>
 
-      <Tabs defaultValue="overview" color="indigo" keepMounted={false}>
+      <Tabs defaultValue="overview" keepMounted={false}>
         <Tabs.List>
           <Tabs.Tab value="overview">
             <Text size="lg" className="bold">Overview</Text>

@@ -45,7 +45,7 @@ const HatchlessTable = ({ columns, actionComponent, resourceName, onRowClick }) 
 
   return (
     <>
-      <Text size="sm" color="dimmed" className="margin-bottom-small">
+      <Text size="sm" className="secondary-text">
         Total: {total}
       </Text>
 
@@ -59,7 +59,7 @@ const HatchlessTable = ({ columns, actionComponent, resourceName, onRowClick }) 
         </Table.Thead>
         <Table.Tbody>
           {tableData.map((row, rowIndex) => (
-            <Table.Tr key={rowIndex} className="clickable" onClick={() => handleRowClick(data[rowIndex])}>
+            <Table.Tr key={rowIndex} className="table-row clickable" onClick={() => handleRowClick(data[rowIndex])}>
               {columns.map((column) => (
                 <Table.Td key={column.accessor} className={`hatchless-table-${column.type}`}>
                   <HatchlessColumnDisplay column={column} row={row} rowData={data[rowIndex]} />

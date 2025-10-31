@@ -31,11 +31,11 @@ const LoginForm = () => {
 
   return (
     <div className="login-form-container">
-      <Card shadow="sm" padding="lg" radius="md" withBorder className="login-signup-form">
+      <Card shadow="sm" padding="lg" radius="md" withBorder className="card">
         <Text size="lg" weight={500}>
           Welcome back!
         </Text>
-        <Text size="sm" color="dimmed" mb="lg">
+        <Text size="sm" className="secondary-text" mb="lg">
           Please log in to your account.
         </Text>
         <form onSubmit={form.onSubmit(handleSubmit)}>
@@ -52,7 +52,7 @@ const LoginForm = () => {
             className="margin-bottom"
           />
           <div className="flex to-right full-width">
-            <Button type="submit" color="teal" className="full-width double-margin-top">Log In</Button>
+            <Button type="submit" className="full-width double-margin-top">Log In</Button>
           </div>
         </form>
       </Card>

@@ -37,11 +37,11 @@ const SignupForm = () => {
 
   return (
     <div className="login-form-container">
-      <Card shadow="sm" padding="lg" radius="md" withBorder className="login-signup-form">
+      <Card shadow="sm" padding="lg" radius="md" withBorder className="card">
         <Text size="lg" weight={500}>
           Create an account
         </Text>
-        <Text size="sm" color="dimmed" mb="lg">
+        <Text size="sm" className="secondary-text" mb="lg">
           Sign up to access exclusive features and offers.
         </Text>
         <form onSubmit={form.onSubmit(handleSubmit)}>
@@ -76,7 +76,7 @@ const SignupForm = () => {
             {...form.getInputProps("passwordConfirm")}
           />
           <div>
-            <Button type="submit" color="teal" className="full-width double-margin-top">Sign Up</Button>
+            <Button type="submit" className="full-width double-margin-top">Sign Up</Button>
           </div>
         </form>
       </Card>

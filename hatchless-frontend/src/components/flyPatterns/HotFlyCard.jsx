@@ -17,7 +17,7 @@ const HotFlyCard = ({ hotFly, editable = false }) => {
   const imageUrl = flyPattern.image_url || getFlyDefaultImageUrl(flyPattern.category);
 
   return (
-    <Card key={hotFly.id} shadow="md" padding="md" radius="md" withBorder className="hot-fly-card margin">
+    <Card key={hotFly.id} shadow="md" padding="md" radius="md" withBorder className="hot-fly-card card margin">
       <div className="flex row space-between">
         <div className="flex row">
           <Image
@@ -30,7 +30,7 @@ const HotFlyCard = ({ hotFly, editable = false }) => {
 
           <div className="flex column">
             <Text>{hotFly.attributes.fly_pattern.name}</Text>
-            <Text size="sm" color="dimmed">{hotFly.attributes.notes}</Text>
+            <Text size="sm" className="secondary-text">{hotFly.attributes.notes}</Text>
           </div>
         </div>
 

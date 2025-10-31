@@ -29,11 +29,11 @@ const MyShopRivers = ({ flyShopId }) => {
     return (
       <Button
         size="compact-xs"
-        color="pink"
+        color="red"
         variant="subtle"
         onClick={() => handleRemoveRiver(shopRiverId)}
       >
-        Remover River
+        Remove River
       </Button>
     );
   }
@@ -43,9 +43,9 @@ const MyShopRivers = ({ flyShopId }) => {
       <div className="margin-bottom">
         <div className="flex row margin-4-b">
           <Title order={2}>Your Shop's Rivers</Title>
-          <Button className="margin-left" size="sm" color="indigo" variant="light" onClick={openDrawer}>Add River to Fly Shop</Button>
+          <Button className="margin-left" size="sm" variant="light" onClick={openDrawer}>Add River to Fly Shop</Button>
         </div>
-        <Text color="dimmed" size="sm">
+        <Text className="secondary-text" size="sm">
           Choose the rivers your shop serves to help local anglers find you and stay connected to the waters you know best.
 
           When your shop is linked to a river, anglers browsing that river’s page will see your shop listed as a trusted resource for gear, advice, and hatch updates.

@@ -56,7 +56,7 @@ const AddHatchReport = ({ riverId = null }) => {
         />
 
         <div className="flex to-right margin-4-t">
-          <Button color="indigo" variant="light" disabled={form.values.notes.length === 0} onClick={addHatchReport}>Add Hatch Report</Button>
+          <Button disabled={form.values.notes.length === 0} onClick={addHatchReport}>Add Hatch Report</Button>
         </div>
       </div>
 

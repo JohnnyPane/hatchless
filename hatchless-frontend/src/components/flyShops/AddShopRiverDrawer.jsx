@@ -35,8 +35,7 @@ const AddShopRiverDrawer = ({ opened, onClose, shopRivers, flyShopId }) => {
                   <Text key={river.id}>{river.attributes.name}</Text>
                   <Button
                     size="compact-xs"
-                    color="indigo"
-                    variant="light"
+                    // variant="light"
                     onClick={() => handleAddRiver(river.id)}
                     disabled={shopRivers.some((shopRiver) => shopRiver.attributes.river.id === river.id)}
                   >
