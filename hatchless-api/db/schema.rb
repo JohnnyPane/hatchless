@@ -10,9 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_29_104010) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_04_083721) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
 
   create_table "addresses", force: :cascade do |t|
     t.string "addressable_type", null: false
@@ -34,9 +62,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_29_104010) do
     t.string "name", null: false
     t.text "notes"
     t.string "category"
-    t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "creator_id"
+    t.string "creator_type"
+    t.boolean "approved", default: false
+    t.boolean "public", default: false
+    t.index ["approved"], name: "index_fly_patterns_on_approved"
+    t.index ["creator_type", "creator_id"], name: "index_fly_patterns_on_creator_type_and_creator_id"
+    t.index ["public"], name: "index_fly_patterns_on_public"
   end
 
   create_table "fly_shops", force: :cascade do |t|
@@ -169,6 +203,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_29_104010) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "fly_shops", "users", column: "owner_id"
   add_foreign_key "hatch_report_insects", "hatch_reports"
   add_foreign_key "hatch_report_insects", "insects"

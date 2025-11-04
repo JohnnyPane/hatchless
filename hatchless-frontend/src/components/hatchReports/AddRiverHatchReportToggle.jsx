@@ -8,7 +8,7 @@ const AddRiverHatchReportToggle = ({ riverId }) => {
   return (
     <div>
       <div className="flex to-center">
-        <Button variant="light" onClick={toggle}>
+        <Button variant={opened ? "light" : "outline"} onClick={toggle}>
           {opened ? 'Hide' : 'Add'} Hatch Report for This River
         </Button>
       </div>

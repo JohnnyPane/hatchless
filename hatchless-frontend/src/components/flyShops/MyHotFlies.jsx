@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { Text, Title, Textarea, NumberInput, Button, Drawer } from '@mantine/core';
+import { useParams, Link } from "react-router-dom";
+import { Text, Title, Textarea, NumberInput, Button, Drawer, Fieldset, Grid } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from "@mantine/form";
 
 import { useCreateResource } from "../../hooks/useResourceMutations.js";
-import useResources from "../../hooks/useResources.js";
+import { ResourceProvider, useResourceContext } from "../../contexts/ResourceContext.jsx";
 import useResource from "../../hooks/useResource.js";
 import HatchlessSearch from "../ui/HatchlessSearch.jsx";
+import HatchlessPagination from "../ui/HatchlessPagination.jsx";
 import HotFlyCard from "../flyPatterns/HotFlyCard.jsx";
 
 const MyHotFlies = () => {
@@ -15,7 +16,7 @@ const MyHotFlies = () => {
   const { id: flyShopId } = useParams();
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { data: hotFlies } = useResources({ resourceName: 'hot_flies', scopes: [{ name: 'for_fly_shop', args: [flyShopId] }, { name: 'active' }] });
+  const { data: hotFlies, total } = useResourceContext();
   const { data: selectedFly } = useResource("fly_patterns", selectedFlyId);
   const { data: flyShop } = useResource("fly_shops", flyShopId);
   const createHotFly = useCreateResource('hot_flies');
@@ -61,9 +62,10 @@ const MyHotFlies = () => {
           <Text className="secondary-text">Share what’s working! Add the flies you’d recommend to anglers this week based on what’s been producing on your local waters.</Text>
         </div>
 
-        <Button onClick={open} variant="light" className="margin-bottom">Add Hot Fly</Button>
+        <Button onClick={open} variant="filled" className="margin-bottom">Add Hot Fly</Button>
       </div>
 
+      <Text size="xs" color="dimmed">Total: {total}</Text>
       <div className="flex row wrap to-center">
         {hotFlies && hotFlies.length > 0 ? (
           <>
@@ -77,46 +79,63 @@ const MyHotFlies = () => {
 
       </div>
 
-     <Drawer opened={opened} onClose={close} position="bottom" title="Select Fly Pattern" padding="md" size="md">
-        <div>
-          <HatchlessSearch onChange={onSelectFly} searchType='select' />
+      <div className="flex center">
+        <HatchlessPagination />
+      </div>
 
-          { selectedFly &&
-            <div>
-              <h3>{selectedFly.name}</h3>
-              <p>{selectedFly.notes}</p>
+     <Drawer opened={opened} onClose={close} position="bottom" padding="md" size="md">
+        <Grid>
+          <Grid.Col span={8}>
+            <Fieldset legend={<Text size="lg" className="bold">Add a Hot Fly Pattern to Your Shop's Recommendations</Text>}>
+              <ResourceProvider resourceName="fly_patterns" initialParams={{ searchColumn: "name" }}>
+                <HatchlessSearch onChange={onSelectFly} searchType='select' />
+              </ResourceProvider>
 
-              <form onSubmit={form.onSubmit(addHotFly)}>
-                <Textarea
-                  label="Notes"
-                  placeholder="Add any notes about this hot fly..."
-                  {...form.getInputProps('notes')}
-                  className="margin-bottom"
-                />
-
-                <div className="flex row">
-                  <NumberInput
-                    label="From Size"
-                    placeholder="Enter minimum size"
-                    {...form.getInputProps('min_size')}
-                    className="margin-right"
-                  />
-
-                  <NumberInput
-                    label="To Size"
-                    placeholder="Enter maximum size"
-                    {...form.getInputProps('max_size')}
-                    className="margin-bottom"
-                  />
-                </div>
-
+              { selectedFly &&
                 <div>
-                  <Button type="submit" color="indigo">Add Hot Fly</Button>
+                  <h3>{selectedFly.name}</h3>
+                  <p>{selectedFly.notes}</p>
+
+                  <form onSubmit={form.onSubmit(addHotFly)}>
+                    <Textarea
+                      label="Notes"
+                      placeholder="Add any notes about this hot fly..."
+                      {...form.getInputProps('notes')}
+                      className="margin-bottom"
+                    />
+
+                    <div className="flex row">
+                      <NumberInput
+                        label="From Size"
+                        placeholder="Enter minimum size"
+                        {...form.getInputProps('min_size')}
+                        className="margin-right"
+                      />
+
+                      <NumberInput
+                        label="To Size"
+                        placeholder="Enter maximum size"
+                        {...form.getInputProps('max_size')}
+                        className="margin-bottom"
+                      />
+                    </div>
+
+                    <div>
+                      <Button type="submit">Add Hot Fly</Button>
+                    </div>
+                  </form>
                 </div>
-              </form>
-            </div>
-          }
-        </div>
+              }
+            </Fieldset>
+          </Grid.Col>
+
+          <Grid.Col span={4}>
+            <Fieldset legend={<Text size="lg" className="bold">Not seeing your fly pattern?</Text>}>
+              <Text>Make sure it’s been added to your shop’s inventory first, then come back here to highlight it as a hot fly!</Text>
+              <Button component={Link} to={`/fly_shops/${flyShopId}/my_fly_shop/add_fly_pattern`} variant="light" className="margin-top">Add Fly Pattern</Button>
+            </Fieldset>
+          </Grid.Col>
+        </Grid>
       </Drawer>
     </div>
   );

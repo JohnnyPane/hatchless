@@ -4,16 +4,10 @@ import { useDisclosure } from "@mantine/hooks";
 
 import useResource from "../../hooks/useResource.js";
 import HatchlessTablePage from "../ui/HatchlessTablePage.jsx";
-import { getFlyDefaultImageUrl } from "../../utils/imageUtils.js";
 import HotFlyDrawer from "./HotFlyDrawer.jsx";
 
-const getImageUrl = (hotFly) => {
-  const { attributes } = hotFly;
-  return attributes.image_url || getFlyDefaultImageUrl(attributes.fly_pattern.category);
-}
-
 const columns = [
-  { accessor: 'fly_pattern.image_url', label: 'Image', type: 'image', getImageUrl: getImageUrl },
+  { accessor: 'image_url', label: 'Image', type: 'image' },
   { accessor: 'fly_pattern.name', label: 'Fly Pattern', type: 'text' },
   { accessor: 'fly_pattern.category', label: 'Fly Type', type: 'text' },
   { accessor: 'fly_shop.name', label: 'Fly Shop', type: 'text' },

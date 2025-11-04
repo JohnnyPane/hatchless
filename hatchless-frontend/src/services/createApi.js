@@ -52,6 +52,19 @@ export const createApi = (resourceName) => {
       } catch (error) {
         throw new Error(`Failed to delete ${singularName} with ID ${id}`);
       }
+    },
+
+    async uploadImages (id, files) {
+      const formData = new FormData();
+      files.forEach(file => formData.append('images[]', file));
+
+      const response = await hatchlessClient.post(`/${pluralName}/${id}/upload_images`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      return response.data;
     }
   }
 }

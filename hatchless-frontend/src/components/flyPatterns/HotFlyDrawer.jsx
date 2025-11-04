@@ -55,16 +55,16 @@ const HotFlyDrawer = ({ isOpen, onClose, hotFly }) => {
           <div className="flex row align-end margin-4-t">
             <Text><strong>Fly Shop:</strong></Text>
 
-            <Button component={Link} to={`/fly_shops/${hotFly.fly_shop.id}`} size="compact-xs" variant="transparent" className="animated-link" color="indigo">
-              <Text color="water">{hotFly.fly_shop.name}</Text>
+            <Button component={Link} to={`/fly_shops/${hotFly.fly_shop.id}`} size="compact-xs" variant="transparent" className="animated-link">
+              <Text color="troutStream">{hotFly.fly_shop.name}</Text>
             </Button>
           </div>
 
           <div className="flex row align-end margin-4-t">
             <Text><strong>Website: </strong>   </Text>
 
-            <Button component={Link} to={hotFly.fly_shop.website_url} target="_blank" size="compact-xs" variant="transparent" className="animated-link" color="indigo">
-              <Text color="water">{hotFly.fly_shop.website_url}</Text>
+            <Button component={Link} to={hotFly.fly_shop.website_url} target="_blank" size="compact-xs" variant="transparent" className="animated-link">
+              <Text color="troutStream">{hotFly.fly_shop.website_url}</Text>
             </Button>
           </div>
         </div>

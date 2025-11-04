@@ -89,12 +89,14 @@ const HatchChart = ({ hatchWindows }) => {
       </defs>
 
       {hatchData.map((hatch) => {
+        const FIXED_BAR_HEIGHT = 22;
         const start = xScale(hatch.start_day);
         const end = xScale(hatch.end_day);
         const width = Math.max(end - start, 1);
 
-        const y = yScale(hatch.index_name) + yScale.bandwidth() * 0.2;
-        const barHeight = yScale.bandwidth() * 0.6;
+        const barHeight = FIXED_BAR_HEIGHT;
+        const yCenter = yScale(hatch.index_name) + yScale.bandwidth() / 2;
+        const y = yCenter - FIXED_BAR_HEIGHT / 2;
 
         const startDate = dayjs().dayOfYear(hatch.start_day).format("MMM D");
         const endDate = dayjs().dayOfYear(hatch.end_day).format("MMM D");
@@ -150,13 +152,18 @@ const HatchChart = ({ hatchWindows }) => {
     </g>
   );
 
+  const MIN_CHART_HEIGHT_FOR_SINGLE_ITEM = 140;
+
   return (
     <div className="flex center full-width">
       <Card
         shadow="sm"
         className="card"
         style={{
-          height: hatchData.length * 40 + margin.top + margin.bottom,
+          height: Math.max(
+            hatchData.length * 40 + margin.top + margin.bottom,
+            MIN_CHART_HEIGHT_FOR_SINGLE_ITEM + margin.top + margin.bottom
+          ),
           width: "min(90vw, 1000px)",
           margin: "0 auto",
           marginBottom: "40px",

@@ -43,3 +43,17 @@ export const useDeleteResource = (modelName) => {
     }
   });
 }
+
+export const useUploadResourceImages = (modelName) => {
+  const queryClient = useQueryClient();
+  const modelApi = createApi(modelName);
+
+  return useMutation({
+    mutationFn: async ({ id, files }) => {
+      return await modelApi.uploadImages(id, files);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries([modelName]);
+    }
+  });
+}

@@ -11,7 +11,7 @@ const HatchlessPagination = () => {
 
 
   return (
-    <div className="center-content">
+    <div className="center">
       <Pagination
         value={page}
         onChange={handlePageChange}

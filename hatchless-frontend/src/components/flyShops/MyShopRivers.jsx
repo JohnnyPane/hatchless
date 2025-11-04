@@ -41,9 +41,9 @@ const MyShopRivers = ({ flyShopId }) => {
   return (
     <div className="page">
       <div className="margin-bottom">
-        <div className="flex row margin-4-b">
+        <div className="flex row space-between margin-4-b">
           <Title order={2}>Your Shop's Rivers</Title>
-          <Button className="margin-left" size="sm" variant="light" onClick={openDrawer}>Add River to Fly Shop</Button>
+          <Button className="margin-left" size="sm" onClick={openDrawer}>Add River to Fly Shop</Button>
         </div>
         <Text className="secondary-text" size="sm">
           Choose the rivers your shop serves to help local anglers find you and stay connected to the waters you know best.

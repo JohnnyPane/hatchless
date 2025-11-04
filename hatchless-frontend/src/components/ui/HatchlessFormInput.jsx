@@ -1,4 +1,4 @@
-import { TextInput, Textarea } from "@mantine/core";
+import { TextInput, Textarea, Select } from "@mantine/core";
 
 const HatchlessFormInput = ({ inputConfig, form }) => {
   const { name, label, placeholder, type } = inputConfig;
@@ -12,6 +12,16 @@ const HatchlessFormInput = ({ inputConfig, form }) => {
           {...form.getInputProps(name)}
         />
       );
+    case "select":
+      return (
+        <Select
+          label={label}
+          placeholder={placeholder}
+          data={inputConfig.data || []}
+          {...form.getInputProps(name)}
+        />
+      );
+    case "text":
     default:
       return (
         <TextInput

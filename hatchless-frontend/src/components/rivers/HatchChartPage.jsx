@@ -68,8 +68,8 @@ const HatchChartPage = ({ initialScope }) => {
       initialParams={{
         perPage: 100,
         scopes: initialScopes,
-        sortColumn: "start_day_of_year",
-        sortDirection: "asc",
+        sortColumn: "common_name",
+        sortDirection: "desc",
       }}
     >
       <ChartPage />

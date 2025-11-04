@@ -8,6 +8,9 @@ import MyHotFlies from "./MyHotFlies.jsx";
 import MyHatchReports from "./MyHatchReports.jsx";
 import './MyFlyShop.scss'
 import MyShopRivers from "./MyShopRivers.jsx";
+import MyFlyShopSettings from "./MyFlyShopSettings.jsx";
+import FlyShopLogo from "./FlyShopLogo.jsx";
+import MyFlyShopOverview from "./MyFlyShopOverview.jsx";
 
 const MyFlyShop = () => {
   const { id } = useParams();
@@ -42,17 +45,17 @@ const MyFlyShop = () => {
           <Tabs.Tab value="rivers">
             <Text size="lg" className="bold">Rivers</Text>
           </Tabs.Tab>
+          <Tabs.Tab value="settings">
+            <Text size="lg" className="bold">Settings</Text>
+          </Tabs.Tab>
         </Tabs.List>
 
         <Tabs.Panel value="overview" pt="xs">
-          <div>
-            <h2>Fly Shop Overview</h2>
-            <p>Manage your fly shop details and settings here.</p>
-          </div>
+          <MyFlyShopOverview flyShop={flyShop} />
         </Tabs.Panel>
 
         <Tabs.Panel value="hot_flies" pt="xs">
-          <ResourceProvider resourceName="fly_patterns" initialParams={{ searchColumn: "name" }}>
+          <ResourceProvider resourceName="hot_flies" initialParams={{ scopes: [{ name: 'for_fly_shop', args: [flyShop.id] }, { name: 'active' }] }}>
             <MyHotFlies />
           </ResourceProvider>
         </Tabs.Panel>
@@ -67,6 +70,10 @@ const MyFlyShop = () => {
           <ResourceProvider resourceName="shop_rivers" initialParams={{ scopes: [{ name: 'for_fly_shop', args: [flyShop.id]}] }}>
             <MyShopRivers flyShopId={id} />
           </ResourceProvider>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="settings" pt="xs">
+          <MyFlyShopSettings flyShop={flyShop} />
         </Tabs.Panel>
       </Tabs>
     </div>

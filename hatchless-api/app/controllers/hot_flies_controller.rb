@@ -3,7 +3,7 @@ class HotFliesController < HatchlessController
   protected
 
   def included_index_resources
-    [ :fly_pattern, :river, :fly_shop ]
+    [ { fly_pattern: { photo_attachment: :blob } }, :river, :fly_shop ]
   end
 
   private

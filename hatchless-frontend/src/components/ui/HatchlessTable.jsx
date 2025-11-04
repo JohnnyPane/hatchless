@@ -1,7 +1,7 @@
 import { Table, Text, Image } from "@mantine/core"
 import { useResourceContext } from "../../contexts/ResourceContext.jsx";
 import { formatDate } from "../../utils/dateUtils.js";
-import './HatchlesTable.scss';
+import './HatchlessTable.scss';
 
 const HatchlessColumnDisplay = ({ column, row, rowData }) => {
   const displayValue = row[column.accessor];

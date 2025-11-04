@@ -21,11 +21,11 @@ const HatchlessNavbar = () => {
           </Group>
 
           <Group h="100%" gap={40}>
-            {flyShop && <Button size="compact-md" component={Link} to={`/fly_shops/${flyShop.id}/my_fly_shop`} variant="transparent" className="animated-link" color="var(--color-highlight)">
+            {flyShop && <Button size="compact-md" component={Link} to={`/fly_shops/${flyShop.id}/my_fly_shop`} variant="transparent" className="animated-link">
               <Text color="black" size="sm">{flyShop.name}</Text>
             </Button>}
 
-            <Button size="compact-md" component={Link} to="/rivers" variant="transparent" className="animated-link" color="var(--color-highlight)">
+            <Button size="compact-md" component={Link} to="/rivers" variant="transparent" className="animated-link">
               <Text color="black" size="sm">Rivers</Text>
             </Button>
           </Group>

@@ -5,6 +5,10 @@ class HotFlySerializer < HatchlessSerializer
     FlyPatternSerializer.shallow_serialize(hot_fly.fly_pattern)
   end
 
+  attribute :image_url do |hot_fly|
+    hot_fly.fly_pattern.image_urls(:thumbnail).first[:image_url]
+  end
+
   attribute :river do |hot_fly|
     if hot_fly.river.present?
       RiverSerializer.shallow_serialize(hot_fly.river)

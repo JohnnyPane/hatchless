@@ -15,6 +15,7 @@ import FlyShopForm from "./components/flyShops/FlyShopForm.jsx";
 import FlyShop from "./components/flyShops/FlyShop.jsx";
 import MyFlyShop from "./components/flyShops/MyFlyShop.jsx";
 import HatchlessNavbar from "./components/ui/HatchlessNavbar.jsx";
+import AddFlyPattern from "./components/flyPatterns/AddFlyPattern.jsx";
 
 function App() {
   const location = useLocation();
@@ -37,6 +38,7 @@ function App() {
           <Route path="/fly_shops/create" element={<FlyShopForm />} />
           <Route path="/fly_shops/:id" element={<FlyShop />} />
           <Route path="/fly_shops/:id/my_fly_shop" element={<MyFlyShop />} />
+          <Route path="/fly_shops/:id/my_fly_shop/add_fly_pattern" element={<AddFlyPattern />} />
 
           <Route path="/rivers" element={<Rivers />} />
           <Route path="/rivers/:id" element={<River />} />

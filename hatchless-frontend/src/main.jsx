@@ -3,9 +3,11 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
+import '@mantine/notifications/styles.css';
 import '@fontsource/inter';
 import '@fontsource/spectral';
 import { MantineProvider } from '@mantine/core';
+import { Notifications } from "@mantine/notifications";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import './index.css'
 import App from './App.jsx'
@@ -25,6 +27,19 @@ const water = [
   '#172524',
 ];
 
+const troutStream = [
+  '#0f4c5c', // deep water
+  '#146c7a',
+  '#198794',
+  '#1fa0ab',
+  '#27b5bf',
+  '#3bb7c3',
+  '#57c2cc',
+  '#74cdd5',
+  '#8fd8de',
+  '#85c0c9', // sunlit highlights
+];
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
@@ -33,11 +48,12 @@ createRoot(document.getElementById('root')).render(
         fontFamily: 'Spectral, san-serif',
         // headings: { fontFamily: 'Spectral, san-serif' },
         colors: {
-          water,
+          troutStream,
         },
-        primaryColor: 'water',
-        primaryShade: 5,
+        primaryColor: 'troutStream',
+        primaryShade: 6,
       }} forceColorScheme="light">
+        <Notifications />
 
         <Router>
           <App />

@@ -26,8 +26,8 @@ const FlyShop = () => {
     <div className="page">
 
       <Title order={2} className="center-text">{flyShop.name}</Title>
-      {flyShop.address && <Text className="secondary-text center-text ">
-        {flyShop.address}
+      {flyShop.formatted_address && <Text className="secondary-text center-text ">
+        {flyShop.formatted_address}
       </Text>}
 
       <Tabs defaultValue="overview" color="indigo" keepMounted={false}>
