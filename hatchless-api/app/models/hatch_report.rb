@@ -10,6 +10,7 @@ class HatchReport < HatchlessRecord
   before_create :set_observed_on
 
   scope :for_fly_shop, ->(fly_shop_id) { where(fly_shop_id: fly_shop_id) }
+  scope :for_user, ->(user_id) { where(user_id: user_id) }
   scope :for_river, ->(river_id) {
     base = left_joins(fly_shop: :shop_rivers)
 

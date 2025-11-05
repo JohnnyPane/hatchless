@@ -6,7 +6,7 @@ class FlyShopSerializer < HatchlessSerializer
   end
 
   attribute :address, if: proc { |_, params| show_only?(params) } do |fly_shop|
-    AddressSerializer.shallow_serialize(fly_shop.address)
+    AddressSerializer.shallow_serialize(fly_shop.address) if fly_shop.address.present?
   end
 
   attribute :logo_url do |fly_shop, params|

@@ -5,7 +5,17 @@ class UserSerializer < HatchlessSerializer
     user.name
   end
 
+  attribute :avatar_url do |user|
+    user.image_urls(:thumbnail).first[:image_url] if user.avatar.attached?
+  end
+
   def self.shallow_attributes_list
-    [:id, :email, :first_name, :last_name]
+    [ :id, :email, :first_name, :last_name ]
+  end
+
+  def self.shallow_associations(user)
+    {
+      name: user.name
+    }
   end
 end

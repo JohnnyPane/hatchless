@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_04_083721) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_05_091334) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -167,6 +167,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_04_083721) do
     t.index ["jti"], name: "index_jwt_denylists_on_jti"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "creator_type", null: false
+    t.bigint "creator_id", null: false
+    t.bigint "river_id"
+    t.text "caption"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_type", "creator_id"], name: "index_posts_on_creator"
+    t.index ["river_id"], name: "index_posts_on_river_id"
+  end
+
   create_table "rivers", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -218,6 +229,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_04_083721) do
   add_foreign_key "hot_flies", "rivers"
   add_foreign_key "insect_fly_patterns", "fly_patterns"
   add_foreign_key "insect_fly_patterns", "insects"
+  add_foreign_key "posts", "rivers"
   add_foreign_key "shop_rivers", "fly_shops"
   add_foreign_key "shop_rivers", "rivers"
 end

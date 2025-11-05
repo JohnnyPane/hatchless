@@ -9,9 +9,13 @@ const AddLogoDrawer = ({ opened, onClose, flyShop }) => {
 
   const imageForm = useForm({
     initialValues: {
-      imageFile: null,
+      imageFile: [],
     },
   });
+
+  const onFileSelect = (file) => {
+    imageForm.setFieldValue('imageFile', file[0]);
+  };
 
   const uploadLogo = async () => {
     const flyShopId = flyShop.id;
@@ -41,8 +45,9 @@ const AddLogoDrawer = ({ opened, onClose, flyShop }) => {
     <Drawer opened={opened} position="bottom" onClose={onClose} title={<Text size="xl" className="bold">Add New Logo</Text> } padding="md" size="md">
       <div className="page">
         <HatchlessImageUploader
-          onFileSelect={(file) => imageForm.setFieldValue('imageFile', file)}
+          onFilesSelect={onFileSelect}
           initialFile={imageForm.values.imageFile}
+          maxFileCount={1}
         />
 
 

@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
     "@fontsource/spectral": "^5.2.8",
+    "@mantine/carousel": "^8.3.6",
     "@mantine/core": "^8.3.6",
     "@mantine/dates": "^8.3.6",
     "@mantine/dropzone": "^8.3.6",

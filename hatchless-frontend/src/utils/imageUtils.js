@@ -1,10 +1,13 @@
-const hatchlessImageBaseUrl = import.meta.env.VITE_HATCHLESS_IMAGE_BASE_URL;
+const rootURL = import.meta.env.VITE_API_ROOT_URL;
 
-export const getFlyDefaultImageUrl = (flyCategory) => {
-  if (!flyCategory) {
-    return `${hatchlessImageBaseUrl}/hatchless-default.jpg`;
+export const generateImageUrl = (imageURL) => {
+  if (!imageURL) {
+    return '';
   }
 
-  const formattedCategory = flyCategory.toLowerCase().replace(/\s+/g, '-');
-  return `${hatchlessImageBaseUrl}/hatchless-${formattedCategory}.jpg`;
+  if (imageURL.startsWith('http://') || imageURL.startsWith('https://')) {
+    return imageURL;
+  }
+
+  return rootURL + imageURL;
 }

@@ -1,19 +1,41 @@
-import useResources from '../../hooks/useResources.js';
+import { useNavigate } from "react-router-dom";
+import { Title } from "@mantine/core";
+import { useResourceContext } from "../../contexts/ResourceContext.jsx";
+import HatchlessTablePage from "../ui/HatchlessTablePage.jsx";
+import HatchlessSearch from "../ui/HatchlessSearch.jsx";
+
+const riversTableData = [
+  { label: 'River', accessor: 'name', type: 'text' },
+  { label: 'Water Type', accessor: 'water_type', type: 'text' },
+  { label: 'Classification', accessor: 'designation', type: 'text' },
+  { label: 'Classification System', accessor: 'designation_system', type: 'text' },
+];
+
+const searchConfig = {
+  style: { width: 300 }
+}
 
 const Rivers = () => {
-  const { data: rivers, isLoading, isError, error } = useResources({ resourceName: 'rivers', perPage: 10 });
+  const navigate = useNavigate();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
+  const onRowClick = (river) => {
+    navigate(`/rivers/${river.id}`);
+  }
 
   return (
-    <div>
-      <h1>Rivers</h1>
-      <ul>
-        {rivers && rivers.map(river => (
-          <li key={river.id}>{river.attributes.name}</li>
-        ))}
-      </ul>
+    <div className="page">
+      <Title className="center-text" order={2}>All Rivers</Title>
+      <div className="flex row full-width to-right margin-4-b">
+        <HatchlessSearch
+          searchType='input'
+          config={searchConfig}
+          nameKey='name'
+          debounceValue={200}
+          searchLabel="rivers"
+        />
+      </div>
+
+      <HatchlessTablePage columns={riversTableData} onRowClick={onRowClick} resourceName="rivers" />
     </div>
   );
 }

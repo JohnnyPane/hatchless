@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
+import '@mantine/carousel/styles.css';
 import '@mantine/notifications/styles.css';
 import '@fontsource/inter';
 import '@fontsource/spectral';
@@ -28,7 +29,7 @@ const water = [
 ];
 
 const troutStream = [
-  '#0f4c5c', // deep water
+  '#0f4c5c',
   '#146c7a',
   '#198794',
   '#1fa0ab',
@@ -37,7 +38,7 @@ const troutStream = [
   '#57c2cc',
   '#74cdd5',
   '#8fd8de',
-  '#85c0c9', // sunlit highlights
+  '#85c0c9',
 ];
 
 createRoot(document.getElementById('root')).render(

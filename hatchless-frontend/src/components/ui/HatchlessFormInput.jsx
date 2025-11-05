@@ -2,6 +2,7 @@ import { TextInput, Textarea, Select } from "@mantine/core";
 
 const HatchlessFormInput = ({ inputConfig, form }) => {
   const { name, label, placeholder, type } = inputConfig;
+  const disabled = inputConfig.disabled || false;
 
   switch (type) {
     case "textArea":
@@ -9,6 +10,7 @@ const HatchlessFormInput = ({ inputConfig, form }) => {
         <Textarea
           label={label}
           placeholder={placeholder}
+          disabled={disabled}
           {...form.getInputProps(name)}
         />
       );
@@ -17,6 +19,7 @@ const HatchlessFormInput = ({ inputConfig, form }) => {
         <Select
           label={label}
           placeholder={placeholder}
+          disabled={disabled}
           data={inputConfig.data || []}
           {...form.getInputProps(name)}
         />
@@ -26,6 +29,7 @@ const HatchlessFormInput = ({ inputConfig, form }) => {
       return (
         <TextInput
           label={label}
+          disabled={disabled}
           placeholder={placeholder}
           {...form.getInputProps(name)}
         />

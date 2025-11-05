@@ -3,12 +3,14 @@ class River < HatchlessRecord
 
   validates :name, presence: true
 
-  has_many :hatch_windows, dependent: :destroy
-  has_many :insects, through: :hatch_windows
   has_many :shop_rivers, dependent: :destroy
   has_many :fly_shops, through: :shop_rivers
   has_many :hatch_reports, dependent: :nullify
+  has_many :hatch_windows, dependent: :destroy
   has_many :hot_flies, dependent: :nullify
+  has_many :insects, through: :hatch_windows
+  has_many :posts
+
 
   scope :for_fly_shop, ->(fly_shop_id) {
     joins(:shop_rivers).where(shop_rivers: { fly_shop_id: fly_shop_id })

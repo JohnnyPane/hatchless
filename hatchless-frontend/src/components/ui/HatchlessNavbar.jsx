@@ -25,9 +25,9 @@ const HatchlessNavbar = () => {
               <Text color="black" size="sm">{flyShop.name}</Text>
             </Button>}
 
-            <Button size="compact-md" component={Link} to="/rivers" variant="transparent" className="animated-link">
-              <Text color="black" size="sm">Rivers</Text>
-            </Button>
+            {/*<Button size="compact-md" component={Link} to="/rivers" variant="transparent" className="animated-link">*/}
+            {/*  <Text color="black" size="sm">Rivers</Text>*/}
+            {/*</Button>*/}
           </Group>
 
           <LoginLogoutToggle />

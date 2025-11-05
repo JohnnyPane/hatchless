@@ -10,6 +10,8 @@ module Imageable
   }.freeze
 
   class_methods do
+    attr_accessor :imageable_config
+
     def acts_as_imageable_one(name = :image)
       has_one_attached name
       @imageable_config = { type: :one, attachment_name: name }
@@ -21,35 +23,34 @@ module Imageable
     end
 
     def imageable_config
-      @imageable_config || { type: :many, attachment_name: :images }
+      @imageable_config ||= { type: :many, attachment_name: :images }
     end
   end
 
   def attached_images
     config = self.class.imageable_config
+    attachment_proxy = send(config[:attachment_name])
+
+    return [] unless attachment_proxy.attached?
 
     if config[:type] == :many
-      send(config[:attachment_name]).attached? ? send(config[:attachment_name]) : []
-
+      attachment_proxy.attachments
     else
-      send(config[:attachment_name])
+      [ attachment_proxy ]
     end
   end
 
   def image_variants(size_key = :default)
-    images = attached_images
-    images = [ images ] unless images.is_a?(Array)
-
-    images.map do |image|
+    attached_images.map do |image|
       size = IMAGE_SIZES[size_key] || IMAGE_SIZES[:main_image]
       image.variant(resize_to_fit: size).processed
     end
   end
 
   def image_urls(size_key = :default)
-    image_proxy = attached_images
+    variants = image_variants(size_key)
 
-    if !image_proxy.is_a?(Array) && !image_proxy.attached? && respond_to?(:imageable_fallback_url)
+    if variants.empty?
       return [
         {
           id: "default",
@@ -58,10 +59,10 @@ module Imageable
       ]
     end
 
-    image_variants(size_key).map do |image|
+    variants.map do |image|
       {
         id: image.blob.id,
-        image_url: Rails.application.routes.url_helpers.rails_blob_url(image, only_path: false)
+        image_url: Rails.application.routes.url_helpers.rails_blob_url(image, only_path: true)
       }
     end
   end
@@ -72,5 +73,9 @@ module Imageable
 
   def cart_image_urls
     image_urls(:cart)
+  end
+
+  def imageable_fallback_url
+    "#{ENV['AWS_BUCKET_ASSET_HOST']}/hatchless-default-image.jpg"
   end
 end

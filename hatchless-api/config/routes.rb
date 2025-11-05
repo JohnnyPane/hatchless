@@ -21,11 +21,14 @@ Rails.application.routes.draw do
     resources :insects, only: [ :index, :show, :create, :update, :destroy ]
     resources :fly_patterns, only: [ :index, :show, :create, :update, :destroy ]
     resources :fly_shops, only: [ :index, :show, :create, :update, :destroy ]
+    resources :posts, only: [ :index, :show, :create, :update, :destroy ]
     resources :rivers, only: [ :index, :show, :create, :update, :destroy ]
     resources :shop_rivers, only: [ :index, :show, :create, :update, :destroy ]
 
     post "fly_patterns/:id/upload_images", to: "fly_patterns#upload_images"
     post "fly_shops/:id/upload_images", to: "fly_shops#upload_images"
+    post "posts/:id/upload_images", to: "posts#upload_images"
+    post "users/:id/upload_images", to: "users#upload_images"
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

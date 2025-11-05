@@ -32,6 +32,7 @@ const Home = () => {
     color: "white",
     styles: searchStyles,
     w: "min(500px, 90%)",
+    classNames: { input: 'home-search-input' },
   }
 
   const searchIcon = <IconSearch color="white" style={{ opacity: 0.7 }} size={18}/>;
@@ -110,7 +111,7 @@ const Home = () => {
           <Group justify="space-between" h="100%" w="100%" px={20}>
             <Group h="100%" gap={0} visibleFrom="sm">
 
-              <Link to="/" className="home-logo">
+              <Link to="/feed" className="home-logo">
                 <Title order={2} className="margin-none">Hatchless</Title>
               </Link>
             </Group>
@@ -119,10 +120,6 @@ const Home = () => {
               {flyShop && <Button size="compact-md" onClick={() => startTransition(`/fly_shops/${flyShop.id}/my_fly_shop`)} variant="transparent" className="animated-link" color="white">
                 <Text color="white" size="sm">{flyShop.name}</Text>
               </Button>}
-
-              <Button size="compact-md" onClick={() => startTransition('rivers')} variant="transparent" className="animated-link" color="white">
-                <Text color="white" size="sm">Rivers</Text>
-              </Button>
             </Group>
 
             <LoginLogoutToggle textColor="white" themeColor="white" />

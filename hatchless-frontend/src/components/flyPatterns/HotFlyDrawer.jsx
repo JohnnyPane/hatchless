@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Drawer, Title, Text, Card, Image, Button } from '@mantine/core';
-import { getFlyDefaultImageUrl } from "../../utils/imageUtils.js";
 import { formatDate } from "../../utils/dateUtils.js";
+import { generateImageUrl } from "../../utils/imageUtils.js";
 
 const HotFlyDrawer = ({ isOpen, onClose, hotFly }) => {
-  const imageUrl = hotFly?.fly_pattern?.image_url || getFlyDefaultImageUrl(hotFly?.fly_pattern?.category);
+  const imageUrl = generateImageUrl(hotFly?.image_url)
 
   return (
     <Drawer

@@ -96,9 +96,9 @@
   100% { transform: translateY(-110vh) scale(0.3); opacity: 0; }
 }
 
-.mantine-Input-input {
+.home-search-input {
   &::placeholder {
     color: rgba(255, 255, 255) !important;
-    opacity: 1 !important;
+    opacity: 1;
   }
 }

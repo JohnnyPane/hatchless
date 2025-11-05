@@ -11,6 +11,8 @@ class HatchlessController < ApplicationController
                             .apply_search(search)
 
     paginated_resources = paginated_resources.includes(*included_index_resources) if included_index_resources.present?
+    paginated_resources = paginated_resources.preload(*preloaded_polymorphic_resources) if preloaded_polymorphic_resources.present?
+    paginated_resources = paginated_resources.public_send("with_attached_#{attachment_name}") if attachment_name.present?
 
     render_resource_collection(paginated_resources, resource_serializer, { image_type: image_size })
   end
@@ -58,7 +60,7 @@ class HatchlessController < ApplicationController
     if attachment_proxy.attach(files_to_attach)
       render_resource(resource, resource_serializer)
     else
-      render json: { errors: resource.errors.full_messages }, status: :unprocessable_content
+      render json: { errors: resource.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -131,6 +133,16 @@ class HatchlessController < ApplicationController
 
   def included_show_resources
     []
+  end
+
+  def preloaded_polymorphic_resources
+    []
+  end
+
+  def attachment_name
+    if resource_class.respond_to?(:imageable_config)
+      resource_class.imageable_config[:attachment_name]
+    end
   end
 
   def render_errors(errors, status: :unprocessable_content)

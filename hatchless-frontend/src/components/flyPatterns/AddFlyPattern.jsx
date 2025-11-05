@@ -29,9 +29,13 @@ const AddFlyPattern = () => {
       name: '',
       notes: '',
       category: '',
-      imageFile: null,
+      imageFile: [],
     },
   });
+
+  const handleFileSelect = (file) => {
+    form.setFieldValue('imageFile', file[0]);
+  };
 
   const handleSubmit = async (values) => {
     const payload = {
@@ -74,8 +78,9 @@ const AddFlyPattern = () => {
 
         <div style={{ marginTop: '1rem' }}>
           <HatchlessImageUploader
-            onFileSelect={(file) => form.setFieldValue('imageFile', file)}
+            onFilesSelect={handleFileSelect}
             initialFile={form.values.imageFile}
+            maxFileCount={1}
           />
         </div>
 

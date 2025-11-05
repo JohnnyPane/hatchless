@@ -2,6 +2,7 @@ import { Table, Text, Image } from "@mantine/core"
 import { useResourceContext } from "../../contexts/ResourceContext.jsx";
 import { formatDate } from "../../utils/dateUtils.js";
 import './HatchlessTable.scss';
+import { generateImageUrl } from "../../utils/imageUtils.js";
 
 const HatchlessColumnDisplay = ({ column, row, rowData }) => {
   const displayValue = row[column.accessor];
@@ -12,7 +13,7 @@ const HatchlessColumnDisplay = ({ column, row, rowData }) => {
     case 'date':
       return <Text>{formatDate(displayValue)}</Text>;
     case 'image':
-      const imageUrl = column.getImageUrl ? column.getImageUrl(rowData) : displayValue;
+      const imageUrl = column.getImageUrl ? column.getImageUrl(rowData) : generateImageUrl(displayValue);
       return <Image radius={8} src={imageUrl} alt="" w={50} h={50} />;
     default:
       return <span>{row[column.accessor]}</span>;

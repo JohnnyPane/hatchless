@@ -1,6 +1,8 @@
-import {Box, Card, Image} from '@mantine/core';
+import { Card, Image } from '@mantine/core';
+import { generateImageUrl } from "../../utils/imageUtils.js";
 
 const  FlyShopLogo = ({ url, name, onClick, size = 60 }) => {
+  const displayURL = generateImageUrl(url)
   const handleClick = () => {
     if (onClick) {
       onClick();
@@ -11,7 +13,7 @@ const  FlyShopLogo = ({ url, name, onClick, size = 60 }) => {
     <Card shadow="md" radius="md" withBorder className="clickable" onClick={handleClick} w={size} h={size}>
       <Card.Section>
         <Image
-          src={url}
+          src={displayURL}
           alt={name}
           h={size}
           w={size}

@@ -10,7 +10,7 @@ class FlyPatternsController < HatchlessController
   private
 
   def fly_pattern_params
-    permitted_params = params.require(:fly_pattern).permit(:name, :notes, :category, :image_url, :public, :approved)
+    permitted_params = params.require(:fly_pattern).permit(:name, :notes, :category, :public, :approved)
 
     creator = if current_user.fly_shop.present?
                 current_user.fly_shop

@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation, Outlet } from 'react-router-dom'
 
 import './App.css'
 import './utility.scss'
@@ -16,6 +16,28 @@ import FlyShop from "./components/flyShops/FlyShop.jsx";
 import MyFlyShop from "./components/flyShops/MyFlyShop.jsx";
 import HatchlessNavbar from "./components/ui/HatchlessNavbar.jsx";
 import AddFlyPattern from "./components/flyPatterns/AddFlyPattern.jsx";
+import User from "./components/users/User.jsx";
+import Feed from "./components/home/Feed.jsx";
+import PostForm from "./components/posts/PostForm.jsx";
+import HatchlessSidebar from "./components/ui/HatchlessSidebar.jsx";
+import FlyShops from "./components/flyShops/FlyShops.jsx";
+
+const AppLayout = () => {
+  return (
+    <div className="app-layout">
+      <Outlet />
+    </div>
+  );
+};
+
+const SidebarLayout = () => {
+  return (
+    <div className="flex row">
+      <HatchlessSidebar />
+      <Outlet />
+    </div>
+  );
+};
 
 function App() {
   const location = useLocation();
@@ -27,22 +49,41 @@ function App() {
         {showNavbar && <HatchlessNavbar/>}
 
         <Routes>
-          <Route path="/" element={
-            <ResourceProvider resourceName="rivers" initialParams={{ searchColumn: "name", waitForSearch: true }}>
-              <Home />
-            </ResourceProvider>
-          }/>
+          <Route element={<AppLayout />}>
+            <Route path="/" element={
+              <ResourceProvider resourceName="rivers" initialParams={{ searchColumn: "name", waitForSearch: true }}>
+                <Home />
+              </ResourceProvider>
+            }/>
 
-          <Route path="/login" element={<LoginSignupToggle />} />
+            <Route path="/login" element={<LoginSignupToggle />} />
 
-          <Route path="/fly_shops/create" element={<FlyShopForm />} />
-          <Route path="/fly_shops/:id" element={<FlyShop />} />
-          <Route path="/fly_shops/:id/my_fly_shop" element={<MyFlyShop />} />
-          <Route path="/fly_shops/:id/my_fly_shop/add_fly_pattern" element={<AddFlyPattern />} />
+            <Route path="/fly_shops" element={<FlyShops />} />
+            <Route path="/fly_shops/create" element={<FlyShopForm />} />
+            <Route path="/fly_shops/:id" element={<FlyShop />} />
+            <Route path="/fly_shops/:id/my_fly_shop" element={<MyFlyShop />} />
+            <Route path="/fly_shops/:id/my_fly_shop/add_fly_pattern" element={<AddFlyPattern />} />
 
-          <Route path="/rivers" element={<Rivers />} />
-          <Route path="/rivers/:id" element={<River />} />
-          <Route path="/rivers/:id/hatch_chart" element={<HatchChartPage />} />
+            <Route path="/posts/create" element={<PostForm />} />
+
+            <Route path="/rivers" element={
+              <ResourceProvider resourceName="rivers" initialParams={{ searchColumn: "name", perPage: 10 }}>
+                <Rivers />
+              </ResourceProvider>
+            } />
+            <Route path="/rivers/:id" element={<River />} />
+            <Route path="/rivers/:id/hatch_chart" element={<HatchChartPage />} />
+
+            <Route path="/users/:id" element={<User />} />
+          </Route>
+
+          <Route element={<SidebarLayout />}>
+            <Route path="/feed" element={
+              <ResourceProvider resourceName="posts">
+                <Feed />
+              </ResourceProvider>
+            } />
+          </Route>
         </Routes>
       </TransitionProvider>
     </AuthProvider>

@@ -8,7 +8,7 @@ class FlyShopsController < HatchlessController
   end
 
   def included_index_resources
-    [ :user, :rivers, :hatch_reports, logo_attachment: :blob ]
+    [ :owner, :rivers, :hatch_reports, logo_attachment: :blob ]
   end
 
   private

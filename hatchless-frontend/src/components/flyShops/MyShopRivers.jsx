@@ -1,7 +1,6 @@
 import { Title, Text, Button } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { ResourceProvider, useResourceContext } from "../../contexts/ResourceContext.jsx";
-import useResources from "../../hooks/useResources.js";
 import { useDeleteResource } from "../../hooks/useResourceMutations.js";
 import HatchlessTablePage from "../ui/HatchlessTablePage.jsx";
 import AddShopRiverDrawer from "./AddShopRiverDrawer.jsx";

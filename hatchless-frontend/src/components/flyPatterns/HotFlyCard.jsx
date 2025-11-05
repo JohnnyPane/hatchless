@@ -1,5 +1,6 @@
-import { Button, Card, Image, Text } from "@mantine/core";
+import { Card, Image, Text } from "@mantine/core";
 import { useUpdateResource } from "../../hooks/useResourceMutations.js";
+import { generateImageUrl } from "../../utils/imageUtils.js";
 
 const HotFlyCard = ({ hotFly, editable = false }) => {
   const { fly_pattern: flyPattern, image_url } = hotFly.attributes;
@@ -19,7 +20,7 @@ const HotFlyCard = ({ hotFly, editable = false }) => {
         <div className="flex row">
           <div>
             <Image
-              src={image_url}
+              src={generateImageUrl(image_url)}
               alt={flyPattern.name}
               className="margin-right hot-fly-card-image"
             />

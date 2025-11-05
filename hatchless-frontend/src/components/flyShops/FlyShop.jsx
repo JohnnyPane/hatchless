@@ -30,7 +30,7 @@ const FlyShop = () => {
         {flyShop.formatted_address}
       </Text>}
 
-      <Tabs defaultValue="overview" color="indigo" keepMounted={false}>
+      <Tabs defaultValue="overview" keepMounted={false}>
         <Tabs.List>
           <Tabs.Tab value="overview">
             <Text size="lg" className="bold">Overview</Text>
@@ -56,7 +56,7 @@ const FlyShop = () => {
         </Tabs.Panel>
 
         <Tabs.Panel value="hatch_reports">
-          <ResourceProvider resourceName="hatch_reports" initialParams={{ scopes: [{ name: "for_fly_shop", args: [id]}] }}>
+          <ResourceProvider resourceName="hatch_reports" initialParams={{ sortColumn: 'observed_on', sortDirection: 'desc', scopes: [{ name: "for_fly_shop", args: [id]}] }}>
             <div className="flex to-center">
               <div className="fly-shop-hatch-reports-page margin-top">
                 <HatchReports />

@@ -1,76 +1,110 @@
-import { useState, useEffect } from 'react';
-import { Group, Text, Card, Image, ActionIcon, Alert, SimpleGrid } from '@mantine/core';
+import { useState, useEffect, useCallback } from 'react';
+import { Group, Title, Text, Card, Image, ActionIcon, Alert, SimpleGrid } from '@mantine/core';
 import { IconUpload, IconPhoto, IconX, IconTrash } from '@tabler/icons-react';
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 
-const HatchlessImageUploader = ({ onFileSelect, initialFile }) => {
-  const file = initialFile;
+const addFileId = (file) => ({
+  file,
+  id: `${file.name}-${file.size}-${Date.now()}-${Math.random()}`,
+  previewUrl: URL.createObjectURL(file),
+});
+
+const HatchlessImageUploader = ({ onFilesSelect, initialFiles = [], maxFileCount = 5 }) => {
+  const [files, setFiles] = useState(initialFiles.map(addFileId));
   const [error, setError] = useState(null);
+  const MAX_FILE_SIZE = 5 * 1024 ** 2;
 
   useEffect(() => {
     return () => {
-      if (file) {
-        const url = URL.createObjectURL(file);
-        URL.revokeObjectURL(url);
-      }
+      files.forEach(f => URL.revokeObjectURL(f.previewUrl));
     };
-  }, [file]);
+  }, []);
 
-  const removeSelectedFile = () => {
-    if (file) {
-      const url = URL.createObjectURL(file);
-      URL.revokeObjectURL(url);
+  useEffect(() => {
+    onFilesSelect(files.map(f => f.file));
+  }, [files]);
+
+
+  const removeFile = useCallback((fileIdToRemove) => {
+    setFiles(prevFiles => {
+      const fileToRemove = prevFiles.find(f => f.id === fileIdToRemove);
+      if (fileToRemove) {
+        URL.revokeObjectURL(fileToRemove.previewUrl);
+      }
+      return prevFiles.filter(f => f.id !== fileIdToRemove);
+    });
+  }, []);
+
+
+  const handleDrop = (newRawFiles) => {
+    const validFiles = [];
+    const rejectedFileNames = [];
+
+    newRawFiles.forEach(file => {
+      if (!file.type.startsWith('image/')) {
+        rejectedFileNames.push(`${file.name} (Not an image)`);
+      } else if (file.size > MAX_FILE_SIZE) {
+        rejectedFileNames.push(`${file.name} (Exceeds 5MB)`);
+      } else {
+        validFiles.push(file);
+      }
+    });
+
+    if (rejectedFileNames.length > 0) {
+      setError(`Rejected: ${rejectedFileNames.join(', ')}`);
     }
-    onFileSelect(null);
+
+    if (validFiles.length > 0) {
+      const newStructuredFiles = validFiles.map(addFileId);
+      setFiles(prevFiles => [...prevFiles, ...newStructuredFiles]);
+      if (rejectedFileNames.length === 0) {
+        setError(null);
+      }
+    }
   };
 
-  const handleDrop = (newFiles) => {
-    if (newFiles.length > 0) {
-      onFileSelect(newFiles[0]);
-      setError(null);
-    }
-  };
-
-  const preview = file ? (
-    <Card padding="xs" radius="md" withBorder>
+  const previews = files.map(f => (
+    <Card key={f.id} padding="xs" radius="md" withBorder>
       <Card.Section>
         <Image
-          src={URL.createObjectURL(file)}
+          src={f.previewUrl}
           height={120}
-          alt={`Upload preview`}
+          alt={`Upload preview for ${f.file.name}`}
         />
       </Card.Section>
-      <Group position="apart" mt="sm">
-        <Text size="sm" weight={500} truncate>
-          {file.name}
+      <Group justify="space-between" mt="sm">
+        <Text size="sm" weight={500} truncate title={f.file.name}>
+          {f.file.name}
         </Text>
         <ActionIcon
           color="red"
           variant="subtle"
-          onClick={removeSelectedFile}
+          onClick={() => removeFile(f.id)}
+          aria-label={`Remove ${f.file.name}`}
         >
           <IconTrash size={16} />
         </ActionIcon>
       </Group>
-      <Text size="xs" color="dimmed">
-        {(file.size / 1024 / 1024).toFixed(2)} MB
+      <Text size="xs" c="dimmed">
+        {(f.file.size / 1024 / 1024).toFixed(2)} MB
       </Text>
     </Card>
-  ) : null;
+  ));
 
-  const hideDropzone = !!file;
 
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
-      <Dropzone
+      <Title order={5}>Upload Images</Title>
+
+      {files.length < maxFileCount && <Dropzone
         onDrop={handleDrop}
-        onReject={(rejectedFiles) => setError(`Rejected files: ${rejectedFiles.map(f => f.name).join(', ')}`)}
-        maxSize={5 * 1024 ** 2}
+        onReject={(rejectedFiles) => setError(`Rejected files: ${rejectedFiles.length} files exceeded limit or type.`)}
+        maxSize={MAX_FILE_SIZE}
         accept={IMAGE_MIME_TYPE}
-        multiple={false}
-        style={hideDropzone ? { display: 'none' } : {}}
+        multiple={true}
+        disabled={files.length >= maxFileCount}
       >
-        <Group justify="center" gap="xl" mih={220} style={{ pointerEvents: 'none' }}>
+        <Group justify="center" gap="xl" mih={150} style={{ pointerEvents: 'none' }}>
           <Dropzone.Accept>
             <IconUpload size={52} color="var(--mantine-color-blue-6)" stroke={1.5} />
           </Dropzone.Accept>
@@ -83,28 +117,28 @@ const HatchlessImageUploader = ({ onFileSelect, initialFile }) => {
 
           <div>
             <Text size="xl" inline>
-              Drag an image here or click to select a file
+              Drag images here or click to select files
             </Text>
             <Text size="sm" c="dimmed" inline mt={7}>
-              Attach a single image (max 5mb)
+              Attach multiple images (max 5MB each)
             </Text>
           </div>
         </Group>
-      </Dropzone>
+      </Dropzone>}
 
       {error && (
-        <Alert color="red" title="Error" withCloseButton onClose={() => setError(null)} mt="md">
+        <Alert color="red" title="Upload Error" withCloseButton onClose={() => setError(null)} mt="md">
           {error}
         </Alert>
       )}
 
-      {preview && (
+      {previews.length > 0 && (
         <div style={{ marginTop: '1rem' }}>
           <Text weight={500} size="sm" mb="xs">
-            Selected Image:
+            {previews.length} Image(s) Selected:
           </Text>
-          <SimpleGrid cols={4} breakpoints={[{ maxWidth: 'sm', cols: 2 }]}>
-            {preview}
+          <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing="md">
+            {previews}
           </SimpleGrid>
         </div>
       )}
