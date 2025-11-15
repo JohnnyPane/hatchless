@@ -67,57 +67,51 @@ midge = Insect.find_or_create_by!(
 )
 
 # Create FlyPatterns
-adams = FlyPattern.create!(
+adams = FlyPattern.find_or_create_by!(
   name: "Adams",
   category: "Dry",
-  image_url: "https://example.com/adams.png",
   notes: "Classic dry fly, effective on many mayflies",
 )
 
-parachute_bwo = FlyPattern.create!(
+parachute_bwo = FlyPattern.find_or_create_by!(
   name: "Parachute BWO",
   category: "Dry",
-  image_url: "https://example.com/parachute_bwo.png",
   notes: "Blue-Winged Olive imitation, floats well",
 )
 
-pheasant_tail_nymph = FlyPattern.create!(
+pheasant_tail_nymph = FlyPattern.find_or_create_by!(
   name: "Pheasant Tail Nymph",
   category: "Nymph",
-  image_url: "https://example.com/pheasant_tail.png",
   notes: "Effective for mayfly nymphs",
 )
 
-hendrickson_dry = FlyPattern.create!(
+hendrickson_dry = FlyPattern.find_or_create_by!(
   name: "Hendrickson",
   category: "Dry",
-  image_url: "https://example.com/hendrickson.png",
   notes: "Hatches in early season, popular pattern",
 )
 
-midge_pattern = FlyPattern.create!(
+midge_pattern = FlyPattern.find_or_create_by!(
   name: "Zebra Midge",
   category: "Nymph",
-  image_url: "https://example.com/zebra_midge.png",
   notes: "Tiny, prolific; works for midges",
 )
 
-stimulator = FlyPattern.create!(
+stimulator = FlyPattern.find_or_create_by!(
   name: "Stimulator",
   category: "Dry",
-  image_url: "https://example.com/stimulator.png",
   notes: "Effective for caddisfly and stonefly patterns",
 )
 
 # Create join table records
-InsectFlyPattern.create!(fly_pattern: adams, insect: bwo)
-InsectFlyPattern.create!(fly_pattern: adams, insect: pmd)
-InsectFlyPattern.create!(fly_pattern: parachute_bwo, insect: bwo)
-InsectFlyPattern.create!(fly_pattern: pheasant_tail_nymph, insect: bwo)
-InsectFlyPattern.create!(fly_pattern: hendrickson_dry, insect: bwo)
-InsectFlyPattern.create!(fly_pattern: midge_pattern, insect: midge)
-InsectFlyPattern.create!(fly_pattern: stimulator, insect: stonefly)
-InsectFlyPattern.create!(fly_pattern: stimulator, insect: caddis)
+InsectFlyPattern.find_or_create_by!(fly_pattern: adams, insect: bwo)
+InsectFlyPattern.find_or_create_by!(fly_pattern: adams, insect: pmd)
+InsectFlyPattern.find_or_create_by!(fly_pattern: parachute_bwo, insect: bwo)
+InsectFlyPattern.find_or_create_by!(fly_pattern: pheasant_tail_nymph, insect: bwo)
+InsectFlyPattern.find_or_create_by!(fly_pattern: hendrickson_dry, insect: bwo)
+InsectFlyPattern.find_or_create_by!(fly_pattern: midge_pattern, insect: midge)
+InsectFlyPattern.find_or_create_by!(fly_pattern: stimulator, insect: stonefly)
+InsectFlyPattern.find_or_create_by!(fly_pattern: stimulator, insect: caddis)
 
 # --- HatchWindows ---
 
@@ -149,7 +143,55 @@ HatchWindow.find_or_create_by!(river: kinni, insect: midge, start_day_of_year: d
 
 puts "✅ Done seeding full chart!"
 
-Dir[Rails.root.join('db', 'seeds', 'configs', '*.yml')].each do |file|
-  config = YAML.load_file(file)
-  SeedRiverChart.new(config).call
+# Dir[Rails.root.join('db', 'seeds', 'configs', '*.yml')].each do |file|
+#   config = YAML.load_file(file)
+#   SeedRiverChart.new(config).call
+# end
+
+fish_species = [
+  # --- Trout & Salmonids ---
+  { common_name: "Brown Trout", scientific_name: "Salmo trutta" },
+  { common_name: "Rainbow Trout", scientific_name: "Oncorhynchus mykiss" },
+  { common_name: "Brook Trout", scientific_name: "Salvelinus fontinalis" },
+  { common_name: "Cutthroat Trout", scientific_name: "Oncorhynchus clarkii" },
+  { common_name: "Lake Trout", scientific_name: "Salvelinus namaycush" },
+  { common_name: "Bull Trout", scientific_name: "Salvelinus confluentus" },
+  { common_name: "Arctic Grayling", scientific_name: "Thymallus arcticus" },
+  { common_name: "Dolly Varden", scientific_name: "Salvelinus malma" },
+  { common_name: "Steelhead", scientific_name: "Oncorhynchus mykiss" },
+  { common_name: "Atlantic Salmon", scientific_name: "Salmo salar" },
+
+  # --- Bass & Panfish ---
+  { common_name: "Smallmouth Bass", scientific_name: "Micropterus dolomieu" },
+  { common_name: "Largemouth Bass", scientific_name: "Micropterus salmoides" },
+  { common_name: "Rock Bass", scientific_name: "Ambloplites rupestris" },
+  { common_name: "Bluegill", scientific_name: "Lepomis macrochirus" },
+  { common_name: "Pumpkinseed Sunfish", scientific_name: "Lepomis gibbosus" },
+  { common_name: "Green Sunfish", scientific_name: "Lepomis cyanellus" },
+  { common_name: "Crappie", scientific_name: "Pomoxis spp." },
+  { common_name: "Redear Sunfish (Shellcracker)", scientific_name: "Lepomis microlophus" },
+
+  # --- Pike, Musky, & Other Predators ---
+  { common_name: "Northern Pike", scientific_name: "Esox lucius" },
+  { common_name: "Muskellunge (Muskie)", scientific_name: "Esox masquinongy" },
+  { common_name: "Chain Pickerel", scientific_name: "Esox niger" },
+  { common_name: "Walleye", scientific_name: "Sander vitreus" },
+
+  # --- Rough / Alternative Fly Species ---
+  { common_name: "Carp", scientific_name: "Cyprinus carpio" },
+  { common_name: "Freshwater Drum (Sheepshead)", scientific_name: "Aplodinotus grunniens" },
+  { common_name: "Channel Catfish", scientific_name: "Ictalurus punctatus" },
+  { common_name: "Gar", scientific_name: "Lepisosteus spp." },
+  { common_name: "Mooneye", scientific_name: "Hiodon tergisus" },
+  { common_name: "Goldeye", scientific_name: "Hiodon alosoides" },
+  { common_name: "White Bass", scientific_name: "Morone chrysops" },
+  { common_name: "Grayling (Mountain Whitefish)", scientific_name: "Prosopium williamsoni" }
+]
+
+fish_species.each do |attrs|
+  Fish.find_or_create_by!(common_name: attrs[:common_name]) do |fish|
+    fish.scientific_name = attrs[:scientific_name]
+  end
 end
+
+puts "✅ Seeded #{Fish.count} freshwater fly-fishing species."

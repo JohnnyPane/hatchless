@@ -18,13 +18,14 @@ const LoginLogoutToggle = ({ themeColor = "", textColor = "black" }) => {
 
   return user ? (
     <div>
-      <Button variant="subtle" color={themeColor} component={Link} to={`/users/${user.id}`} size="compact-md" className="margin-right">
+      <Button variant="transparent" onClick={handleLogout} color={themeColor} size="compact-md" className="animated-link margin-right">
+        <Text color={textColor} size="sm">Logout</Text>
+      </Button>
+
+      <Button variant="subtle" color={themeColor} component={Link} to={`/users/${user.id}`} size="compact-md">
         <IconUserCircle />
       </Button>
 
-      <Button variant="transparent" onClick={handleLogout} color={themeColor} size="compact-md" className="animated-link">
-        <Text color={textColor} size="sm">Logout</Text>
-      </Button>
     </div>
   ) : (
     <Button variant="transparent" color={themeColor} component={Link} to="/login"  size="compact-md" className="animated-link">

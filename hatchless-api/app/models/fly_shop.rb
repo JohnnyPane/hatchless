@@ -9,7 +9,11 @@ class FlyShop < HatchlessRecord
   has_many :posts, as: :creator, dependent: :nullify
   has_many :shop_rivers, dependent: :destroy
   has_many :rivers, through: :shop_rivers
+  has_many :fly_packs, dependent: :destroy
 
+  scope :for_river, ->(river_id) {
+    joins(:shop_rivers).where(shop_rivers: { river_id: river_id })
+  }
 
   acts_as_imageable_one :logo
 

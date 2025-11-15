@@ -47,7 +47,7 @@ const HatchReportDrawer = ({ opened, onClose, hatchReport }) => {
         <div className="flex column margin-bottom">
           <div className="margin-bottom">
             <Title order={5}>Hatches Observed</Title>
-            <HatchlessSearch onChange={onInsectSelect} nameKey='common_name' searchType='multiSelect' />
+            <HatchlessSearch onChange={onInsectSelect} nameKey='display_name' searchType='multiSelect' />
           </div>
 
           <div className="margin-top margin-bottom">

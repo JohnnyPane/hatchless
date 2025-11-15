@@ -11,7 +11,7 @@ const PostCard = ({ postData }) => {
   const { attributes: post } = postData;
 
   const badgeInfo = badgeConfig[post.creator_type] || { color: "gray", label: "Unknown" };
-  
+
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder style={{ width: 600}}>
       <Card.Section>

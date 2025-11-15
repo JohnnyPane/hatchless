@@ -11,7 +11,7 @@ const tableColumns = [
   { accessor: "description", label: "Description", type: "text" },
 ]
 
-const FlyShops = () => {
+const FlyShops = ({ extraParams = {} }) => {
   const navigate = useNavigate();
 
   const onRowClick = (flyShop) => {
@@ -22,7 +22,7 @@ const FlyShops = () => {
     <div className="page">
       <Title order={2} className="center-text margin">Fly Shops</Title>
 
-      <ResourceProvider resourceName="fly_shops" initialParams={{ searchColumn: "name" }}>
+      <ResourceProvider resourceName="fly_shops" initialParams={{ searchColumn: "name", ...extraParams }}>
 
         <div className="flex row to-right margin-4-b">
           <HatchlessSearch config={{ style: { width: 300 } }} resourceName="fly_shops" searchLabel="Fly Shops" />

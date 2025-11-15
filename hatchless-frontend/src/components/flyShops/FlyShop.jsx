@@ -7,6 +7,7 @@ import {ResourceProvider} from "../../contexts/ResourceContext.jsx";
 import HatchReports from "../hatchReports/HatchReports.jsx";
 import HotFliesTable from "../flyPatterns/HotFliesTable.jsx";
 import FlyShopOverview from "./FlyShopOverview.jsx";
+import FlyPacks from "../flyPacks/FlyPacks.jsx";
 import './FlyShop.scss'
 
 const FlyShop = () => {
@@ -41,6 +42,9 @@ const FlyShop = () => {
           <Tabs.Tab value="hatch_reports">
             <Text size="lg" className="bold">Hatch Reports</Text>
           </Tabs.Tab>
+          <Tabs.Tab value="fly_packs">
+            <Text size="lg" className="bold">Fly Packs</Text>
+          </Tabs.Tab>
         </Tabs.List>
 
         <Tabs.Panel value="overview">
@@ -61,6 +65,20 @@ const FlyShop = () => {
               <div className="fly-shop-hatch-reports-page margin-top">
                 <HatchReports />
               </div>
+            </div>
+          </ResourceProvider>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="fly_packs">
+          <ResourceProvider resourceName="fly_packs" initialParams={{ scopes: [{ name: "for_fly_shop", args: [id]}] }}>
+            <div className="margin-top">
+              {/*<Title order={3} className="center-text">Fly Packs</Title>*/}
+              <Text size="lg" className="secondary-text center-text margin-bottom">
+                Fly Packs connect you with the knowledge of local fly shops and guides.
+                Every pack reflects real conditions, real hatches, and real experience from the people who fish those waters every day.
+                Support local shops and fish more confidently.
+              </Text>
+              <FlyPacks flexDirection="row wrap space-around" />
             </div>
           </ResourceProvider>
         </Tabs.Panel>

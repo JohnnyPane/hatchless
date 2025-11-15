@@ -24,13 +24,15 @@ const HatchlessNavbar = () => {
             {flyShop && <Button size="compact-md" component={Link} to={`/fly_shops/${flyShop.id}/my_fly_shop`} variant="transparent" className="animated-link">
               <Text color="black" size="sm">{flyShop.name}</Text>
             </Button>}
-
-            {/*<Button size="compact-md" component={Link} to="/rivers" variant="transparent" className="animated-link">*/}
-            {/*  <Text color="black" size="sm">Rivers</Text>*/}
-            {/*</Button>*/}
           </Group>
 
-          <LoginLogoutToggle />
+          <div className="flex row align-center">
+            <Button size="compact-md" component={Link} to="/feed" variant="transparent" className="animated-link margin-right">
+              <Text color="black" size="sm">Home</Text>
+            </Button>
+
+            <LoginLogoutToggle />
+          </div>
         </Group>
       </header>
     </Box>

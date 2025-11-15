@@ -4,11 +4,11 @@ class FlyShopsController < HatchlessController
   protected
 
   def included_show_resources
-    [ :address, :rivers, :hatch_reports ]
+    [ :owner, :rivers, :hatch_reports, logo_attachment: [ blob: :variant_records ] ]
   end
 
   def included_index_resources
-    [ :owner, :rivers, :hatch_reports, logo_attachment: :blob ]
+    [ :owner, :rivers, :hatch_reports, logo_attachment: [ blob: :variant_records ] ]
   end
 
   private

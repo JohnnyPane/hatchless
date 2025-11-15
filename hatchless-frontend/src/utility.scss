@@ -60,6 +60,10 @@
   width: 100%;
 }
 
+.full-height {
+  height: 100%;
+}
+
 .margin {
   margin: 1rem;
 }
@@ -94,6 +98,10 @@
 
 .margin-4-r {
   margin-right: 4px;
+}
+
+.margin-8-r {
+  margin-right: 8px;
 }
 
 .margin-80-t {
@@ -142,4 +150,8 @@
 
 .helper-text {
   color: #607C75
+}
+
+.primary-button {
+  width: 240px;
 }

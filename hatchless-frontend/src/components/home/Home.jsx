@@ -122,7 +122,13 @@ const Home = () => {
               </Button>}
             </Group>
 
-            <LoginLogoutToggle textColor="white" themeColor="white" />
+            <div className="flex row align-center">
+              <Button size="compact-md" onClick={() => startTransition(`/feed`)} variant="transparent" className="animated-link margin-right" color="white">
+                <Text color="white" size="sm">Home</Text>
+              </Button>
+
+              <LoginLogoutToggle textColor="white" themeColor="white" />
+            </div>
           </Group>
         </header>
       </Box>

@@ -9,8 +9,8 @@ import MyHatchReports from "./MyHatchReports.jsx";
 import './MyFlyShop.scss'
 import MyShopRivers from "./MyShopRivers.jsx";
 import MyFlyShopSettings from "./MyFlyShopSettings.jsx";
-import FlyShopLogo from "./FlyShopLogo.jsx";
 import MyFlyShopOverview from "./MyFlyShopOverview.jsx";
+import MyFlyPacks from "../flyPacks/MyFlyPacks.jsx";
 
 const MyFlyShop = () => {
   const { id } = useParams();
@@ -45,6 +45,11 @@ const MyFlyShop = () => {
           <Tabs.Tab value="rivers">
             <Text size="lg" className="bold">Rivers</Text>
           </Tabs.Tab>
+
+          <Tabs.Tab value="fly_packs">
+            <Text size="lg" className="bold">Fly Packs</Text>
+          </Tabs.Tab>
+
           <Tabs.Tab value="settings">
             <Text size="lg" className="bold">Settings</Text>
           </Tabs.Tab>
@@ -69,6 +74,12 @@ const MyFlyShop = () => {
         <Tabs.Panel value="rivers" pt="xs">
           <ResourceProvider resourceName="shop_rivers" initialParams={{ scopes: [{ name: 'for_fly_shop', args: [flyShop.id]}] }}>
             <MyShopRivers flyShopId={id} />
+          </ResourceProvider>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="fly_packs" pt="xs">
+          <ResourceProvider resourceName="fly_packs" initialParams={{ scopes: [{ name: 'for_fly_shop', args: [flyShop.id] }] }}>
+            <MyFlyPacks />
           </ResourceProvider>
         </Tabs.Panel>
 

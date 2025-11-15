@@ -1,0 +1,3 @@
+class FishController < HatchlessController
+
+end

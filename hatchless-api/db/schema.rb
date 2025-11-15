@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_05_091334) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_13_131505) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -56,6 +56,48 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_05_091334) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable"
+  end
+
+  create_table "fish", force: :cascade do |t|
+    t.string "common_name", null: false
+    t.string "scientific_name", null: false
+    t.text "description"
+    t.integer "water_type", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["common_name"], name: "index_fish_on_common_name"
+  end
+
+  create_table "fly_pack_items", force: :cascade do |t|
+    t.bigint "fly_pack_id", null: false
+    t.bigint "fly_pattern_id", null: false
+    t.integer "quantity", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fly_pack_id"], name: "index_fly_pack_items_on_fly_pack_id"
+    t.index ["fly_pattern_id"], name: "index_fly_pack_items_on_fly_pattern_id"
+  end
+
+  create_table "fly_packs", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "price_cents", null: false
+    t.string "currency", default: "USD", null: false
+    t.date "available_from"
+    t.date "available_to"
+    t.bigint "fly_shop_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fly_shop_id"], name: "index_fly_packs_on_fly_shop_id"
+  end
+
+  create_table "fly_packs_fishes", force: :cascade do |t|
+    t.bigint "fly_pack_id", null: false
+    t.bigint "fish_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fish_id"], name: "index_fly_packs_fishes_on_fish_id"
+    t.index ["fly_pack_id"], name: "index_fly_packs_fishes_on_fly_pack_id"
   end
 
   create_table "fly_patterns", force: :cascade do |t|
@@ -216,6 +258,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_05_091334) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "fly_pack_items", "fly_packs"
+  add_foreign_key "fly_pack_items", "fly_patterns"
+  add_foreign_key "fly_packs", "fly_shops"
+  add_foreign_key "fly_packs_fishes", "fish"
+  add_foreign_key "fly_packs_fishes", "fly_packs"
   add_foreign_key "fly_shops", "users", column: "owner_id"
   add_foreign_key "hatch_report_insects", "hatch_reports"
   add_foreign_key "hatch_report_insects", "insects"

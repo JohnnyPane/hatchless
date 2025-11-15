@@ -10,6 +10,7 @@ import HotFliesTable from "../flyPatterns/HotFliesTable.jsx";
 import HatchChartPage from "./HatchChartPage.jsx";
 import HatchReports from "../hatchReports/HatchReports.jsx";
 import AddRiverHatchReportToggle from "../hatchReports/AddRiverHatchReportToggle.jsx";
+import FlyShops from "../flyShops/FlyShops.jsx";
 import './River.scss';
 
 
@@ -42,6 +43,9 @@ const River = () => {
           <Tabs.Tab value="hatch_charts">
             <Text size="lg" className="bold">Hatch Charts</Text>
           </Tabs.Tab>
+          <Tabs.Tab value="fly_shops">
+            <Text size="lg" className="bold">Fly Shops</Text>
+          </Tabs.Tab>
         </Tabs.List>
 
         <Tabs.Panel value="overview">
@@ -69,6 +73,10 @@ const River = () => {
           <ResourceProvider resourceName="hatch_windows" initialParams={{ scopes: [{ name: 'for_river', args: [id] }] }}>
             <HatchChartPage />
           </ResourceProvider>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="fly_shops">
+          <FlyShops extraParams={{ scopes: [{ name: 'for_river', args: [id] }] } }/>
         </Tabs.Panel>
 
       </Tabs>

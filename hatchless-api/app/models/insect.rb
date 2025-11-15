@@ -16,4 +16,8 @@ class Insect < HatchlessRecord
   }
 
   searchable_by :common_name, :scientific_name
+
+  def display_name
+    common_name + " (" + scientific_name + ")"
+  end
 end
