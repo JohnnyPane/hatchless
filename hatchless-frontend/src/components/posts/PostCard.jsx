@@ -21,7 +21,7 @@ const PostCard = ({ postData }) => {
       <Group justify="space-between" mt="md" mb="sm">
         <div className="flex row align-center">
           <Text size="lg" fw={500} className="margin-right">{post.creator.name}</Text>
-          <Badge color={badgeInfo.color}>{badgeInfo.label}</Badge>
+          <Badge color={badgeInfo.color} variant="outline" style={{ textTransform: "none" }}>{badgeInfo.label}</Badge>
         </div>
 
         <div className="flex column align-end">

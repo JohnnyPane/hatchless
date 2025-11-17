@@ -3,7 +3,7 @@ import { Tabs, Text, Title } from "@mantine/core";
 
 import useResource from "../../hooks/useResource.js";
 import { useMe } from "../../hooks/useMe.js";
-import {ResourceProvider} from "../../contexts/ResourceContext.jsx";
+import { ResourceProvider } from "../../contexts/ResourceContext.jsx";
 import HatchReports from "../hatchReports/HatchReports.jsx";
 import HotFliesTable from "../flyPatterns/HotFliesTable.jsx";
 import FlyShopOverview from "./FlyShopOverview.jsx";
@@ -54,7 +54,7 @@ const FlyShop = () => {
         <Tabs.Panel value="hot_flies">
           <ResourceProvider resourceName="hot_flies" initialParams={{ scopes: [{ name: "for_fly_shop", args: [id]}] }}>
             <div className="margin-top">
-              <HotFliesTable  displayHeader={false} />
+              <HotFliesTable displayHeader={false} />
             </div>
           </ResourceProvider>
         </Tabs.Panel>

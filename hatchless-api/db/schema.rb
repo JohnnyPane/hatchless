@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_17_124904) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_17_161939) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -65,7 +65,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_17_124904) do
     t.integer "water_type", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["common_name"], name: "index_fish_on_common_name"
+    t.virtual "common_name_vector", type: :tsvector, as: "to_tsvector('simple'::regconfig, (COALESCE(common_name, ''::character varying))::text)", stored: true
+    t.index ["common_name_vector"], name: "index_fish_on_common_name_vector", using: :gin
   end
 
   create_table "fly_pack_items", force: :cascade do |t|
@@ -111,8 +112,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_17_124904) do
     t.string "creator_type"
     t.boolean "approved", default: false
     t.boolean "public", default: false
+    t.virtual "name_vector", type: :tsvector, as: "to_tsvector('simple'::regconfig, (COALESCE(name, ''::character varying))::text)", stored: true
     t.index ["approved"], name: "index_fly_patterns_on_approved"
     t.index ["creator_type", "creator_id"], name: "index_fly_patterns_on_creator_type_and_creator_id"
+    t.index ["name_vector"], name: "index_fly_patterns_on_name_vector", using: :gin
     t.index ["public"], name: "index_fly_patterns_on_public"
   end
 
@@ -125,7 +128,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_17_124904) do
     t.bigint "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_fly_shops_on_name", unique: true
+    t.virtual "name_vector", type: :tsvector, as: "to_tsvector('simple'::regconfig, (COALESCE(name, ''::character varying))::text)", stored: true
+    t.index ["name_vector"], name: "index_fly_shops_on_name_vector", using: :gin
     t.index ["owner_id"], name: "index_fly_shops_on_owner_id"
   end
 
@@ -199,7 +203,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_17_124904) do
     t.json "colors", default: []
     t.integer "min_size"
     t.integer "max_size"
-    t.index ["common_name"], name: "index_insects_on_common_name"
+    t.virtual "common_name_vector", type: :tsvector, as: "to_tsvector('simple'::regconfig, (COALESCE(common_name, ''::character varying))::text)", stored: true
+    t.index ["common_name_vector"], name: "index_insects_on_common_name_vector", using: :gin
   end
 
   create_table "jwt_denylists", force: :cascade do |t|
@@ -231,6 +236,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_17_124904) do
     t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.virtual "name_vector", type: :tsvector, as: "to_tsvector('simple'::regconfig, (COALESCE(name, ''::character varying))::text)", stored: true
+    t.index ["name_vector"], name: "index_rivers_on_name_vector", using: :gin
   end
 
   create_table "shop_rivers", force: :cascade do |t|

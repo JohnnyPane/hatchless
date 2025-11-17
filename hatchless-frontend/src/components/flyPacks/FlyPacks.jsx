@@ -15,7 +15,7 @@ const FlyPacks = ({ display = "vertical", editable = false }) => {
 
   return (
     <>
-      <Text color="dimmed" size="sm">
+      <Text color="dimmed" size="sm" className="margin-4-b">
         Total: {total}
       </Text>
       <div className={`flex ${flexDirection}`}>
