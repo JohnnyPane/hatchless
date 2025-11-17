@@ -12,12 +12,12 @@ const HatchlessPagination = () => {
 
   return (
     <div className="center">
-      <Pagination
+      {totalPages > 1 && <Pagination
         value={page}
         onChange={handlePageChange}
         total={totalPages}
         size="sm"
-      />
+      />}
     </div>
   );
 }

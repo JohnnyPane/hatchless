@@ -2,7 +2,7 @@ import { Drawer, Button, Title, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useResourceContext } from "../../contexts/ResourceContext.jsx";
 import FlyPackForm from "./FlyPackForm.jsx";
-import FlyPackCard from "./FlyPackCard.jsx";
+import FlyPacks from "./FlyPacks.jsx";
 
 const MyFlyPacks = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -23,13 +23,9 @@ const MyFlyPacks = () => {
 
       <div>
         {flyPacks && flyPacks.length > 0 ? (
-          <div className="flex row wrap margin-top space-around">
-            {flyPacks.map((pack) => (
-              <FlyPackCard key={pack.id} flyPackAttributes={pack} />
-            ))}
-          </div>
+          <FlyPacks display="horizontal" editable={true} />
         ) : (
-          <Text className="margin-top">You have no fly packs. Click "Create New Fly Pack" to get started.</Text>
+          <Text className="center-text margin-80-t">You have not created any fly packs. Click "Create New Fly Pack" to get started.</Text>
         )}
       </div>
 

@@ -11,7 +11,9 @@ import HatchChartPage from "./HatchChartPage.jsx";
 import HatchReports from "../hatchReports/HatchReports.jsx";
 import AddRiverHatchReportToggle from "../hatchReports/AddRiverHatchReportToggle.jsx";
 import FlyShops from "../flyShops/FlyShops.jsx";
+import FlyPacks from "../flyPacks/FlyPacks.jsx";
 import './River.scss';
+import HatchlessPagination from "../ui/HatchlessPagination.jsx";
 
 
 const River = () => {
@@ -46,6 +48,9 @@ const River = () => {
           <Tabs.Tab value="fly_shops">
             <Text size="lg" className="bold">Fly Shops</Text>
           </Tabs.Tab>
+          <Tabs.Tab value="fly_packs">
+            <Text size="lg" className="bold">Fly Packs</Text>
+          </Tabs.Tab>
         </Tabs.List>
 
         <Tabs.Panel value="overview">
@@ -77,6 +82,16 @@ const River = () => {
 
         <Tabs.Panel value="fly_shops">
           <FlyShops extraParams={{ scopes: [{ name: 'for_river', args: [id] }] } }/>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="fly_packs">
+          <ResourceProvider resourceName="fly_packs" initialParams={{ scopes: [{ name: 'for_river', args: [id] }] }}>
+            <Text className="center-text secondary-text margin-bottom">
+              Fly Packs are curated sets of flies from local fly shops, matched to this river’s current conditions and hatches. Pick the right flies with confidence and spend more time fishing, less time guessing.
+            </Text>
+
+            <FlyPacks display="horizontal" />
+          </ResourceProvider>
         </Tabs.Panel>
 
       </Tabs>

@@ -23,7 +23,7 @@ const MyFlyShop = () => {
   }
 
   if (user?.fly_shop?.id !== flyShop.id) {
-    return <div>You do not have permission to view this fly shop.</div>;
+    return <Text size="lg" className="margin-80-t center-text">You do not have permission to view this fly shop.</Text>;
   }
 
   return (

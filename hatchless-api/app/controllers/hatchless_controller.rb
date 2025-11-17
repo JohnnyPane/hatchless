@@ -12,7 +12,9 @@ class HatchlessController < ApplicationController
 
     paginated_resources = paginated_resources.includes(*included_index_resources) if included_index_resources.present?
     paginated_resources = paginated_resources.preload(*preloaded_polymorphic_resources) if preloaded_polymorphic_resources.present?
-    paginated_resources = paginated_resources.public_send("with_attached_#{attachment_name}") if attachment_name.present?
+
+    # TODO: re-think this approach
+    # paginated_resources = paginated_resources.public_send("with_attached_#{attachment_name}") if attachment_name.present?
 
     render_resource_collection(paginated_resources, resource_serializer, { image_type: image_size })
   end

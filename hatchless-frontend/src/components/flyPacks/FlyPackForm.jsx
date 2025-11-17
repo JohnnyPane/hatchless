@@ -1,11 +1,13 @@
 import { useForm } from "@mantine/form";
-import { Button, Text } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { Button, Text, Modal } from "@mantine/core";
 import { useCreateResource } from "../../hooks/useResourceMutations.js";
 import HatchlessGridInputs from "../ui/HatchlessGridInputs.jsx";
 import HatchlessSearch from "../ui/HatchlessSearch.jsx";
 import { ResourceProvider } from "../../contexts/ResourceContext.jsx";
 import { notifications } from "@mantine/notifications";
 import FlyPackItemFormInputs from "./FlyPackItemFormInputs.jsx";
+import AddFlyPattern from "../flyPatterns/AddFlyPattern.jsx";
 
 const flyPackInputs = [
   { name: "name", label: "Name", placeholder: "Enter fly pack name", type: "text", span: 6, required: true },
@@ -17,6 +19,7 @@ const flyPackInputs = [
 
 const FlyPackForm = ({ onSuccess }) => {
   const createFlyPack = useCreateResource('fly_packs');
+  const [addFlyPatternOpened, { open: openAddFlyPattern, close: closeAddFlyPattern }] = useDisclosure(false);
 
   const form = useForm({
     initialValues: {
@@ -82,7 +85,11 @@ const FlyPackForm = ({ onSuccess }) => {
             </div>
           ))}
 
-          <Button variant="default" className="margin-top" onClick={addItem} style={{ marginBottom: '20px' }}>Add Fly Pattern to Pack</Button>
+          <div>
+            <Button variant="default" className="margin-top margin-right" onClick={addItem} style={{ marginBottom: '20px' }}>Add Fly Pattern to Pack</Button>
+            {flyPackItems.length > 0 && <Button variant="light" color="blue" className="margin-top" onClick={openAddFlyPattern}
+                     style={{marginBottom: '20px'}}>Can't find your pattern?</Button>}
+          </div>
         </ResourceProvider>
 
         <ResourceProvider resourceName="fish" initialParams={{ searchColumn: 'common_name' }}>
@@ -95,6 +102,15 @@ const FlyPackForm = ({ onSuccess }) => {
           <Button type="submit" disabled={!submittable} className="primary-button" mt="md">Create Fly Pack</Button>
         </div>
       </form>
+
+      <Modal
+        opened={addFlyPatternOpened}
+        onClose={closeAddFlyPattern}
+        title={<Text size="lg" className="bold">Add New Fly Pattern</Text>}
+        size="xl"
+      >
+        <AddFlyPattern onSuccess={closeAddFlyPattern} />
+      </Modal>
     </div>
   );
 };

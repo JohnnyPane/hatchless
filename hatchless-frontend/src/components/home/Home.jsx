@@ -116,15 +116,13 @@ const Home = () => {
               </Link>
             </Group>
 
-            <Group h="100%">
-              {flyShop && <Button size="compact-md" onClick={() => startTransition(`/fly_shops/${flyShop.id}/my_fly_shop`)} variant="transparent" className="animated-link" color="white">
+            <div className="flex row align-center">
+              {flyShop && <Button size="compact-md" onClick={() => startTransition(`/fly_shops/${flyShop.id}/my_fly_shop`)} variant="transparent" className="animated-link margin-right" color="white">
                 <Text color="white" size="sm">{flyShop.name}</Text>
               </Button>}
-            </Group>
 
-            <div className="flex row align-center">
               <Button size="compact-md" onClick={() => startTransition(`/feed`)} variant="transparent" className="animated-link margin-right" color="white">
-                <Text color="white" size="sm">Home</Text>
+                <Text color="white" size="sm">Feed</Text>
               </Button>
 
               <LoginLogoutToggle textColor="white" themeColor="white" />

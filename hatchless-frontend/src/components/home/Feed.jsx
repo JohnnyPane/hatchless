@@ -10,7 +10,7 @@ const Feed = () => {
   return (
     <div className="page">
       <div className="flex column to-center margin-bottom">
-        {me && <Button variant="light" color="indigo" onClick={() => navigate('/posts/create')}>
+        {me && <Button variant="outline" color="blue" onClick={() => navigate('/posts/create')}>
           Have something to share? Create a Post!
         </Button>}
 

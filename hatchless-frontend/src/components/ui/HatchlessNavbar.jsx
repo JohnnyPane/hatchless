@@ -20,15 +20,13 @@ const HatchlessNavbar = () => {
             </Link>
           </Group>
 
-          <Group h="100%" gap={40}>
-            {flyShop && <Button size="compact-md" component={Link} to={`/fly_shops/${flyShop.id}/my_fly_shop`} variant="transparent" className="animated-link">
+          <div className="flex row align-center">
+            {flyShop && <Button size="compact-md" component={Link} to={`/fly_shops/${flyShop.id}/my_fly_shop`} variant="transparent" className="animated-link margin-right">
               <Text color="black" size="sm">{flyShop.name}</Text>
             </Button>}
-          </Group>
 
-          <div className="flex row align-center">
             <Button size="compact-md" component={Link} to="/feed" variant="transparent" className="animated-link margin-right">
-              <Text color="black" size="sm">Home</Text>
+              <Text color="black" size="sm">Feed</Text>
             </Button>
 
             <LoginLogoutToggle />

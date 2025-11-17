@@ -10,11 +10,13 @@ import useResource from "../../hooks/useResource.js";
 import HatchlessSearch from "../ui/HatchlessSearch.jsx";
 import HatchlessPagination from "../ui/HatchlessPagination.jsx";
 import HotFlyCard from "../flyPatterns/HotFlyCard.jsx";
+import AddFlyPattern from "../flyPatterns/AddFlyPattern.jsx";
 
 const MyHotFlies = () => {
   const [selectedFlyId, setSelectedFlyId] = useState(null);
   const { id: flyShopId } = useParams();
   const [opened, { open, close }] = useDisclosure(false);
+  const [addPatternOpened, { open: openAddPattern, close: closeAddPattern }] = useDisclosure(false);
 
   const { data: hotFlies, total } = useResourceContext();
   const { data: selectedFly } = useResource("fly_patterns", selectedFlyId);
@@ -132,10 +134,22 @@ const MyHotFlies = () => {
           <Grid.Col span={4}>
             <Fieldset legend={<Text size="lg" className="bold">Not seeing your fly pattern?</Text>}>
               <Text>Make sure it’s been added to your shop’s inventory first, then come back here to highlight it as a hot fly!</Text>
-              <Button component={Link} to={`/fly_shops/${flyShopId}/my_fly_shop/add_fly_pattern`} variant="light" className="margin-top">Add Fly Pattern</Button>
+              {/*<Button component={Link} to={`/fly_shops/${flyShopId}/my_fly_shop/add_fly_pattern`} variant="light" className="margin-top">Add Fly Pattern</Button>*/}
+              <Button onClick={openAddPattern} variant="light" className="margin-top">Add Fly Pattern</Button>
             </Fieldset>
           </Grid.Col>
         </Grid>
+      </Drawer>
+
+      <Drawer
+        opened={addPatternOpened}
+        onClose={closeAddPattern}
+        title={<Text size="lg" className="bold">Add New Fly Pattern</Text>}
+        position="right"
+        padding="md"
+        size="lg"
+      >
+        <AddFlyPattern onSuccess={closeAddPattern} />
       </Drawer>
     </div>
   );

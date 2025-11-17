@@ -3,8 +3,8 @@ import { ResourceProvider } from "../../contexts/ResourceContext.jsx";
 import useResource from "../../hooks/useResource.js";
 import FlyShopLogo from "./FlyShopLogo.jsx";
 import FlyPacks from "../flyPacks/FlyPacks.jsx";
-import HotFlies from "../flyPatterns/HotFlies.jsx";
 import HatchReports from "../hatchReports/HatchReports.jsx";
+import PostList from "../posts/PostList.jsx";
 
 const FlyShopOverview = ({ flyShopId }) => {
   const { data: flyShop } = useResource('fly_shops', flyShopId);
@@ -27,6 +27,11 @@ const FlyShopOverview = ({ flyShopId }) => {
 
           <ResourceProvider resourceName="hatch_reports" initialParams={{ perPage: 3, scopes: [{ name: "for_fly_shop", args: [flyShopId]}] }}>
             <HatchReports />
+          </ResourceProvider>
+
+          <ResourceProvider resourceName="posts" initialParams={{ perPage: 3, scopes: [{ name: "for_fly_shop", args: [flyShopId]}] }}>
+            <div className="margin-top"></div>
+            <PostList />
           </ResourceProvider>
         </Grid.Col>
 

@@ -20,7 +20,7 @@ const flyPatternInputs = [
 ]
 
 
-const AddFlyPattern = () => {
+const AddFlyPattern = ({ onSuccess }) => {
   const createFlyPattern = useCreateResource('fly_patterns');
   const uploadResourceImages = useUploadResourceImages('fly_patterns');
 
@@ -57,6 +57,10 @@ const AddFlyPattern = () => {
         color: 'green',
         position: 'top-right',
       });
+
+      if (onSuccess) {
+        onSuccess();
+      }
     } catch (error) {
       console.error("Failed to add fly pattern:", error);
       notifications.show({
@@ -72,7 +76,6 @@ const AddFlyPattern = () => {
 
   return (
     <div className="page">
-      <Title order={3}>Add New Fly Pattern</Title>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <HatchlessGridInputs inputs={flyPatternInputs} form={form} />
 

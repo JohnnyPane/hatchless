@@ -78,7 +78,8 @@ const FlyShop = () => {
                 Every pack reflects real conditions, real hatches, and real experience from the people who fish those waters every day.
                 Support local shops and fish more confidently.
               </Text>
-              <FlyPacks flexDirection="row wrap space-around" />
+
+              <FlyPacks display="horizontal" />
             </div>
           </ResourceProvider>
         </Tabs.Panel>

@@ -1,14 +1,15 @@
 import { Carousel } from "@mantine/carousel";
 import { Image } from "@mantine/core";
+import { IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
 import { generateImageUrl } from "../../utils/imageUtils.js";
 
-const HatchlessImageCarousel = ({ images, height = 300 }) => {
+const HatchlessImageCarousel = ({ images, height = 300, badge = null }) => {
   if (!images || images.length === 0) {
     return null;
   }
 
   const slides  = images.map((image, index) => (
-    <Carousel.Slide key={index}>
+    <Carousel.Slide key={index} className="relative">
       <Image
         src={generateImageUrl(image.image_url)}
         alt={image.alt || `Image ${index + 1}`}
@@ -18,8 +19,11 @@ const HatchlessImageCarousel = ({ images, height = 300 }) => {
           objectFit: 'cover',
         }}
       />
+      {badge}
     </Carousel.Slide>
   ));
+
+  const showIndicators = images.length > 1;
 
   return (
     <Carousel
@@ -27,7 +31,8 @@ const HatchlessImageCarousel = ({ images, height = 300 }) => {
       slideGap="md"
       align="start"
       loop
-      withIndicators
+      withIndicators={showIndicators}
+      withControls={false}
       height={height}
       styles={{
         viewport: {
@@ -35,6 +40,7 @@ const HatchlessImageCarousel = ({ images, height = 300 }) => {
           margin: '0 auto',
         },
       }}
+      className="relative"
     >
       {slides}
     </Carousel>
