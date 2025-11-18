@@ -21,6 +21,7 @@ import Feed from "./components/home/Feed.jsx";
 import PostForm from "./components/posts/PostForm.jsx";
 import HatchlessSidebar from "./components/ui/HatchlessSidebar.jsx";
 import FlyShops from "./components/flyShops/FlyShops.jsx";
+import EventForm from "./components/events/EventForm.jsx";
 
 const AppLayout = () => {
   return (
@@ -57,6 +58,8 @@ function App() {
             }/>
 
             <Route path="/login" element={<LoginSignupToggle />} />
+
+            <Route path="/events/create" element={<EventForm />} />
 
             <Route path="/fly_shops" element={<FlyShops />} />
             <Route path="/fly_shops/create" element={<FlyShopForm />} />

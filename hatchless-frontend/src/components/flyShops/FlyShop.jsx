@@ -9,6 +9,7 @@ import HotFliesTable from "../flyPatterns/HotFliesTable.jsx";
 import FlyShopOverview from "./FlyShopOverview.jsx";
 import FlyPacks from "../flyPacks/FlyPacks.jsx";
 import './FlyShop.scss'
+import Events from "../events/Events.jsx";
 
 const FlyShop = () => {
   const { id } = useParams();
@@ -45,6 +46,9 @@ const FlyShop = () => {
           <Tabs.Tab value="fly_packs">
             <Text size="lg" className="bold">Fly Packs</Text>
           </Tabs.Tab>
+          <Tabs.Tab value="events">
+            <Text size="lg" className="bold">Events</Text>
+          </Tabs.Tab>
         </Tabs.List>
 
         <Tabs.Panel value="overview">
@@ -80,6 +84,14 @@ const FlyShop = () => {
               </Text>
 
               <FlyPacks display="horizontal" />
+            </div>
+          </ResourceProvider>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="events">
+          <ResourceProvider resourceName="events" initialParams={{ scopes: [{ name: "for_fly_shop", args: [id]}] }}>
+            <div className="margin-top">
+              <Events />
             </div>
           </ResourceProvider>
         </Tabs.Panel>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get "/users/me", to: "users/sessions#me"
     end
 
+    resources :events, only: [ :index, :show, :create, :update, :destroy ]
     resources :fish, only: [ :index, :show, :create, :update, :destroy ]
     resources :fly_packs, only: [ :index, :show, :create, :update, :destroy ]
     resources :fly_patterns, only: [ :index, :show, :create, :update, :destroy ]
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
     resources :rivers, only: [ :index, :show, :create, :update, :destroy ]
     resources :shop_rivers, only: [ :index, :show, :create, :update, :destroy ]
 
+    post "events/:id/upload_images", to: "events#upload_images"
     post "fly_patterns/:id/upload_images", to: "fly_patterns#upload_images"
     post "fly_shops/:id/upload_images", to: "fly_shops#upload_images"
     post "posts/:id/upload_images", to: "posts#upload_images"

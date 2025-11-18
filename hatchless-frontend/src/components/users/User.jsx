@@ -73,11 +73,11 @@ const User = () => {
             <Text size="lg" color="dimmed">{me.email}</Text>
 
             {isMe && <div className="margin-4-t">
-              <Button onClick={toggleEditMode} className="margin-right">
+              <Button onClick={toggleEditMode} color="blue" className="margin-right">
                 Edit Information
               </Button>
 
-              <Button onClick={openAddAvatar} variant="light">
+              <Button onClick={openAddAvatar} color="blue" variant="light">
                 Update Profile Picture
               </Button>
             </div>}

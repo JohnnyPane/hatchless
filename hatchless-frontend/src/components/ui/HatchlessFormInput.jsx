@@ -1,5 +1,5 @@
 import { TextInput, Textarea, NumberInput, Select } from "@mantine/core";
-import { DatePickerInput } from "@mantine/dates";
+import { DatePickerInput, DateTimePicker } from "@mantine/dates";
 import { IconCurrencyDollar } from "@tabler/icons-react";
 
 const HatchlessFormInput = ({ inputConfig, form }) => {
@@ -32,6 +32,20 @@ const HatchlessFormInput = ({ inputConfig, form }) => {
           label={label}
           placeholder={placeholder}
           disabled={disabled}
+          {...form.getInputProps(name)}
+        />
+      );
+    case "dateTime":
+      return (
+        <DateTimePicker
+          label={label}
+          placeholder={placeholder}
+          disabled={disabled}
+          timePickerProps={{
+            withDropdown: true,
+            popoverProps: { withinPortal: false },
+            format: '12h',
+          }}
           {...form.getInputProps(name)}
         />
       );

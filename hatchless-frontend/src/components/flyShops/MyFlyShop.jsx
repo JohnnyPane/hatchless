@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
-import { Text, Title, Tabs } from "@mantine/core";
+import { useParams, Link, useSearchParams } from "react-router-dom";
+import { Text, Title, Tabs, Button } from "@mantine/core";
 
 import { useMe } from "../../hooks/useMe.js";
 import { ResourceProvider } from "../../contexts/ResourceContext.jsx";
@@ -11,9 +11,12 @@ import MyShopRivers from "./MyShopRivers.jsx";
 import MyFlyShopSettings from "./MyFlyShopSettings.jsx";
 import MyFlyShopOverview from "./MyFlyShopOverview.jsx";
 import MyFlyPacks from "../flyPacks/MyFlyPacks.jsx";
+import Events from "../events/Events.jsx";
 
 const MyFlyShop = () => {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const initialTab = searchParams.get('tab') || 'overview';
 
   const { data: user } = useMe();
   const { data: flyShop, isLoading } = useResource('fly_shops', id);
@@ -31,23 +34,31 @@ const MyFlyShop = () => {
 
       <Title order={2} className="center-text margin">{flyShop.name}</Title>
 
-      <Tabs defaultValue="overview" keepMounted={false}>
+      <Tabs defaultValue={initialTab} keepMounted={false}>
         <Tabs.List>
           <Tabs.Tab value="overview">
             <Text size="lg" className="bold">Overview</Text>
           </Tabs.Tab>
-          <Tabs.Tab value="hot_flies">
-            <Text size="lg" className="bold">Hot Flies</Text>
-          </Tabs.Tab>
-          <Tabs.Tab value="hatch_reports">
-            <Text size="lg" className="bold">Hatch Reports</Text>
-          </Tabs.Tab>
-          <Tabs.Tab value="rivers">
-            <Text size="lg" className="bold">Rivers</Text>
-          </Tabs.Tab>
 
           <Tabs.Tab value="fly_packs">
             <Text size="lg" className="bold">Fly Packs</Text>
+          </Tabs.Tab>
+
+          <Tabs.Tab value="hot_flies">
+            <Text size="lg" className="bold">Hot Flies</Text>
+          </Tabs.Tab>
+
+          <Tabs.Tab value="events">
+            <Text size="lg" className="bold">Events</Text>
+          </Tabs.Tab>
+
+          <Tabs.Tab value="hatch_reports">
+            <Text size="lg" className="bold">Hatch Reports</Text>
+          </Tabs.Tab>
+
+          {/* TODO: Move rivers in to settings? */}
+          <Tabs.Tab value="rivers">
+            <Text size="lg" className="bold">Rivers</Text>
           </Tabs.Tab>
 
           <Tabs.Tab value="settings">
@@ -62,6 +73,21 @@ const MyFlyShop = () => {
         <Tabs.Panel value="hot_flies" pt="xs">
           <ResourceProvider resourceName="hot_flies" initialParams={{ scopes: [{ name: 'for_fly_shop', args: [flyShop.id] }, { name: 'active' }] }}>
             <MyHotFlies />
+          </ResourceProvider>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="events" pt="xs">
+          <ResourceProvider resourceName="events" initialParams={{ scopes: [{ name: 'for_fly_shop', args: [flyShop.id] }] }}>
+            <div className="page">
+              <div className="flex row space-between ">
+                <Title order={2} className="margin-bottom">My Events</Title>
+                <Button component={Link} to="/events/create" color="blue" variant="outline">
+                  Create New Event
+                </Button>
+              </div>
+
+              <Events />
+            </div>
           </ResourceProvider>
         </Tabs.Panel>
 

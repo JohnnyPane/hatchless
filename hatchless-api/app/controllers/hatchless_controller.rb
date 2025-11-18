@@ -25,6 +25,7 @@ class HatchlessController < ApplicationController
 
   def create
     new_resource = resource_class.new(resource_params)
+    new_resource.assign_owner(current_creator) if new_resource.respond_to?(:assign_owner)
 
     if new_resource.save
       render_resource(new_resource, resource_serializer, { image_type: :main_image })
@@ -90,6 +91,10 @@ class HatchlessController < ApplicationController
     "#{resource_class}Serializer".constantize
   end
 
+  def current_creator
+    current_user.fly_shop || current_user
+  end
+
   def page
     (params[:page] || 1).to_i
   end
@@ -153,3 +158,4 @@ class HatchlessController < ApplicationController
     render json: { errors: errors }, status: status
   end
 end
+

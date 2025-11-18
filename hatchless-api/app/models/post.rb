@@ -1,10 +1,9 @@
 class Post < HatchlessRecord
   include Imageable
+  include Ownable
 
   belongs_to :creator, polymorphic: true
   belongs_to :river, optional: true
-
-  acts_as_imageable_many :images
 
   scope :for_river, ->(river_id) { where(river_id: river_id) }
   scope :for_fly_shop, ->(fly_shop_id) {
@@ -16,4 +15,6 @@ class Post < HatchlessRecord
     direct.or(indirect)
   }
 
+  acts_as_imageable_many :images
+  owned_by :creator
 end

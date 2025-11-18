@@ -7,7 +7,7 @@ class FlyPacksController < HatchlessController
   end
 
   def fly_pack_params
-    permitted_params = params.require(:fly_pack).permit(
+    params.require(:fly_pack).permit(
       :name,
       :description,
       :price_cents,
@@ -22,9 +22,5 @@ class FlyPacksController < HatchlessController
       ],
       fish_ids: []
     )
-
-    fly_shop = current_user.fly_shop
-
-    permitted_params.merge(fly_shop_id: fly_shop.id)
   end
 end

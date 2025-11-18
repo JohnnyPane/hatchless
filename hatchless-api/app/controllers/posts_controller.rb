@@ -8,22 +8,14 @@ class PostsController < HatchlessController
   end
 
   def included_show_resources
-    [ :river, { images_attachments: :blob } ]
+    [ :river, { images_attachments: { blob: :variant_records } } ]
   end
 
   def included_index_resources
-    [ :river, { images_attachments: :blob } ]
+    [ :river, { images_attachments: { blob: :variant_records } } ]
   end
 
   def post_params
-    permitted_params = params.require(:post).permit(:river_id, :caption, images: [])
-
-    creator = if current_user.fly_shop.present?
-                current_user.fly_shop
-              else
-                current_user
-              end
-
-    permitted_params.merge(creator: creator)
+    params.require(:post).permit(:river_id, :caption, images: [])
   end
 end

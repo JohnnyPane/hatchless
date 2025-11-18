@@ -1,5 +1,7 @@
 class FlyPattern < HatchlessRecord
   include Imageable
+  include Ownable
+
   has_many :insect_fly_patterns, dependent: :destroy
   has_many :insects, through: :insect_fly_patterns
   has_many :hot_flies, dependent: :nullify
@@ -16,6 +18,7 @@ class FlyPattern < HatchlessRecord
   }
 
   searchable_by :name
+  owned_by :creator
 
   def imageable_fallback_url
     unless self.category.present?

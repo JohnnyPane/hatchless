@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_17_161939) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_18_111759) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -56,6 +56,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_17_161939) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "start_time", null: false
+    t.datetime "end_time"
+    t.string "location"
+    t.integer "price_cents"
+    t.integer "capacity"
+    t.integer "status", default: 0, null: false
+    t.bigint "fly_shop_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fly_shop_id"], name: "index_events_on_fly_shop_id"
   end
 
   create_table "fish", force: :cascade do |t|
@@ -266,6 +281,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_17_161939) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "events", "fly_shops"
   add_foreign_key "fly_pack_items", "fly_packs"
   add_foreign_key "fly_pack_items", "fly_patterns"
   add_foreign_key "fly_packs", "fly_shops"

@@ -1,4 +1,5 @@
 class FlyPack < HatchlessRecord
+  include Ownable
   belongs_to :fly_shop
   has_many :fly_pack_items, dependent: :destroy
   has_many :fly_patterns, through: :fly_pack_items
@@ -15,4 +16,6 @@ class FlyPack < HatchlessRecord
   scope :for_river, ->(river_id) {
     joins(fly_shop: :rivers).where(rivers: { id: river_id })
   }
+
+  owned_by :fly_shop
 end

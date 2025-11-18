@@ -1,4 +1,6 @@
 class HotFly < HatchlessRecord
+  include Ownable
+
   belongs_to :fly_shop
   belongs_to :fly_pattern
   belongs_to :river, optional: true
@@ -15,4 +17,6 @@ class HotFly < HatchlessRecord
 
     direct.or(via_shop).distinct
   }
+
+  owned_by :fly_shop
 end

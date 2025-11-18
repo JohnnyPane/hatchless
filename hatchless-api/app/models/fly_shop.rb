@@ -1,5 +1,6 @@
 class FlyShop < HatchlessRecord
   include Imageable
+  include Ownable
 
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id', optional: true
   has_one :address, as: :addressable, dependent: :destroy
@@ -22,5 +23,6 @@ class FlyShop < HatchlessRecord
   validates :name, presence: true
 
   searchable_by :name
+  owned_by :owner
 
 end
