@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Drawer, Button } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { notifications } from "@mantine/notifications";
@@ -9,6 +10,7 @@ import HatchlessImageUploader from "../ui/HatchlessImageUploader.jsx";
 
 const UserAvatarDrawer = ({ opened, onClose }) => {
   const { data: me } = useMe();
+  const [isUploading, setIsUploading] = useState(false);
   const uploadAvatarImage = useUploadResourceImages('users');
 
   const form = useForm({
@@ -22,6 +24,7 @@ const UserAvatarDrawer = ({ opened, onClose }) => {
   };
 
   const uploadAvatar = async () => {
+    setIsUploading(true);
     const userId = me.id;
     const imageFile = form.values.avatar;
 
@@ -42,6 +45,8 @@ const UserAvatarDrawer = ({ opened, onClose }) => {
         color: 'red',
         position: 'top-right',
       });
+    } finally {
+      setIsUploading(false);
     }
   }
 
@@ -59,7 +64,7 @@ const UserAvatarDrawer = ({ opened, onClose }) => {
         initialFile={form.values.avatar}
       />
 
-      <Button mt="md" fullWidth onClick={uploadAvatar} disabled={!form.values.avatar}>
+      <Button mt="md" fullWidth onClick={uploadAvatar} disabled={!form.values.avatar} loading={isUploading}>
         Upload Avatar
       </Button>
     </Drawer>

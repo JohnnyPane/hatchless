@@ -143,10 +143,10 @@ HatchWindow.find_or_create_by!(river: kinni, insect: midge, start_day_of_year: d
 
 puts "✅ Done seeding full chart!"
 
-# Dir[Rails.root.join('db', 'seeds', 'configs', '*.yml')].each do |file|
-#   config = YAML.load_file(file)
-#   SeedRiverChart.new(config).call
-# end
+Dir[Rails.root.join('db', 'seeds', 'configs', '*.yml')].each do |file|
+  config = YAML.load_file(file)
+  SeedRiverChart.new(config).call
+end
 
 fish_species = [
   # --- Trout & Salmonids ---

@@ -538,63 +538,63 @@ fly_patterns:
     - name: "Parachute Adams"
       category: "Dry"
 
-    "Polycentropus cinereus | P. interruptus|Brown Checkered Summer Sedge":
-      - name: "Black Caddis"
-        category: "Dry"
-      - name: "Caddis Pupa"
-        category: "Emerger"
-      - name: "Stimulator"
-        category: "Dry"
+  "Polycentropus cinereus | P. interruptus|Brown Checkered Summer Sedge":
+    - name: "Black Caddis"
+      category: "Dry"
+    - name: "Caddis Pupa"
+      category: "Emerger"
+    - name: "Stimulator"
+      category: "Dry"
 
-    "Anthopotamus distinctus|Yellow Drake":
-      - name: "Golden Drake"
-        category: "Dry"
-      - name: "Mayfly Nymph"
-        category: "Nymph"
-      - name: "Prince Nymph"
-        category: "Nymph"
-      - name: "Parachute Adams"
-        category: "Dry"
+  "Anthopotamus distinctus|Yellow Drake":
+    - name: "Golden Drake"
+      category: "Dry"
+    - name: "Mayfly Nymph"
+      category: "Nymph"
+    - name: "Prince Nymph"
+      category: "Nymph"
+    - name: "Parachute Adams"
+      category: "Dry"
 
-    "Hymenoptera|Ants":
-      - name: "Ant Pattern"
-        category: "Terrestrial"
-      - name: "Cinnamon Ant"
-        category: "Terrestrial"
+  "Hymenoptera|Ants":
+    - name: "Ant Pattern"
+      category: "Terrestrial"
+    - name: "Cinnamon Ant"
+      category: "Terrestrial"
 
-    "Coleoptera|Beetles":
-      - name: "Foam Beetle"
-        category: "Terrestrial"
-      - name: "Black Beetle"
-        category: "Terrestrial"
+  "Coleoptera|Beetles":
+    - name: "Foam Beetle"
+      category: "Terrestrial"
+    - name: "Black Beetle"
+      category: "Terrestrial"
 
-    "Orthoptera|Grasshoppers":
-      - name: "Dave’s Hopper"
-        category: "Terrestrial"
-      - name: "Fat Albert"
-        category: "Terrestrial"
+  "Orthoptera|Grasshoppers":
+    - name: "Dave’s Hopper"
+      category: "Terrestrial"
+    - name: "Fat Albert"
+      category: "Terrestrial"
 
-    "Orthoptera|Crickets":
-      - name: "Cricket Pattern"
-        category: "Terrestrial"
-      - name: "Chernobyl Ant"
-        category: "Terrestrial"
+  "Orthoptera|Crickets":
+    - name: "Cricket Pattern"
+      category: "Terrestrial"
+    - name: "Chernobyl Ant"
+      category: "Terrestrial"
 
-    "Neophlax concinnus|Autumn Mottled Sedge":
-      - name: "Caddis Pupa"
-        category: "Emerger"
-      - name: "Brown Caddis"
-        category: "Dry"
-      - name: "Stimulator"
-        category: "Dry"
+  "Neophlax concinnus|Autumn Mottled Sedge":
+    - name: "Caddis Pupa"
+      category: "Emerger"
+    - name: "Brown Caddis"
+      category: "Dry"
+    - name: "Stimulator"
+      category: "Dry"
 
-    "Diptera - Chironomidae|Midges":
-      - name: "Zebra Midge"
-        category: "Nymph"
-      - name: "Griffith’s Gnat"
-        category: "Dry"
-      - name: "WD-40"
-        category: "Emerger"
+  "Diptera - Chironomidae|Midges":
+    - name: "Zebra Midge"
+      category: "Nymph"
+    - name: "Griffith’s Gnat"
+      category: "Dry"
+    - name: "WD-40"
+      category: "Emerger"
 
 hatch_windows:
   - insect: "Allocapnia | Paracapnia sp.|Tiny Winter Black Stonefly"

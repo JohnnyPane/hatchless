@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 
-const baseApiUrl = import.meta.env.VITE_API_BASE_URL;
+const baseApiUrl = import.meta.env.VITE_API_BASE_URL || '/api/';
 
 const serializeParams = (params) => {
   return qs.stringify(params, { arrayFormat: 'brackets' });

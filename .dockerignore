@@ -1,0 +1,10 @@
+**/node_modules
+**/bundle
+**/vendor/bundle
+
+**/log/*.log
+**/tmp
+**/.git
+**/.DS_Store
+
+react-client/dist

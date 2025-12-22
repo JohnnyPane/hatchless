@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Drawer, Button, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useUploadResourceImages } from "../../hooks/useResourceMutations.js";
@@ -5,6 +6,7 @@ import HatchlessImageUploader from "../ui/HatchlessImageUploader.jsx";
 import { notifications } from "@mantine/notifications";
 
 const AddLogoDrawer = ({ opened, onClose, flyShop }) => {
+  const [isUploading, setIsUploading] = useState(false);
   const uploadFlyShopImages = useUploadResourceImages('fly_shops');
 
   const imageForm = useForm({
@@ -18,6 +20,7 @@ const AddLogoDrawer = ({ opened, onClose, flyShop }) => {
   };
 
   const uploadLogo = async () => {
+    setIsUploading(true);
     const flyShopId = flyShop.id;
     const imageFile = imageForm.values.imageFile;
 
@@ -38,6 +41,8 @@ const AddLogoDrawer = ({ opened, onClose, flyShop }) => {
         color: 'red',
         position: 'top-right',
       });
+    } finally {
+      setIsUploading(false);
     }
   }
 
@@ -51,7 +56,7 @@ const AddLogoDrawer = ({ opened, onClose, flyShop }) => {
         />
 
 
-        <Button mt="md" onClick={uploadLogo} disabled={!imageForm.values.imageFile}>
+        <Button mt="md" onClick={uploadLogo} disabled={!imageForm.values.imageFile} loading={isUploading}>
           Upload Logo
         </Button>
       </div>

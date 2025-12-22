@@ -1,4 +1,4 @@
-const rootURL = import.meta.env.VITE_API_ROOT_URL;
+const rootURL = import.meta.env.VITE_API_ROOT_URL || '';
 
 export const generateImageUrl = (imageURL) => {
   if (!imageURL) {
