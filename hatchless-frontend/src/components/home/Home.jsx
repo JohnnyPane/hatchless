@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Title, Button, Stack, Box, Group, Text } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { Title, Button, Stack, Box, Group, Text, Burger } from "@mantine/core";
 import { IconSearch } from '@tabler/icons-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -9,9 +10,11 @@ import { useTransition } from "../../contexts/TransitionContext.jsx";
 import HatchlessSearch from "../ui/HatchlessSearch.jsx";
 import "./Home.scss";
 import LoginLogoutToggle from "../auth/LoginLogoutToggle.jsx";
+import HatchlessNavDrawer from "../ui/HatchlessNavDrawer.jsx";
 
 
 const Home = () => {
+  const [burgerOpened, { toggle: toggleBurger }] = useDisclosure(false);
   const { data: user } = useMe();
   const flyShop = user?.fly_shop;
   const { data: rivers, search, isLoading } = useResourceContext();
@@ -108,15 +111,16 @@ const Home = () => {
     >
       <Box>
         <header className="home-navbar">
-          <Group justify="space-between" h="100%" w="100%" px={20}>
-            <Group h="100%" gap={0} visibleFrom="sm">
+          <Group justify="space-between" h="100%" w="100%">
+
+            <Group h="100%">
 
               <Link to="/feed" className="home-logo">
                 <Title order={2} className="margin-none">Hatchless</Title>
               </Link>
             </Group>
 
-            <div className="flex row align-center">
+            <Group visibleFrom="sm" className="flex row align-center">
               {flyShop && <Button size="compact-md" onClick={() => startTransition(`/fly_shops/${flyShop.id}/my_fly_shop`)} variant="transparent" className="animated-link margin-right" color="white">
                 <Text color="white" size="sm">{flyShop.name}</Text>
               </Button>}
@@ -126,10 +130,20 @@ const Home = () => {
               </Button>
 
               <LoginLogoutToggle textColor="white" themeColor="white" />
-            </div>
+            </Group>
+
+            <Burger
+              opened={burgerOpened}
+              onClick={toggleBurger}
+              color="white"
+              className="burger-menu"
+              hiddenFrom="sm"
+            />
           </Group>
         </header>
       </Box>
+
+      <HatchlessNavDrawer open={burgerOpened} onClose={toggleBurger} />
 
       <Stack align="center" className="hero-search-container" spacing="xl">
         <Title
@@ -139,6 +153,7 @@ const Home = () => {
             fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
             fontWeight: 600,
           }}
+          className="center-text"
         >
           Find your next hatch.
         </Title>

@@ -58,10 +58,10 @@ const MyHotFlies = () => {
 
   return (
     <div className="page">
-      <div className="flex row space-between align-start">
+      <div className="flex row wrap space-between align-start">
         <div>
           <Title order={2}>{flyShop.name} Hot Flies</Title>
-          <Text className="secondary-text">Share what’s working! Add the flies you’d recommend to anglers this week based on what’s been producing on your local waters.</Text>
+          <Text className="secondary-text margin-4-b">Share what’s working! Add the flies you’d recommend to anglers this week based on what’s been producing on your local waters.</Text>
         </div>
 
         <Button onClick={open} variant="filled" className="margin-bottom">Add Hot Fly</Button>
@@ -72,7 +72,7 @@ const MyHotFlies = () => {
         {hotFlies && hotFlies.length > 0 ? (
           <>
             {hotFlies.map((hotFly) => (
-              <HotFlyCard hotFly={hotFly} editable={true} key={hotFly.id} />
+              <HotFlyCard item={hotFly.attributes} editable={true} key={hotFly.id} />
             ))}
           </>
         ) : (
@@ -134,7 +134,6 @@ const MyHotFlies = () => {
           <Grid.Col span={4}>
             <Fieldset legend={<Text size="lg" className="bold">Not seeing your fly pattern?</Text>}>
               <Text>Make sure it’s been added to your shop’s inventory first, then come back here to highlight it as a hot fly!</Text>
-              {/*<Button component={Link} to={`/fly_shops/${flyShopId}/my_fly_shop/add_fly_pattern`} variant="light" className="margin-top">Add Fly Pattern</Button>*/}
               <Button onClick={openAddPattern} variant="light" className="margin-top">Add Fly Pattern</Button>
             </Fieldset>
           </Grid.Col>

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Title } from "@mantine/core";
-import { useResourceContext } from "../../contexts/ResourceContext.jsx";
-import HatchlessTablePage from "../ui/HatchlessTablePage.jsx";
 import HatchlessSearch from "../ui/HatchlessSearch.jsx";
+import ResponsiveList from "../ui/ResponsiveList.jsx";
+import RiverCard from "./RiverCard.jsx";
 
 const riversTableData = [
   { label: 'River', accessor: 'name', type: 'text' },
@@ -35,7 +35,7 @@ const Rivers = () => {
         />
       </div>
 
-      <HatchlessTablePage columns={riversTableData} onRowClick={onRowClick} resourceName="rivers" />
+      <ResponsiveList resourceName="rivers" onClick={onRowClick} CardComponent={RiverCard} columns={riversTableData} />
     </div>
   );
 }

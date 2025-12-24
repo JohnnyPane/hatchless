@@ -2,9 +2,9 @@ module Imageable
   extend ActiveSupport::Concern
 
   IMAGE_SIZES = {
-    main_image: [ 1000, 1000 ],
-    default: [ 600, 600 ],
-    thumbnail: [ 300, 300 ],
+    main_image: [ 1200, 900 ],
+    default: [ 800, 600 ],
+    thumbnail: [ 400, 300 ],
     small: [ 200, 200 ],
     cart: [ 150, 150 ]
   }.freeze
@@ -43,7 +43,7 @@ module Imageable
   def image_variants(size_key = :default)
     attached_images.map do |image|
       size = IMAGE_SIZES[size_key] || IMAGE_SIZES[:main_image]
-      image.variant(resize_to_fit: size).processed
+      image.variant(resize_to_limit: size).processed
     end
   end
 

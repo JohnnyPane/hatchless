@@ -11,7 +11,7 @@ const HotFlies = () => {
   return (
     <div className="flex column align-center">
       {hotFlies.map((hotFly) => (
-        <HotFlyCard hotFly={hotFly} editable={true} key={hotFly.id} />
+        <HotFlyCard item={hotFly.attributes} editable={true} key={hotFly.id} />
       ))}
     </div>
   );

@@ -1,4 +1,4 @@
-import { Text } from "@mantine/core";
+import { Stack, Text } from "@mantine/core";
 import { useResourceContext } from "../../contexts/ResourceContext.jsx";
 import EventCard from "./EventCard.jsx";
 
@@ -13,9 +13,9 @@ const Events = () => {
       ) : (
           <div className="flex column align-center">
             {events.map((event) => (
-              <div key={event.id} className="margin-bottom">
+              <Stack align="center" gap="xl" w="100%" key={event.id} className="margin-bottom">
                 <EventCard key={event.id} event={event} />
-              </div>
+              </Stack>
             ))}
           </div>
       )}

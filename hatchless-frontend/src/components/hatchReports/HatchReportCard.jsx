@@ -1,36 +1,72 @@
-import { Card, Text, Title } from "@mantine/core";
+import { Card, Text, Title, Group, Stack, Badge, Box } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { formatDate } from "../../utils/dateUtils.js";
 
+const badgeConfig = {
+  "User": { color: "pink", label: "User" },
+  "Fly Shop": { color: "indigo", label: "Fly Shop" }
+}
 
 const HatchReportCard = ({ report, className }) => {
   const { id, author, observed_on, notes, insects } = report;
 
+  const isMobile = useMediaQuery('(max-width: 480px)');
+
   return (
-    <Card key={id} shadow="sm" padding="md" radius="md" mb={8} withBorder className={className + " card"}>
-      <div className="flex row align-end space-between margin-4-b">
-        <div className="flex row align-center">
-          <Title order={4} className="margin-4-r">{author.name}</Title>
-          <Text size="md" className="secondary-text">{author.type}</Text>
-        </div>
+    <Card
+      key={id}
+      shadow="sm"
+      padding="md"
+      radius="md"
+      mb={8}
+      withBorder
+      className={`${className} card`}
+    >
+      <Group justify="space-between" align="flex-start" mb="xs" wrap="nowrap">
+        <Stack gap={0}>
+          <Group gap="xs" align="center">
+            <Title order={5} style={{ lineHeight: 1.2 }}>
+              {author.name}
+            </Title>
+            <Badge size="sm" color={badgeConfig[author.type]?.color || "gray"} variant="transparent">
+              {author.type}
+            </Badge>
+          </Group>
 
-        <Text size="sm" className="secondary-text italic margin-left">
-          {formatDate(observed_on)}
-        </Text>
-      </div>
+          {isMobile && (
+            <Text size="sm" c="dimmed" italic mt={2}>
+              Observed {formatDate(observed_on)}
+            </Text>
+          )}
+        </Stack>
 
-      <Text size="md" className="margin-bottom">{notes}</Text>
+        {!isMobile && (
+          <Text size="sm" c="dimmed" italic>
+            {formatDate(observed_on)}
+          </Text>
+        )}
+      </Group>
 
-      {insects && <div className="flex row align-center">
-        <Text className="bold" size="sm">Insects:</Text>
+      <Text size="md" mb="md" style={{ lineHeight: 1.5 }}>
+        {notes}
+      </Text>
 
-        {insects.map((insect, index) => (
-          <div key={index} className="margin-left">
-            <Text size="sm" className="secondary-text">{insect.common_name} </Text>
-          </div>
-        ))}
-      </div>}
+      {insects && insects.length > 0 && (
+        <Box pt="xs" style={{ borderTop: '1px solid #eee' }}>
+          <Group gap={6} wrap="wrap">
+            <Text fw={700} size="sm">
+              Insects:
+            </Text>
+            {insects.map((insect, index) => (
+              <Badge key={index} variant="dot" color="#d9480f" size="lg" radius="lg" style={{ textTransform: 'none' }}>
+                {insect.common_name}
+              </Badge>
+            ))}
+          </Group>
+        </Box>
+      )}
     </Card>
-  )
- }
+  );
+};
 
 export default HatchReportCard;

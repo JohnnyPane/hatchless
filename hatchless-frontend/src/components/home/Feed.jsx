@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from '@mantine/core'
+import { IconPlus } from '@tabler/icons-react';
 import { useMe } from "../../hooks/useMe.js";
 import PostList from "../posts/PostList.jsx";
 
@@ -10,8 +11,8 @@ const Feed = () => {
   return (
     <div className="page">
       <div className="flex column to-center margin-bottom">
-        {me && <Button variant="outline" color="blue" onClick={() => navigate('/posts/create')}>
-          Have something to share? Create a Post!
+        {me && <Button variant="filled" onClick={() => navigate('/posts/create')} rightSection={<IconPlus size={16} />}>
+          Create a Post
         </Button>}
 
         <div className="margin-top">

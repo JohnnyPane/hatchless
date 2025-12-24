@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Tabs, Text, Title } from "@mantine/core";
+import { Tabs, Text, Title, Box } from "@mantine/core";
 
 import useResource from "../../hooks/useResource.js";
 import { useMe } from "../../hooks/useMe.js";
@@ -25,12 +25,14 @@ const FlyShop = () => {
   }
 
   return (
-    <div className="page">
+    <Box className="page">
 
-      <Title order={2} className="center-text">{flyShop.name}</Title>
-      {flyShop.formatted_address && <Text className="secondary-text center-text ">
-        {flyShop.formatted_address}
-      </Text>}
+      <Box className="margin-bottom">
+        <Title order={2} className="center-text margin-top">{flyShop.name}</Title>
+        {flyShop.formatted_address && <Text className="secondary-text center-text ">
+          {flyShop.formatted_address}
+        </Text>}
+      </Box>
 
       <Tabs defaultValue="overview" keepMounted={false}>
         <Tabs.List>
@@ -96,7 +98,7 @@ const FlyShop = () => {
           </ResourceProvider>
         </Tabs.Panel>
       </Tabs>
-    </div>
+    </Box>
   );
 }
 

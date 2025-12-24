@@ -3,7 +3,8 @@ import { Text } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks";
 
 import useResource from "../../hooks/useResource.js";
-import HatchlessTablePage from "../ui/HatchlessTablePage.jsx";
+import ResponsiveList from "../ui/ResponsiveList.jsx";
+import HotFlyCard from "./HotFlyCard.jsx";
 import HotFlyDrawer from "./HotFlyDrawer.jsx";
 
 const columns = [
@@ -40,7 +41,7 @@ const HotFliesTable = ({ displayHeader = true }) => {
         </Text>
       </div>}
 
-      <HatchlessTablePage resourceName="hot_flies" columns={columns} onRowClick={onRowClick} />
+      <ResponsiveList resourceName="hot_flies" columns={columns} onClick={onRowClick} CardComponent={HotFlyCard} />
 
       <HotFlyDrawer hotFly={selectedHotFly} onClose={onClose} isOpen={opened} />
     </div>

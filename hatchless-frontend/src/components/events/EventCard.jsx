@@ -1,45 +1,81 @@
-import {Image, Card, Title, Text, Badge} from "@mantine/core";
+import { Card, Image, Text, Title, Badge, Group, Stack, Box } from '@mantine/core';
 import { generateImageUrl } from "../../utils/imageUtils.js";
-import { formatDateTime } from "../../utils/dateUtils.js";
+import { formatEventTimes } from "../../utils/dateUtils.js";
 import { formatPriceInCents } from "../../utils/railsDisplayFormatters.js";
 
 const EventCard = ({ event }) => {
   const { attributes: eventAttrs } = event;
-
   const imageUrl = generateImageUrl(eventAttrs.image_url);
 
+  const secondaryColor = "#495057";
+
   return (
-    <Card shadow="sm" padding="lg" className="" style={{ width: 600}}>
+    <Card
+      shadow="sm"
+      padding="md"
+      radius="md"
+      withBorder
+      style={{
+        width: '100%',
+        maxWidth: '600px',
+        margin: '0 auto',
+        backgroundColor: "#F9F9F7",
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <Card.Section>
-        <Image src={imageUrl} alt={event.title} height={300} />
+        <Image
+          src={imageUrl}
+          alt={eventAttrs.name}
+          fallbackSrc="https://placehold.co/600x300?text=No+Image+Available"
+          style={{ aspectRatio: '16 / 9', objectFit: 'cover' }}
+        />
       </Card.Section>
 
-      <div className="flex row space-between margin-top">
-        <div className="flex row align-center">
-          <Title order={2} className="margin-right">{eventAttrs.name}</Title>
+      <Stack mt="xs" gap="0">
+        <Group justify="space-between" align="flex-start" wrap="nowrap">
+          <Title order={3} c="black" style={{ lineHeight: 1.2 }}>
+            {eventAttrs.name}
+          </Title>
+          <Text fw={700} size="lg" c="blue.7">
+            {formatPriceInCents(eventAttrs.price_cents)}
+          </Text>
+        </Group>
 
+        <Stack gap={2}>
+          <Text size="md">
+            <Text span fw={700} c="black" mr={4}>Location:</Text>
+            <Text span c={secondaryColor}>{eventAttrs.location}</Text>
+          </Text>
+
+          <Text size="md">
+            <Text span fw={700} c="black" mr={4}>Time:</Text>
+            <Text span c={secondaryColor}>
+              {formatEventTimes(eventAttrs.start_time, eventAttrs.end_time)}
+            </Text>
+          </Text>
+
+          <Text size="md">
+            <Text span fw={700} c="black" mr={4}>Description:</Text>
+            <Text span c={secondaryColor}>
+              {eventAttrs.description}
+            </Text>
+          </Text>
+        </Stack>
+
+        <Group justify="center" mt="lg">
           <Badge
-            size="lg"
-            style={{
-              backgroundColor: "rgba(0, 0, 0, 0.6)",
-              color: "var(--color-bone)",
-              textTransform: "none",
-            }}
+            variant="filled"
+            color="gray.8"
+            radius="sm"
+            size="xl"
+            style={{ textTransform: "none", fontWeight: 600 }}
           >
             {eventAttrs.fly_shop.name}
           </Badge>
-        </div>
-        <Text size="lg" className="secondary-text ">{formatPriceInCents(eventAttrs.price_cents)}</Text>
-      </div>
-
-      <Text className="secondary-text margin-bottom">{eventAttrs.description}</Text>
-
-
-      <Text className="margin-4-t">Location: {eventAttrs.location}</Text>
-
-      <Text size="sm" c="dimmed" className="margin-top-sm">
-        {formatDateTime(eventAttrs.start_time)} - {formatDateTime(eventAttrs.end_time)}
-      </Text>
+        </Group>
+      </Stack>
     </Card>
   );
 };

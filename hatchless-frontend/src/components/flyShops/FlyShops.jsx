@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { Title } from "@mantine/core";
 import { ResourceProvider } from "../../contexts/ResourceContext";
-import HatchlessTablePage from "../ui/HatchlessTablePage.jsx";
 import HatchlessSearch from "../ui/HatchlessSearch.jsx";
+import ResponsiveList from "../ui/ResponsiveList.jsx";
+import FlyShopCard from "./FlyShopCard.jsx";
 
 const tableColumns = [
-  { accessor: "logo_url", label: "", type: "image" },
+  { accessor: "logo_url", label: "", type: "image", isLogo: true },
   { accessor: "name", label: "Name" , type: "text" },
   { accessor: "website_url", label: "Website", type: "text" },
   { accessor: "description", label: "Description", type: "text" },
@@ -28,8 +29,7 @@ const FlyShops = ({ extraParams = {} }) => {
           <HatchlessSearch config={{ style: { width: 300 } }} resourceName="fly_shops" searchLabel="Fly Shops" />
         </div>
 
-        <HatchlessTablePage resourceName="fly_shops" columns={tableColumns} onRowClick={onRowClick} />
-
+        <ResponsiveList CardComponent={FlyShopCard} resourceName="fly_shops" onClick={onRowClick} columns={tableColumns} />
       </ResourceProvider>
     </div>
   );

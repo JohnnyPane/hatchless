@@ -1,5 +1,4 @@
-import { Table, Text, Image } from "@mantine/core"
-import { useResourceContext } from "../../contexts/ResourceContext.jsx";
+import { Table, Text, Image, Box } from "@mantine/core"
 import { formatDate } from "../../utils/dateUtils.js";
 import './HatchlessTable.scss';
 import { generateImageUrl } from "../../utils/imageUtils.js";
@@ -14,14 +13,40 @@ const HatchlessColumnDisplay = ({ column, row, rowData }) => {
       return <Text>{formatDate(displayValue)}</Text>;
     case 'image':
       const imageUrl = column.getImageUrl ? column.getImageUrl(rowData) : generateImageUrl(displayValue);
-      return <Image radius={8} src={imageUrl} alt="" w={50} h={50} />;
+      const isLogo = column.isLogo || false;
+
+      return (
+        <Box
+          w={50}
+          h={50}
+          style={{
+            overflow: 'hidden',
+            borderRadius: 8,
+            backgroundColor: isLogo ? '#f8f9fa' : 'transparent',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: isLogo ? '1px solid #eee' : 'none'
+          }}
+        >
+          <Image
+            src={imageUrl}
+            alt=""
+            w="100%"
+            h="100%"
+            fit={isLogo ? "contain" : "cover"}
+            p={isLogo ? 4 : 0}
+            fallbackSrc={`https://placehold.co/80x80?text=[no image available]&font=roboto`}
+          />
+        </Box>
+      );
     default:
       return <span>{row[column.accessor]}</span>;
   }
 }
 
-const HatchlessTable = ({ columns, actionComponent, resourceName, onRowClick }) => {
-  const { data, total } = useResourceContext({ resourceName: resourceName });
+const HatchlessTable = ({ resources, columns, actionComponent, onRowClick }) => {
+  const { data, total } = resources;
 
   const tableData = data.map((row) => {
     const rowData = {};
