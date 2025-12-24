@@ -81,7 +81,7 @@ const MyFlyShop = () => {
             <div className="page">
               <div className="flex row space-between ">
                 <Title order={2} className="margin-bottom">My Events</Title>
-                <Button component={Link} to="/events/create" color="blue" variant="outline">
+                <Button component={Link} to="/events/create" variant="filled">
                   Create New Event
                 </Button>
               </div>

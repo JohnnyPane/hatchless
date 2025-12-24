@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Button, Textarea } from "@mantine/core";
+import { Button, Textarea, Box, Card, Stack, Title, useMantineTheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
+import { useMediaQuery } from "@mantine/hooks";
 
 import { useCreateResource } from "../../hooks/useResourceMutations.js";
 import { ResourceProvider } from "../../contexts/ResourceContext.jsx";
@@ -11,6 +12,10 @@ import HatchReportDrawer from "./HatchReportDrawer.jsx";
 const AddHatchReport = ({ riverId = null }) => {
   const [newHatchReport, setNewHatchReport] = useState(null);
   const [opened, { open, close }] = useDisclosure(false);
+
+  const isMobile = useMediaQuery('(max-width: 576px)', false, {
+    getInitialValueInEffect: true,
+  });
 
   const createHatchReport = useCreateResource('hatch_reports');
 
@@ -46,25 +51,39 @@ const AddHatchReport = ({ riverId = null }) => {
   }
 
   return (
-    <div className="flex column align-center margin-bottom">
-      <div className="my-hatch-report-card">
+    <Box mb="md">
+      <Stack gap="sm">
         <Textarea
           label="Add New Hatch Report"
           placeholder="Enter hatch report notes"
-          minRows={4}
+          minRows={isMobile ? 3 : 4}
+          autosize
           {...form.getInputProps('notes')}
+          styles={{
+            input: {
+              fontSize: '16px'
+            }
+          }}
         />
 
-        <div className="flex to-right margin-4-t">
-          <Button disabled={form.values.notes.length === 0} onClick={addHatchReport}>Add Hatch Report</Button>
-        </div>
-      </div>
-
+        <Button
+          fullWidth={isMobile}
+          disabled={form.values.notes.length === 0}
+          onClick={addHatchReport}
+          style={{ alignSelf: isMobile ? 'stretch' : 'flex-end' }}
+        >
+          Add Hatch Report
+        </Button>
+      </Stack>
 
       <ResourceProvider resourceName="insects" initialParams={{ searchColumn: "common_name" }}>
-        <HatchReportDrawer hatchReport={newHatchReport} opened={opened} onClose={closeHatchReportDrawer} />
+        <HatchReportDrawer
+          hatchReport={newHatchReport}
+          opened={opened}
+          onClose={closeHatchReportDrawer}
+        />
       </ResourceProvider>
-    </div>
+    </Box>
   )
 };
 

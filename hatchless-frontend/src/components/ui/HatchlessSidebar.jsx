@@ -2,13 +2,13 @@ import { Text, NavLink } from '@mantine/core'
 import { useMe } from '../../hooks/useMe.js';
 import './HatchlessSidebar.scss'
 
-const navStyle = {
-  root: {
-    "&:hover": {
-      backgroundColor: "black",
-    }
-  }
-};
+// const navStyle = {
+//   root: {
+//     "&:hover": {
+//       backgroundColor: "black",
+//     }
+//   }
+// };
 
 const links = [
   { label: 'Home', path: '/' },
@@ -34,9 +34,8 @@ const HatchlessSidebar = () => {
           key={link.path}
           href={link.path}
           label={<Text size="lg" className="bold">{link.label}</Text>}
-          styles={navStyle}
           className="bold"
-          activeClassName="active-link"
+          color="var(--mantine-color-troutStream)"
         />
       ))}
     </div>

@@ -12,17 +12,41 @@ const MyFlyShopOverview = ({ flyShop }) => {
 
   return (
     <div className="page">
-      <Grid>
-        <Grid.Col span={8}>
-          <div className="flex row margin-bottom">
-            <FlyShopLogo name={flyShop.name} url={flyShop.logo_url} size={200} onClick={openDrawer} />
+      <Grid gutter="md">
+        <Grid.Col span={{ base: 12, md: 8 }}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column', // Mobile first
+            alignItems: 'center',
+            marginBottom: '20px',
+            gap: '20px'
+          }} className="desktop-row-override">
+            <style dangerouslySetInnerHTML={{ __html: `
+              @media (min-width: 768px) {
+                .desktop-row-override { flex-direction: row !important; align-items: flex-start !important; }
+              }
+            `}} />
 
-            <div className="margin-left">
-              <Title order={2} className="">{flyShop.name}</Title>
-              <Text size="lg" color="dimmed" className="">{flyShop.formatted_address}</Text>
-              <Text size="lg" className="">{flyShop.description}</Text>
-              <Text size="lg" className="">{flyShop.website_url}</Text>
-              <Text size="lg" className="">{flyShop.email}</Text>
+            <FlyShopLogo
+              name={flyShop.name}
+              url={flyShop.logo_url}
+              size={180}
+              onClick={openDrawer}
+            />
+
+            <div style={{ textAlign: 'center' }} className="desktop-text-left">
+              <style dangerouslySetInnerHTML={{ __html: `
+                @media (min-width: 768px) {
+                  .desktop-text-left { text-align: left !important; }
+                }
+              `}} />
+              <Title order={2}>{flyShop.name}</Title>
+              <Text size="md" color="dimmed">{flyShop.formatted_address}</Text>
+              <Text size="md" mt="sm">{flyShop.description}</Text>
+              <Text size="md" component="a" href={flyShop.website_url} display="block" variant="link">
+                {flyShop.website_url}
+              </Text>
+              <Text size="md">{flyShop.email}</Text>
             </div>
           </div>
 
@@ -31,7 +55,7 @@ const MyFlyShopOverview = ({ flyShop }) => {
           </ResourceProvider>
         </Grid.Col>
 
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, md: 4 }}>
           <ResourceProvider resourceName="fly_packs" initialParams={{ scopes: [{ name: 'for_fly_shop', args: [flyShop.id] }] }}>
             <FlyPacks />
           </ResourceProvider>

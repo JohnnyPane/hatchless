@@ -2,8 +2,9 @@ import { Title, Text, Button } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { ResourceProvider, useResourceContext } from "../../contexts/ResourceContext.jsx";
 import { useDeleteResource } from "../../hooks/useResourceMutations.js";
-import HatchlessTablePage from "../ui/HatchlessTablePage.jsx";
 import AddShopRiverDrawer from "./AddShopRiverDrawer.jsx";
+import ResponsiveList from "../ui/ResponsiveList.jsx";
+import RiverCard from "../rivers/RiverCard.jsx";
 
 const riversTableData = [
   { label: 'River', accessor: 'river.name', type: 'text' },
@@ -55,7 +56,7 @@ const MyShopRivers = ({ flyShopId }) => {
 
       <div>
         <Title order={4} className="margin-4-b">Rivers Associated with Your Fly Shop</Title>
-        <HatchlessTablePage columns={riversTableData} actionComponent={RemoveShopRiverButton} resourceName="shop_rivers" />
+        <ResponsiveList columns={riversTableData} CardComponent={RiverCard} resourceName="shop_rivers" onClick={() => {}} />
       </div>
 
       <ResourceProvider resourceName="rivers" initialParams={{ searchColumn: "name", scopes: [{ name: 'not_for_fly_shop', args: [flyShopId]}] }}>

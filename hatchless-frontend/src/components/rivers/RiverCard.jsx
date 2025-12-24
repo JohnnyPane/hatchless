@@ -1,7 +1,7 @@
 import { Card, Title, Text } from "@mantine/core";
 
 const RiverCard = ({ item, onClick }) => {
-  const riverData = item;
+  const riverData = item.hasOwnProperty('river') ? item.river : item;
 
   const handleClick = () => {
     if (onClick) {

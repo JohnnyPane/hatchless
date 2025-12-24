@@ -6,15 +6,23 @@ import ActiveHatches from "./ActiveHatches.jsx";
 
 const RiverOverview = ({ riverId }) => {
   return (
-    <Grid>
-      <Grid.Col span={8} p={20}>
+    <Grid gutter="md">
+      <Grid.Col span={{ base: 12, md: 8 }} p={{ base: 10, md: 20 }}>
         <HatchChartPage initialScope={{ name: 'currently_hatching' }} />
 
-        <ResourceProvider resourceName="hatch_reports" initialParams={{ sortColumn: 'observed_on', scopes: [{ name: 'for_river', args: [riverId] }], perPage: 3 }}>
+        <ResourceProvider
+          resourceName="hatch_reports"
+          initialParams={{
+            sortColumn: 'observed_on',
+            scopes: [{ name: 'for_river', args: [riverId] }],
+            perPage: 3
+          }}
+        >
           <HatchReports />
         </ResourceProvider>
       </Grid.Col>
-      <Grid.Col span={4} p={20}>
+
+      <Grid.Col span={{ base: 12, md: 4 }} p={{ base: 10, md: 20 }}>
         <ActiveHatches riverId={riverId} />
       </Grid.Col>
     </Grid>

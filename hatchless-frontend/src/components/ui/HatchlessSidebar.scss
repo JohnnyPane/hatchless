@@ -11,7 +11,7 @@
     width: 300px;
     padding: 1rem;
     border-right: 1px solid #ddd;
-    color: var(--color-text-muted);
+    //color: #0ca678;
     background: rgba(251, 251, 248, 0.1);
   }
 }
@@ -22,6 +22,22 @@
   border-radius: 0 8px 8px 0;
 }
 
+//.mantine-NavLink-root:hover {
+//  background-color: var(--mantine-color-troutStream-8, 0.1);
+//}
+
 .mantine-NavLink-root:hover {
-  background-color: var(--color-active)
+  background-color: color-mix(in srgb, var(--mantine-color-troutStream-6), transparent 85%);
+  box-shadow: inset 4px 0 0 0 var(--mantine-color-troutStream-4);
+  color: var(--mantine-color-troutStream-9);
+}
+
+.mantine-NavLink-root[data-active="true"] {
+  background-color: var(--mantine-color-troutStream-6);
+  color: #ffffff; font-weight: 500;
+}
+
+.mantine-NavLink-label {
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
 }

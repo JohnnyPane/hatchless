@@ -10,7 +10,7 @@ const badgeConfig = {
 const HatchReportCard = ({ report, className }) => {
   const { id, author, observed_on, notes, insects } = report;
 
-  const isMobile = useMediaQuery('(max-width: 480px)');
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <Card
@@ -19,6 +19,7 @@ const HatchReportCard = ({ report, className }) => {
       padding="md"
       radius="md"
       mb={8}
+      style={{ width: '100%' }}
       withBorder
       className={`${className} card`}
     >
